@@ -14,7 +14,7 @@ class IntroductionActivity : AppCompatActivity() {
         val btnJaTenhoConta = findViewById<Button>(R.id.btnJaTenhoConta)
 
         btnAbrirConta.setOnClickListener {
-            val intent = Intent(this, CadastroCpfActivity::class.java)
+            val intent = Intent(this, CadastroInicioActivity::class.java)
             startActivity(intent)
         }
 

@@ -29,7 +29,9 @@
         <activity android:name=".SenhaActivity" android:exported="false" />
 
         <!-- Telas de Cadastro -->
+        <activity android:name=".CadastroInicioActivity" android:exported="false" />
         <activity android:name=".CadastroCpfActivity" android:exported="false" />
+        <activity android:name=".CadastroCnpjActivity" android:exported="false" />
         <activity android:name=".CadastroEmailActivity" android:exported="false" />
         <activity android:name=".CadastroSenhaActivity" android:exported="false" />
 
