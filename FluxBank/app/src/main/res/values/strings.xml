@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FluxBank</string>
+    <string name="digite_seu_cpf">Digite seu cpf:</string>
+    <string name="cpf_hint">___.___.___-__</string>
+    <string name="logo_do_fluxbank">Logo do FluxBank</string>
+    <string name="bot_o_de_avan_ar">Botão de avançar</string>
+    <string name="digite_sua_senha">Digite sua senha:</string>
+    <string name="ativar_biometria">Ativar biometria</string>
+</resources>
