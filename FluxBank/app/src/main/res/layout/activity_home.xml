@@ -34,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FluxBank"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         android:layout_marginEnd="16dp"
@@ -45,7 +46,8 @@
         android:id="@+id/agencyLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ag 2411"
+        android:text="Ag"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="@id/userAvatar"
@@ -55,7 +57,8 @@
         android:id="@+id/accountLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cc 12345-0"
+        android:text="Cc"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@id/agencyLabel"
         app:layout_constraintTop_toBottomOf="@id/agencyLabel" />
@@ -85,7 +88,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/home_content_background"
+        android:background="@color/backgroundLight"
         app:layout_constraintTop_toBottomOf="@+id/accountLabel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +98,7 @@
         <TextView
             android:id="@+id/saldoLabel"
             android:layout_width="wrap_content"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:text="Saldo Conta Corrente:"
             android:textColor="@android:color/black"
@@ -139,11 +143,15 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="85dp"
-                android:layout_height="95dp"
+                android:layout_height="85dp"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:translationZ="40dp"
                 android:layout_margin="6dp"
                 android:clickable="true"
+                app:strokeWidth="2dp"
+                app:strokeColor="#0D565656"
                 android:focusable="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -158,17 +166,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
                         android:text="PIX"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="85dp"
-                android:layout_height="95dp"
+                android:layout_height="85dp"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:translationZ="4dp"
                 android:layout_margin="6dp"
                 android:clickable="true"
+                app:strokeWidth="2dp"
+                app:strokeColor="#0D565656"
                 android:focusable="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -183,18 +197,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
                         android:text="Pagar"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="85dp"
-                android:layout_height="95dp"
+                android:layout_height="85dp"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:translationZ="4dp"
                 android:layout_margin="6dp"
                 android:clickable="true"
-                android:focusable="true">
+                app:strokeWidth="2dp"
+                app:strokeColor="#0D565656"
+                android:focusable="true"
+                >
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -208,18 +230,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
                         android:text="Cartões"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="85dp"
-                android:layout_height="95dp"
+                android:layout_height="85dp"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:translationZ="4dp"
                 android:layout_margin="6dp"
                 android:clickable="true"
-                android:focusable="true">
+                app:strokeWidth="2dp"
+                app:strokeColor="#0D565656"
+                android:focusable="true"
+                >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -233,6 +262,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+
                         android:text="Investimentos"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -254,10 +286,11 @@
         <!-- Bottom Navigation -->
         <LinearLayout
             android:id="@+id/bottomNav"
-            android:layout_width="0dp"
+            android:layout_width="360dp"
             android:layout_height="60dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
-            android:background="#F0F0F0"
+            android:background="@drawable/bg_bottom_nav"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -265,7 +298,7 @@
 
             <ImageView android:id="@+id/nav_home" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_home"/>
             <ImageView android:id="@+id/nav_list" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_list"/>
-            <ImageView android:id="@+id/nav_qr" android:layout_width="48dp" android:layout_height="48dp" android:src="@drawable/ic_qr_code" android:background="@drawable/fab_background" android:scaleType="center"/>
+            <ImageView android:id="@+id/nav_qr" android:layout_width="68dp" android:layout_height="68dp" android:src="@drawable/ic_qr_code" android:background="@drawable/fab_background" android:scaleType="center" />
             <ImageView android:id="@+id/nav_transfer" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_transfer"/>
             <ImageView android:id="@+id/nav_settings" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_settings"/>
 

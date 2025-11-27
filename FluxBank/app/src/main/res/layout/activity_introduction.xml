@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@color/backgroundDark1">
 
     <ImageView
         android:id="@+id/introLogo"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="Constância"
         android:textColor="#FF2849"
-        android:textSize="24sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         android:layout_marginStart="32dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,11 +39,11 @@
         android:id="@+id/bodyText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="32dp"
-        android:text="Flux é movimento.\nFlux é continuidade.\nFlux é um sistema financeiro que flui."
+        android:text="Flux é movimento.\nFlux é continuidade.\nFlux é um sistema \nfinanceiro que flui."
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="22sp"
         app:layout_constraintStart_toStartOf="@id/titleText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleText" />
