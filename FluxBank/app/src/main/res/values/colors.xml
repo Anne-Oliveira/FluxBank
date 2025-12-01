@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<!--    cores base-->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    Paleta de cores-->
+    <color name="laranjaPal">#FA082E</color>
+    <color name="lRosaPal">#C00E62</color>
+    <color name="rosaPal">#B50850</color>
+    <color name="backgroundDark2">#06001E</color>
+    <color name="backgroundDark1">#0c1319</color>
+    <color name="backgroundLight">#FAF9FF</color>
+    <color name="purplePal">#382971</color>
 </resources>
