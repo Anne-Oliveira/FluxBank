@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@drawable/rounded_card"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/management_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_key"
+        android:contentDescription="Ícone" />
+
+    <TextView
+        android:id="@+id/management_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/management_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"
+        android:text="Minhas chaves"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/arrow_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_arrow_right"
+        android:contentDescription="Ver mais" />
+
+</RelativeLayout>
