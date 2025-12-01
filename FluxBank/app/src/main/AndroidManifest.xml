@@ -39,6 +39,9 @@
         <activity android:name=".LoadingActivity" android:exported="false" />
         <activity android:name=".HomeActivity" android:exported="false" />
         <activity android:name=".SegundaActivity" android:exported="false" />
+
+        <!-- Tela Pix -->
+        <activity android:name=".PixActivity" android:exported="false" />
         
     </application>
 

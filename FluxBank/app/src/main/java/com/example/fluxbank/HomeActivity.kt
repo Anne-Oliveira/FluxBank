@@ -1,11 +1,13 @@
 package com.example.fluxbank
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,7 +17,10 @@ class HomeActivity : AppCompatActivity() {
         // Configuração da Lista de Atividades Recentes
         setupRecyclerView()
 
-        // Configuração dos Cliques da Barra de Navegação
+        // Configuração dos botões de ação
+        setupActionButtons()
+
+        // Configuração dos cliques da Barra de Navegação
         setupBottomNavigation()
     }
 
@@ -31,6 +36,15 @@ class HomeActivity : AppCompatActivity() {
 
         val adapter = RecentActivityAdapter(activities)
         recyclerView.adapter = adapter
+    }
+
+    private fun setupActionButtons() {
+        val btnPix = findViewById<MaterialCardView>(R.id.btn_pix)
+
+        btnPix.setOnClickListener {
+            val intent = Intent(this, PixActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupBottomNavigation() {
