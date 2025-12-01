@@ -44,187 +44,145 @@
     </LinearLayout>
 
     <!-- Content Area -->
-    <LinearLayout
+    <ScrollView
         android:id="@+id/content_area"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/header"
-        android:layout_above="@id/bottom_navigation"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_above="@id/bottomNav">
 
-        <!-- Question Text -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Para quem você deseja transferir?"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Search Input -->
-        <EditText
-            android:id="@+id/search_input"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="Nome, chave ou Pix copia e cola"
-            android:textColorHint="#999999"
-            android:background="@drawable/rounded_input"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Transfer Again Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Transferir novamente:"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Recent Contacts - LinearLayout Horizontal -->
         <LinearLayout
-            android:id="@+id/contacts_container"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <ListView
-                android:id="@+id/recent_contacts"
+            <!-- Question Text -->
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Para quem você deseja transferir?"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Search Input -->
+            <EditText
+                android:id="@+id/search_input"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Nome, chave ou Pix copia e cola"
+                android:textColorHint="#999999"
+                android:background="@drawable/rounded_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Transfer Again Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Transferir novamente:"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Recent Contacts - LinearLayout Horizontal -->
+            <LinearLayout
+                android:id="@+id/contacts_container"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <ListView
+                    android:id="@+id/recent_contacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="0dp" />
+            </LinearLayout>
+
+            <!-- Other Options Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Outras opções:"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Grid of Options -->
+            <GridView
+                android:id="@+id/options_grid"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:numColumns="3"
+                android:horizontalSpacing="16dp"
+                android:verticalSpacing="16dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Manage Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gerenciar:"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Management Options List -->
+            <ListView
+                android:id="@+id/management_options"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:divider="@android:color/transparent"
-                android:dividerHeight="0dp" />
+                android:dividerHeight="8dp" />
+
         </LinearLayout>
 
-        <!-- Other Options Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Outras opções:"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+    </ScrollView>
 
-        <!-- Grid of Options -->
-        <GridView
-            android:id="@+id/options_grid"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:numColumns="3"
-            android:horizontalSpacing="16dp"
-            android:verticalSpacing="16dp"
-            android:layout_marginBottom="16dp" />
 
-        <!-- Manage Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Gerenciar:"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Management Options List -->
-        <ListView
-            android:id="@+id/management_options"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="8dp" />
-
-    </LinearLayout>
 
     <!-- Bottom Navigation -->
     <LinearLayout
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
+        android:id="@+id/bottomNav"
+        android:layout_width="360dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
-        android:elevation="8dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:background="@drawable/bg_bottom_nav"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical">
 
-        <LinearLayout
-            android:id="@+id/nav_home"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_home"
-                android:contentDescription="Home" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/nav_list"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_list"
-                android:contentDescription="Lista" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/nav_qr"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:src="@drawable/fab_pix"
-                android:contentDescription="Pix"
-                android:layout_marginTop="-20dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/nav_transfer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_back_arrow"
-                android:contentDescription="Voltar" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/nav_settings"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_settings"
-                android:contentDescription="Configurações" />
-        </LinearLayout>
+        <ImageView android:id="@+id/nav_home" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_home"/>
+        <ImageView android:id="@+id/nav_list" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_list"/>
+        <ImageView android:id="@+id/nav_spacer" android:layout_width="68dp" android:layout_height="68dp" />
+        <ImageView android:id="@+id/nav_transfer" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_transfer"/>
+        <ImageView android:id="@+id/nav_settings" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_settings"/>
 
     </LinearLayout>
+
+    <!-- QR Code Button - Floating -->
+    <ImageView
+        android:id="@+id/nav_qr"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:src="@drawable/ic_qr_code"
+        android:background="@drawable/fab_background"
+        android:scaleType="center"
+
+        android:elevation="16dp"
+        android:layout_above="@id/bottomNav"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-60dp"
+        android:clickable="true"
+        android:focusable="true" />
 
 </RelativeLayout>
