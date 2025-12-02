@@ -12,6 +12,15 @@
             </PendingDiffInfo>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/button_gradient_round.xml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/src/main/res/drawable/button_gradient_round.xml" />
+              <option name="originalContent" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;&lt;ripple xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&#10;    android:color=&quot;#33FFFFFF&quot;&gt;&#10;    &lt;item&gt;&#10;        &lt;shape android:shape=&quot;rectangle&quot;&gt;&#10;            &lt;gradient&#10;                android:startColor=&quot;#EF3B7A&quot;&#10;                android:endColor=&quot;#E91E63&quot;&#10;                android:angle=&quot;90&quot; /&gt;&#10;            &lt;corners android:radius=&quot;12dp&quot; /&gt;&#10;        &lt;/shape&gt;&#10;    &lt;/item&gt;&#10;&lt;/ripple&gt;" />
+              <option name="updatedContent" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;&lt;ripple xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&#10;    android:color=&quot;#33FFFFFF&quot;&gt;&#10;    &lt;item&gt;&#10;        &lt;shape android:shape=&quot;rectangle&quot;&gt;&#10;            &lt;gradient&#10;                android:startColor=&quot;#EF3B7A&quot;&#10;                android:endColor=&quot;#E91E63&quot;&#10;                android:angle=&quot;90&quot; /&gt;&#10;            &lt;corners android:radius=&quot;12dp&quot; /&gt;&#10;        &lt;/shape&gt;&#10;    &lt;/item&gt;&#10;&lt;/ripple&gt;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/drawable/circular_background.xml">
           <value>
             <PendingDiffInfo>

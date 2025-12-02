@@ -1,100 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    app:cardUseCompatPadding="true">
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- CARD PRINCIPAL -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        android:layout_marginBottom="20dp"
+        app:strokeColor="@android:color/transparent"
+        app:cardUseCompatPadding="true">
 
-        <TextView
-            android:id="@+id/poupancaTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Poupança Especial"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#fff"
 
-        <TextView
-            android:id="@+id/poupancaAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ag/Conta: 1122/xx.xxxx-x"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/poupancaTitle" />
+            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/valorTotalLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Valor total"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/poupancaAccount" />
+            <TextView
+                android:id="@+id/poupancaTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Poupança Especial"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/valorTotalValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="R$ ****"
-            android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/valorTotalLabel" />
+            <TextView
+                android:id="@+id/poupancaAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ag/Conta: 1122/xx.xxxx-x"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/poupancaTitle" />
 
-        <TextView
-            android:id="@+id/valorResgateLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Valor para resgate"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/valorTotalLabel" />
+            <TextView
+                android:id="@+id/valorTotalLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Valor total"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/poupancaAccount" />
 
-        <TextView
-            android:id="@+id/valorResgateValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="R$ ****"
-            android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/valorResgateLabel" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="3.5dp"
+                android:background="#25000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/valorTotalLabel" />
 
-        <Button
-            android:id="@+id/btnResgatar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/button_gradient_background"
-            android:text="Resgatar"
-            android:textColor="@android:color/white"
-            app:backgroundTint="@null"
-            app:layout_constraintEnd_toStartOf="@+id/btnAplicar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/valorResgateLabel" />
+            <TextView
+                android:id="@+id/valorTotalValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R$ ****"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/valorTotalLabel" />
 
-        <Button
-            android:id="@+id/btnAplicar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/button_gradient_background"
-            android:text="Aplicar"
-            android:textColor="@android:color/white"
-            app:backgroundTint="@null"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnResgatar"
-            app:layout_constraintTop_toTopOf="@+id/btnResgatar" />
+            <TextView
+                android:id="@+id/valorResgateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Valor para resgate"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/valorTotalLabel" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/valorResgateValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R$ ****"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/valorResgateLabel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- BOTÕES FLUTUANDO POR CIMA DO CARD -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:translationY="120dp"
+        android:elevation="30dp">
+
+    <Button
+        android:id="@+id/btnResgatar"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="40dp"
+        android:background="@drawable/button_gradient_background"
+        android:text="Resgatar"
+        android:textColor="@android:color/white"
+        app:backgroundTint="@null" />
+
+    <Button
+        android:id="@+id/btnAplicar"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/button_gradient_background"
+        android:text="Aplicar"
+        android:textColor="@android:color/white"
+        app:backgroundTint="@null" />
+
+</LinearLayout>
+
+    </FrameLayout>

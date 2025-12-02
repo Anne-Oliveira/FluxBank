@@ -10,15 +10,17 @@
     <!-- Header -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/home_header_gradient"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@drawable/gradient_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="56dp">
 
             <ImageView
                 android:id="@+id/btnBack"
@@ -43,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_help_question"
+                android:src="@drawable/ic_help"
                 app:tint="@android:color/white" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -82,7 +84,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/valorTotalLabel" />
-        
+
     <ImageView
         android:id="@+id/visibilityIcon"
         android:layout_width="wrap_content"
@@ -105,35 +107,89 @@
 
     <Button
         android:id="@+id/btnAdicionarConta"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:layout_margin="16dp"
         android:background="@drawable/button_gradient_background"
         android:text="Adicionar conta"
         android:textColor="@android:color/white"
+        android:textStyle="bold"
         app:backgroundTint="@null"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Bottom Navigation -->
+    <!-- Bottom Navigation (ajustado para ConstraintLayout e responsivo) -->
     <LinearLayout
         android:id="@+id/bottomNav"
-        android:layout_width="0dp"
+        android:layout_width="360dp"
         android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
         android:orientation="horizontal"
-        android:background="#F0F0F0"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/bg_bottom_nav"
+        android:gravity="center_vertical"
+        android:elevation="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center_vertical">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
 
-        <ImageView android:id="@+id/nav_home" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_home"/>
-        <ImageView android:id="@+id/nav_list" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_list"/>
-        <ImageView android:id="@+id/nav_qr" android:layout_width="48dp" android:layout_height="48dp" android:src="@drawable/ic_qr_code" android:background="@drawable/fab_background" android:scaleType="center"/>
-        <ImageView android:id="@+id/nav_transfer" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_transfer"/>
-        <ImageView android:id="@+id/nav_settings" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_settings"/>
+        <ImageView
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_home"
+            android:scaleType="centerInside"
+/>
+        <ImageView
+            android:id="@+id/nav_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_list"
+            android:scaleType="centerInside"
+/>
+        <View
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:id="@+id/nav_transfer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_transfer"
+            android:scaleType="centerInside"
+/>
+        <ImageView
+            android:id="@+id/nav_settings"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_settings"
+            android:scaleType="centerInside"
+            />
 
     </LinearLayout>
+
+    <!-- QR Code Button - Floating (centralizado acima do bottom nav) -->
+    <ImageView
+        android:id="@+id/nav_qr"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:src="@drawable/ic_qr_code"
+        android:background="@drawable/fab_background"
+        android:scaleType="center"
+        android:elevation="16dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        android:layout_marginBottom="-65dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="true"
+        android:focusable="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
