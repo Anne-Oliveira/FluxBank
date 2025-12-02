@@ -12,6 +12,7 @@ class PoupancaActivity : AppCompatActivity() {
     private var isSaldoVisible = false
     private val saldoOculto = "R$ ******"
     private val saldoVisivel = "R$ 5.430,00"
+    private lateinit var adapter: PoupancaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,16 @@ class PoupancaActivity : AppCompatActivity() {
             finish()
         }
 
+        val poupancaItems = listOf(
+            PoupancaItem("Poupança Especial", "Ag/Conta: 1122/xx.xxxx-x", "R$ 3.430,00", "R$ ****", "R$ 3.000,00", "R$ ****"),
+            PoupancaItem("Poupança Especial", "Ag/Conta: 1122/xx.xxxx-x", "R$ 2.000,00", "R$ ****", "R$ 1.500,00", "R$ ****")
+        )
+
+        adapter = PoupancaAdapter(poupancaItems)
+        val poupancaRecyclerView = findViewById<RecyclerView>(R.id.poupancaRecyclerView)
+        poupancaRecyclerView.layoutManager = LinearLayoutManager(this)
+        poupancaRecyclerView.adapter = adapter
+
         visibilityIcon.setOnClickListener {
             isSaldoVisible = !isSaldoVisible
             if (isSaldoVisible) {
@@ -34,17 +45,7 @@ class PoupancaActivity : AppCompatActivity() {
                 valorTotalValue.text = saldoOculto
                 visibilityIcon.setImageResource(R.drawable.ic_visibility)
             }
+            adapter.toggleSaldoVisibility()
         }
-
-        val poupancaRecyclerView = findViewById<RecyclerView>(R.id.poupancaRecyclerView)
-        poupancaRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        val poupancaItems = listOf(
-            PoupancaItem("Poupança Especial", "Ag/Conta: 1122/xx.xxxx-x", "R$ ****", "R$ ****"),
-            PoupancaItem("Poupança Especial", "Ag/Conta: 1122/xx.xxxx-x", "R$ ****", "R$ ****")
-        )
-
-        val adapter = PoupancaAdapter(poupancaItems)
-        poupancaRecyclerView.adapter = adapter
     }
 }

@@ -22,6 +22,7 @@ class HomeActivity : AppCompatActivity() {
 
         val saldoValue = findViewById<TextView>(R.id.saldoValue)
         val visibilityIcon = findViewById<ImageView>(R.id.visibilityIcon)
+        val cofinhoLink = findViewById<TextView>(R.id.cofinhoLink)
 
         // Configuração da visibilidade do saldo
         visibilityIcon.setOnClickListener {
@@ -35,8 +36,15 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // Configuração da Lista de Atividades Recentes
+        // Navegação para a tela do cofrinho
+        cofinhoLink.setOnClickListener {
+            val intent = Intent(this, CofinhoActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Configuração das Listas
         setupRecyclerView()
+        setupCofinho()
 
         // Configuração dos botões de ação
         setupActionButtons()
@@ -57,6 +65,19 @@ class HomeActivity : AppCompatActivity() {
 
         val adapter = RecentActivityAdapter(activities)
         recyclerView.adapter = adapter
+    }
+
+    private fun setupCofinho() {
+        val cofinhoRecyclerView = findViewById<RecyclerView>(R.id.cofinhoRecyclerView)
+        cofinhoRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        val cofinhoItems = listOf(
+            CofinhoItem(R.drawable.ic_piggy_bank, "Dia a Dia", "R$ 0,00", "Rendeu R$ 0,00"),
+            CofinhoItem(R.drawable.ic_travel_bag, "Viagem", "R$ 0,00", "Rendeu R$ 0,00")
+        )
+
+        val adapter = CofinhoAdapter(cofinhoItems)
+        cofinhoRecyclerView.adapter = adapter
     }
 
     private fun setupActionButtons() {
