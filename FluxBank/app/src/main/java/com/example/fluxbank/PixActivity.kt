@@ -105,11 +105,11 @@ class PixActivity : AppCompatActivity() {
 
     private fun setupBottomNavigation() {
         // Os IDs são dos LinearLayouts, não dos ImageViews!
-        val navHome = findViewById<LinearLayout>(R.id.nav_home)
-        val navList = findViewById<LinearLayout>(R.id.nav_list)
-        val navQr = findViewById<LinearLayout>(R.id.nav_qr)
-        val navTransfer = findViewById<LinearLayout>(R.id.nav_transfer)
-        val navSettings = findViewById<LinearLayout>(R.id.nav_settings)
+        val navHome = findViewById<ImageView>(R.id.nav_home)
+        val navList = findViewById<ImageView>(R.id.nav_list)
+        val navQr = findViewById<ImageView>(R.id.nav_qr)
+        val navTransfer = findViewById<ImageView>(R.id.nav_transfer)
+        val navSettings = findViewById<ImageView>(R.id.nav_settings)
 
         navHome.setOnClickListener {
             finish() // Volta para a home
