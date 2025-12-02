@@ -3,6 +3,7 @@ package com.example.fluxbank
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,9 +11,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 
 class HomeActivity : AppCompatActivity() {
+
+    private var isSaldoVisible = false
+    private val saldoOculto = "R$********"
+    private val saldoVisivel = "R$ 12.345,67"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        val saldoValue = findViewById<TextView>(R.id.saldoValue)
+        val visibilityIcon = findViewById<ImageView>(R.id.visibilityIcon)
+
+        // Configuração da visibilidade do saldo
+        visibilityIcon.setOnClickListener {
+            isSaldoVisible = !isSaldoVisible
+            if (isSaldoVisible) {
+                saldoValue.text = saldoVisivel
+                visibilityIcon.setImageResource(R.drawable.ic_visibility_off)
+            } else {
+                saldoValue.text = saldoOculto
+                visibilityIcon.setImageResource(R.drawable.ic_visibility)
+            }
+        }
 
         // Configuração da Lista de Atividades Recentes
         setupRecyclerView()
@@ -40,9 +61,15 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupActionButtons() {
         val btnPix = findViewById<MaterialCardView>(R.id.btn_pix)
+        val investmentsCard = findViewById<MaterialCardView>(R.id.investmentsCard)
 
         btnPix.setOnClickListener {
             val intent = Intent(this, PixActivity::class.java)
+            startActivity(intent)
+        }
+
+        investmentsCard.setOnClickListener {
+            val intent = Intent(this, PoupancaActivity::class.java)
             startActivity(intent)
         }
     }
