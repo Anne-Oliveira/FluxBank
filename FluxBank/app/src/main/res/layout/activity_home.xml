@@ -208,6 +208,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_cards"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
                 app:cardCornerRadius="12dp"

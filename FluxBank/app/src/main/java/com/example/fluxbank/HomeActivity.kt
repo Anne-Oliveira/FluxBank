@@ -61,10 +61,16 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupActionButtons() {
         val btnPix = findViewById<MaterialCardView>(R.id.btn_pix)
+        val btnCards = findViewById<MaterialCardView>(R.id.btn_cards)
         val investmentsCard = findViewById<MaterialCardView>(R.id.investmentsCard)
 
         btnPix.setOnClickListener {
             val intent = Intent(this, PixActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnCards.setOnClickListener {
+            val intent = Intent(this, CardsActivity::class.java)
             startActivity(intent)
         }
 
