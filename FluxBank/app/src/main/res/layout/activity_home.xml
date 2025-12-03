@@ -327,7 +327,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
-                android:drawableStart="@drawable/ic_piggy_bank"
+                android:drawableStart="@drawable/ic_porquinho"
                 android:drawablePadding="8dp"
                 app:drawableTint="@android:color/black"
                 android:layout_marginStart="16dp"
@@ -337,7 +337,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cofinhoRecyclerView"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"

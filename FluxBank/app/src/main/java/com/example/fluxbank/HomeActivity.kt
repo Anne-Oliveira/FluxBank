@@ -72,7 +72,7 @@ class HomeActivity : AppCompatActivity() {
         cofinhoRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         val cofinhoItems = listOf(
-            CofinhoItem(R.drawable.ic_piggy_bank, "Dia a Dia", "R$ 0,00", "Rendeu R$ 0,00"),
+            CofinhoItem(R.drawable.ic_porquinho, "Dia a Dia", "R$ 0,00", "Rendeu R$ 0,00"),
             CofinhoItem(R.drawable.ic_travel_bag, "Viagem", "R$ 0,00", "Rendeu R$ 0,00")
         )
 

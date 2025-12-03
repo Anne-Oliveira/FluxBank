@@ -11,14 +11,14 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/home_header_gradient"
+        android:layout_height="60dp"
+        android:background="@drawable/gradient_background"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="60dp">
 
             <ImageView
                 android:id="@+id/btnBack"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_help_question"
+                android:src="@drawable/ic_help"
                 app:tint="@android:color/white" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -51,10 +51,10 @@
     <!-- Main Content -->
     <ImageView
         android:id="@+id/piggyBankImage"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/piggy_bank_image"
+        android:src="@drawable/img_3"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -95,7 +95,7 @@
         android:id="@+id/rendeuHelpIcon"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:src="@drawable/ic_help_question"
+        android:src="@drawable/ic_help"
         android:layout_marginStart="4dp"
         app:layout_constraintStart_toEndOf="@+id/rendeuLabel"
         app:layout_constraintTop_toTopOf="@+id/rendeuLabel"
