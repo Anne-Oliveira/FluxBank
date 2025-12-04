@@ -2,6 +2,7 @@ package com.example.fluxbank
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +16,9 @@ class HomeActivity : AppCompatActivity() {
     private var isSaldoVisible = false
     private val saldoOculto = "R$********"
     private val saldoVisivel = "R$ 12.345,67"
+
+    private val limiteTotal = 1400.0
+    private val limiteUsado = 924.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +49,9 @@ class HomeActivity : AppCompatActivity() {
         // Configuração das Listas
         setupRecyclerView()
         setupCofinho()
+
+        // Configurar módulo de fatura
+        setupInvoiceModule()
 
         // Configuração dos botões de ação
         setupActionButtons()
@@ -78,6 +85,33 @@ class HomeActivity : AppCompatActivity() {
 
         val adapter = CofinhoAdapter(cofinhoItems)
         cofinhoRecyclerView.adapter = adapter
+    }
+
+    private fun setupInvoiceModule() {
+        val progressBar = findViewById<View>(R.id.home_progress_bar)
+        val limiteUtilizado = findViewById<TextView>(R.id.home_limite_utilizado)
+        val limiteDisponivel = findViewById<TextView>(R.id.home_limite_disponivel)
+        val btnConferirFaturas = findViewById<TextView>(R.id.btn_conferir_faturas)
+
+        // Calcular e exibir valores
+        val disponivel = limiteTotal - limiteUsado
+
+        limiteUtilizado.text = String.format("R$%.2f", limiteUsado).replace(".", ",")
+        limiteDisponivel.text = String.format("R$%.2f", disponivel).replace(".", ",")
+
+        // Calcular largura da barra de progresso
+        val screenWidth = resources.displayMetrics.widthPixels - 64 // margins
+        val progressWidth = ((limiteUsado / limiteTotal) * screenWidth).toInt()
+
+        val params = progressBar.layoutParams
+        params.width = progressWidth
+        progressBar.layoutParams = params
+
+        // Click para abrir tela de faturas
+        btnConferirFaturas.setOnClickListener {
+            val intent = Intent(this, InvoiceActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupActionButtons() {
