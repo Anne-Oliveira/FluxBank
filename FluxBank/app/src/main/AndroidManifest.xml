@@ -43,6 +43,9 @@
         <activity android:name=".ConfiguracoesActivity" android:exported="false" />
         <activity android:name=".DefinirValorPixActivity" android:exported="false" />
         <activity android:name=".ConfirmarPagamentoActivity" android:exported="false" />
+        <activity android:name=".SenhaPagamentoActivity" android:exported="false" />
+        <activity android:name=".PagamentoSucessoActivity" android:exported="false" />
+        <activity android:name=".ComprovanteActivity" android:exported="false" />
         <activity android:name=".SegundaActivity" android:exported="false" />
 
         <!-- Tela Pix -->
