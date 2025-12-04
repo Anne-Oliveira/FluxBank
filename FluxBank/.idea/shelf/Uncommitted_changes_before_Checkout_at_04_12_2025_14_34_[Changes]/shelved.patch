@@ -1,0 +1,19 @@
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n<!--    cores base-->\r\n    <color name=\"black\">#FF000000</color>\r\n    <color name=\"white\">#FFFFFFFF</color>\r\n\r\n<!--    Paleta de cores-->\r\n    <color name=\"laranjaPal\">#FA082E</color>\r\n    <color name=\"lRosaPal\">#C00E62</color>\r\n    <color name=\"rosaPal\">#B50850</color>\r\n    <color name=\"backgroundDark2\">#06001E</color>\r\n    <color name=\"backgroundDark1\">#0c1319</color>\r\n    <color name=\"backgroundLight\">#FAF9FF</color>\r\n    <color name=\"purplePal\">#382971</color>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/colors.xml b/app/src/main/res/values/colors.xml
+--- a/app/src/main/res/values/colors.xml	(revision 2b85f141eac74398df35427f5c078d807fa74506)
++++ b/app/src/main/res/values/colors.xml	(date 1764869112997)
+@@ -12,4 +12,7 @@
+     <color name="backgroundDark1">#0c1319</color>
+     <color name="backgroundLight">#FAF9FF</color>
+     <color name="purplePal">#382971</color>
++
++    <!-- Cores Adicionais -->
++    <color name="grey_300">#E0E0E0</color>
+ </resources>
+\ No newline at end of file

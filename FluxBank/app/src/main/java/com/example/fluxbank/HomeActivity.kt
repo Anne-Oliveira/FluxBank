@@ -155,7 +155,8 @@ class HomeActivity : AppCompatActivity() {
             showToast("Transferir clicado")
         }
         navSettings.setOnClickListener {
-            showToast("Configurações clicado")
+            val intent = Intent(this, ConfiguracoesActivity::class.java)
+            startActivity(intent)
         }
     }
 
