@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -79,7 +80,17 @@
                 android:paddingEnd="16dp"
                 android:gravity="center_vertical"
                 android:elevation="8dp"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btn_prosseguir"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Prosseguir"
+                android:background="@drawable/button_gradient_background"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@null"
+                android:layout_gravity="end" />
 
             <!-- Transfer Again Section -->
             <TextView
@@ -89,6 +100,7 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
 
             <!-- Recent Contacts - LinearLayout Horizontal -->
@@ -149,8 +161,6 @@
 
     </ScrollView>
 
-
-
     <!-- Bottom Navigation -->
     <LinearLayout
         android:id="@+id/bottomNav"
@@ -163,7 +173,6 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
         android:elevation="8dp">
-        >
 
         <ImageView android:id="@+id/nav_home" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_home"/>
         <ImageView android:id="@+id/nav_list" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_list"/>
@@ -181,7 +190,6 @@
         android:src="@drawable/ic_qr_code"
         android:background="@drawable/fab_background"
         android:scaleType="center"
-
         android:elevation="16dp"
         android:layout_above="@id/bottomNav"
         android:layout_centerHorizontal="true"
