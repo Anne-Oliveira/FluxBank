@@ -42,7 +42,9 @@
 
         <!-- Tela Pix -->
         <activity android:name=".PixActivity" android:exported="false" />
-        
+
+        <!-- Tela de FAQ -->
+        <activity android:name=".FaqActivity" android:exported="true" />
     </application>
 
 </manifest>
