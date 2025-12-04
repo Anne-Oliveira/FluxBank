@@ -157,7 +157,7 @@
                 android:textColor="#C00E62"
                 android:textSize="14sp"
                 android:textAlignment="center"
-                android:padding="12dp"
+                android:padding="10dp"
                 android:background="@drawable/button_outline_pink"
                 android:clickable="true"
                 android:focusable="true"
@@ -197,7 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="12dp">
 
                 <LinearLayout
                     android:id="@+id/invoices_container"
@@ -251,7 +251,7 @@
                 android:textColor="#C00E62"
                 android:textSize="14sp"
                 android:textAlignment="center"
-                android:padding="12dp"
+                android:padding="10dp"
                 android:background="@drawable/button_outline_pink"
                 android:clickable="true"
                 android:focusable="true" />

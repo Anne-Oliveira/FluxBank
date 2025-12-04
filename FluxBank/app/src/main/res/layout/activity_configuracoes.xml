@@ -62,47 +62,74 @@
                 android:id="@+id/topButtonsLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="24dp"
                 android:gravity="center"
-                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginEnd="24dp"
                     android:gravity="center"
-                    android:layout_marginEnd="24dp">
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:padding="12dp"
-                        android:background="@drawable/circular_background"
-                        android:src="@drawable/ic_user_profile"/>
+
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        app:cardCornerRadius="50dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true"
+                        app:strokeWidth="0dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:padding="0dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_user_profile"
+                            app:tint="#A9A9A9" />
+                    </com.google.android.material.card.MaterialCardView>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dados Pessoais"/>
+                        android:text="Dados Pessoais" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:gravity="center"
-                    android:layout_marginStart="24dp">
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:padding="12dp"
-                        android:background="@drawable/circular_background"
-                        android:src="@drawable/ic_bank"/>
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        app:cardCornerRadius="50dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true"
+                        app:strokeWidth="0dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:padding="0dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_bank"
+                            app:tint="#A9A9A9" />
+                    </com.google.android.material.card.MaterialCardView>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dados Bancários"/>
+                        android:text="Dados Bancários" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -111,132 +138,156 @@
                 android:id="@+id/optionsList"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="32dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@id/topButtonsLayout"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/topButtonsLayout">
 
                 <!-- Cadastro -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp">
+                    android:padding="15dp">
+
                     <ImageView
                         android:id="@+id/ic_cadastro"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_user_profile"
-                        android:layout_centerVertical="true"/>
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        app:tint="#737373"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_user_profile" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cadastro"
-                        android:layout_toEndOf="@id/ic_cadastro"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="16dp"
-                        android:layout_centerVertical="true"/>
+                        android:layout_toEndOf="@id/ic_cadastro"
+                        android:text="Cadastro"
+                        android:textSize="16sp" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_arrow_right"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        app:tint="@android:color/black"/>
+                        android:src="@drawable/ic_arrow_right"
+                        app:tint="@android:color/black" />
                 </RelativeLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/grey_300"/>
+                    android:background="@color/grey_300" />
 
                 <!-- Meus Limites -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp">
+
                     <ImageView
                         android:id="@+id/ic_limites"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_limits"
-                        android:layout_centerVertical="true"/>
+                        app:tint="#737373"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_limits" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Meus Limites"
-                        android:layout_toEndOf="@id/ic_limites"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="16dp"
-                        android:layout_centerVertical="true"/>
+                        android:layout_toEndOf="@id/ic_limites"
+                        android:text="Meus Limites"
+                        android:textSize="16sp" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_arrow_right"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        app:tint="@android:color/black"/>
+                        android:src="@drawable/ic_arrow_right"
+                        app:tint="@android:color/black" />
                 </RelativeLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/grey_300"/>
+                    android:background="@color/grey_300" />
 
                 <!-- Central de Segurança -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp">
+
                     <ImageView
                         android:id="@+id/ic_seguranca"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_security"
-                        android:layout_centerVertical="true"/>
+                        android:layout_width="34dp"
+                        app:tint="#737373"
+                        android:layout_height="34dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_security" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Central de Segurança"
-                        android:layout_toEndOf="@id/ic_seguranca"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="16dp"
-                        android:layout_centerVertical="true"/>
+
+                        android:layout_toEndOf="@id/ic_seguranca"
+                        android:text="Central de Segurança"
+                        android:textSize="16sp" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_arrow_right"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        app:tint="@android:color/black"/>
+                        android:src="@drawable/ic_arrow_right"
+                        app:tint="@android:color/black" />
                 </RelativeLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/grey_300"/>
+                    android:background="@color/grey_300" />
 
                 <!-- Informe de Rendimentos -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp">
+
                     <ImageView
                         android:id="@+id/ic_rendimentos"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_informe_rendimentos"
-                        android:layout_centerVertical="true"/>
+                        android:layout_width="34dp"
+                        app:tint="#737373"
+                        android:layout_height="34dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_informe_rendimentos" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Informe de rendimentos"
-                        android:layout_toEndOf="@id/ic_rendimentos"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="16dp"
-                        android:layout_centerVertical="true"/>
+                        android:layout_toEndOf="@id/ic_rendimentos"
+                        android:text="Informe de rendimentos"
+                        android:textSize="16sp" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_arrow_right"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        app:tint="@android:color/black"/>
+                        android:src="@drawable/ic_arrow_right"
+                        app:tint="@android:color/black" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -245,29 +296,29 @@
                 android:id="@+id/placeholderLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@id/optionsList"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/optionsList"
                 app:layout_constraintStart_toStartOf="@id/optionsList"
-                app:layout_constraintEnd_toEndOf="@id/optionsList">
+                app:layout_constraintTop_toBottomOf="@id/optionsList">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="60dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     app:cardBackgroundColor="@color/grey_300"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    android:layout_marginEnd="8dp"/>
+                    app:cardElevation="0dp" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="60dp"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     app:cardBackgroundColor="@color/grey_300"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    android:layout_marginStart="8dp"/>
+                    app:cardElevation="0dp" />
             </LinearLayout>
 
             <!-- Logout Button -->
@@ -275,16 +326,17 @@
                 android:id="@+id/btnLogout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sair"
-                android:textColor="@color/rosaPal"
-                android:textStyle="bold"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="24dp"
                 android:drawableStart="@drawable/ic_logout"
                 android:drawablePadding="8dp"
+                android:text="Sair"
+                android:textColor="@color/rosaPal"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:drawableTint="@color/rosaPal"
-                android:layout_marginBottom="24dp"
-                android:layout_marginStart="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
