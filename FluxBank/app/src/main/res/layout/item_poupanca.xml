@@ -98,7 +98,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:paddingHorizontal="16dp"
-        android:translationY="120dp"
+        android:translationY="130dp"
         android:elevation="30dp">
 
     <Button

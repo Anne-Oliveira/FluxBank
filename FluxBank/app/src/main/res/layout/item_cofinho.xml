@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="140dp"
+    android:layout_height="160dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:strokeColor="@android:color/transparent"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:padding="12dp">
+
+
+        <ImageView
+            android:id="@+id/cofinhoIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/circular_background_pink"
+            android:contentDescription="@drawable/img_2"
+            android:scaleType="centerInside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/cofinhoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dia a Dia"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cofinhoIcon" />
+
+        <TextView
+            android:id="@+id/cofinhoValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R$ 0,00"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cofinhoTitle" />
+
+        <TextView
+            android:id="@+id/cofinhoRendeu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rendeu R$ 0,00"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cofinhoValue" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
