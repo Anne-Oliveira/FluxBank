@@ -95,7 +95,7 @@
         android:id="@+id/rendeuHelpIcon"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:src="@drawable/ic_help"
+        android:src="@drawable/ic_help2"
         android:layout_marginStart="4dp"
         app:layout_constraintStart_toEndOf="@+id/rendeuLabel"
         app:layout_constraintTop_toTopOf="@+id/rendeuLabel"
