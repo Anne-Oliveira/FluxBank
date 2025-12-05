@@ -1,12 +1,16 @@
 package com.example.fluxbank
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import android.widget.GridView
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fluxbank.ConfiguracoesActivity
+import com.example.fluxbank.DefinirValorPixActivity
 
 class PixActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +19,9 @@ class PixActivity : AppCompatActivity() {
 
         // Configuração do botão voltar no header
         setupHeader()
+
+        // Configurar o campo de busca e o botão prosseguir
+        setupSearch()
 
         // Configurar listas e grids
         setupRecentContacts()
@@ -35,6 +42,22 @@ class PixActivity : AppCompatActivity() {
 
         btnHelp.setOnClickListener {
             showToast("Ajuda clicado")
+        }
+    }
+
+    private fun setupSearch() {
+        val searchInput = findViewById<EditText>(R.id.search_input)
+        val btnProsseguir = findViewById<Button>(R.id.btn_prosseguir)
+
+        btnProsseguir.setOnClickListener {
+            val pixKey = searchInput.text.toString()
+            if (pixKey.isNotEmpty()) {
+                val intent = Intent(this, DefinirValorPixActivity::class.java)
+                intent.putExtra("PIX_KEY", pixKey)
+                startActivity(intent)
+            } else {
+                searchInput.error = "Digite uma chave Pix"
+            }
         }
     }
 
@@ -104,12 +127,11 @@ class PixActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigation() {
-        // Os IDs são dos LinearLayouts, não dos ImageViews!
-        val navHome = findViewById<LinearLayout>(R.id.nav_home)
-        val navList = findViewById<LinearLayout>(R.id.nav_list)
-        val navQr = findViewById<LinearLayout>(R.id.nav_qr)
-        val navTransfer = findViewById<LinearLayout>(R.id.nav_transfer)
-        val navSettings = findViewById<LinearLayout>(R.id.nav_settings)
+        val navHome = findViewById<ImageView>(R.id.nav_home)
+        val navList = findViewById<ImageView>(R.id.nav_list)
+        val navQr = findViewById<ImageView>(R.id.nav_qr)
+        val navTransfer = findViewById<ImageView>(R.id.nav_transfer)
+        val navSettings = findViewById<ImageView>(R.id.nav_settings)
 
         navHome.setOnClickListener {
             finish() // Volta para a home
@@ -128,7 +150,8 @@ class PixActivity : AppCompatActivity() {
         }
 
         navSettings.setOnClickListener {
-            showToast("Configurações clicado")
+            val intent = Intent(this, ConfiguracoesActivity::class.java)
+            startActivity(intent)
         }
     }
 

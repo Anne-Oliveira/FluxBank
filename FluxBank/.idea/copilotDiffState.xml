@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/button_gradient_round.xml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/src/main/res/drawable/button_gradient_round.xml" />
+              <option name="originalContent" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;&lt;ripple xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&#10;    android:color=&quot;#33FFFFFF&quot;&gt;&#10;    &lt;item&gt;&#10;        &lt;shape android:shape=&quot;rectangle&quot;&gt;&#10;            &lt;gradient&#10;                android:startColor=&quot;#EF3B7A&quot;&#10;                android:endColor=&quot;#E91E63&quot;&#10;                android:angle=&quot;90&quot; /&gt;&#10;            &lt;corners android:radius=&quot;12dp&quot; /&gt;&#10;        &lt;/shape&gt;&#10;    &lt;/item&gt;&#10;&lt;/ripple&gt;" />
+              <option name="updatedContent" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;&lt;ripple xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&#10;    android:color=&quot;#33FFFFFF&quot;&gt;&#10;    &lt;item&gt;&#10;        &lt;shape android:shape=&quot;rectangle&quot;&gt;&#10;            &lt;gradient&#10;                android:startColor=&quot;#EF3B7A&quot;&#10;                android:endColor=&quot;#E91E63&quot;&#10;                android:angle=&quot;90&quot; /&gt;&#10;            &lt;corners android:radius=&quot;12dp&quot; /&gt;&#10;        &lt;/shape&gt;&#10;    &lt;/item&gt;&#10;&lt;/ripple&gt;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/circular_background.xml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/src/main/res/drawable/circular_background.xml" />
+              <option name="originalContent" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&#10;    android:shape=&quot;oval&quot;&gt;&#10;    &lt;solid android:color=&quot;@android:color/white&quot; /&gt;&#10;&lt;/shape&gt;&#10;" />
+              <option name="updatedContent" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&#10;    android:shape=&quot;oval&quot;&gt;&#10;    &lt;solid android:color=&quot;@android:color/white&quot; /&gt;&#10;&lt;/shape&gt;&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_splash_screen.xml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/src/main/res/layout/activity_splash_screen.xml" />
+              <option name="originalContent" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&#10;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&#10;    android:layout_width=&quot;match_parent&quot;&#10;    android:layout_height=&quot;match_parent&quot;&#10;    android:background=&quot;@drawable/splash_background&quot;&gt;&#10;&#10;    &lt;ImageView&#10;        android:layout_width=&quot;150dp&quot;&#10;        android:layout_height=&quot;150dp&quot;&#10;        android:src=&quot;@drawable/logo&quot;&#10;        android:contentDescription=&quot;@string/logo_do_fluxbank&quot;&#10;        app:layout_constraintTop_toTopOf=&quot;parent&quot;&#10;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;&#10;        app:layout_constraintStart_toStartOf=&quot;parent&quot;&#10;        app:layout_constraintEnd_toEndOf=&quot;parent&quot; /&gt;&#10;&#10;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;" />
+              <option name="updatedContent" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&#10;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&#10;    android:layout_width=&quot;match_parent&quot;&#10;    android:layout_height=&quot;match_parent&quot;&#10;    android:background=&quot;@drawable/splash_background&quot;&gt;&#10;&#10;    &lt;ImageView&#10;        android:layout_width=&quot;150dp&quot;&#10;        android:layout_height=&quot;150dp&quot;&#10;        android:src=&quot;@drawable/logo&quot;&#10;        android:contentDescription=&quot;@string/logo_do_fluxbank&quot;&#10;        app:layout_constraintTop_toTopOf=&quot;parent&quot;&#10;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;&#10;        app:layout_constraintStart_toStartOf=&quot;parent&quot;&#10;        app:layout_constraintEnd_toEndOf=&quot;parent&quot; /&gt;&#10;&#10;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

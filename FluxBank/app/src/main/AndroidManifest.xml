@@ -38,13 +38,19 @@
         <!-- Telas Pós-Login -->
         <activity android:name=".LoadingActivity" android:exported="false" />
         <activity android:name=".HomeActivity" android:exported="false" />
+        <activity android:name=".PoupancaActivity" android:exported="false" />
+        <activity android:name=".CofinhoActivity" android:exported="false" />
+        <activity android:name=".ConfiguracoesActivity" android:exported="false" />
+        <activity android:name=".DefinirValorPixActivity" android:exported="false" />
+        <activity android:name=".ConfirmarPagamentoActivity" android:exported="false" />
+        <activity android:name=".SenhaPagamentoActivity" android:exported="false" />
+        <activity android:name=".PagamentoSucessoActivity" android:exported="false" />
+        <activity android:name=".ComprovanteActivity" android:exported="false" />
         <activity android:name=".SegundaActivity" android:exported="false" />
 
         <!-- Tela Pix -->
         <activity android:name=".PixActivity" android:exported="false" />
 
-        <!-- Tela de FAQ -->
-        <activity android:name=".FaqActivity" android:exported="true" />
     </application>
 
 </manifest>
