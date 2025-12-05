@@ -108,7 +108,7 @@
         android:layout_weight="1"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="40dp"
-        android:background="@drawable/button_gradient_background"
+        android:background="@drawable/button_rounded_pink"
         android:text="Resgatar"
         android:textColor="@android:color/white"
         app:backgroundTint="@null" />
@@ -120,7 +120,7 @@
         android:layout_weight="1"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/button_gradient_background"
+        android:background="@drawable/button_rounded_pink"
         android:text="Aplicar"
         android:textColor="@android:color/white"
         app:backgroundTint="@null" />
