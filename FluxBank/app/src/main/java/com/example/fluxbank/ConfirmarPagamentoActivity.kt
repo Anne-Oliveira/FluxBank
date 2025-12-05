@@ -1,5 +1,6 @@
 package com.example.fluxbank
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -40,6 +41,13 @@ class ConfirmarPagamentoActivity : AppCompatActivity() {
 
         btnBack.setOnClickListener {
             finish()
+        }
+
+        btnPagar.setOnClickListener {
+            val intent = Intent(this, SenhaPagamentoActivity::class.java)
+            intent.putExtra("PIX_KEY", pixKey)
+            intent.putExtra("VALOR", valorString)
+            startActivity(intent)
         }
     }
 }
