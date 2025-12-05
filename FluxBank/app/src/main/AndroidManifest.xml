@@ -45,6 +45,8 @@
 
         <!-- Tela de FAQ -->
         <activity android:name=".FaqActivity" android:exported="true" />
+        <activity android:name=".DuvidaActivity" android:exported="false"/>
+
 
 
     <!-- Tela de Pagamento -->

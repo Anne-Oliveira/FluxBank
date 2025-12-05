@@ -18,6 +18,8 @@ class FaqActivity : AppCompatActivity() {
     private lateinit var searchFaq: EditText
     private lateinit var btnSendQuestion: Button
 
+
+
     // Perguntas e respostas
     private lateinit var btnExpand1: ImageButton
     private lateinit var answer1: TextView
@@ -61,12 +63,8 @@ class FaqActivity : AppCompatActivity() {
         // Botão enviar pergunta
         btnSendQuestion = findViewById(R.id.btnSendQuestion)
         btnSendQuestion.setOnClickListener {
-            val pergunta = searchFaq.text.toString()
-            if (pergunta.isNotEmpty()) {
-                Toast.makeText(this, "Pergunta enviada: $pergunta", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Digite sua pergunta primeiro", Toast.LENGTH_SHORT).show()
-            }
+            val intent = Intent(this, DuvidaActivity::class.java)
+            startActivity(intent)
         }
 
         // Expandir respostas
