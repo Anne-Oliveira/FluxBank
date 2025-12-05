@@ -97,6 +97,11 @@ class DuvidaActivity : AppCompatActivity() {
             .setMessage("Sua pergunta foi enviada:\n\n$texto")
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
+
+                // Voltar para a HomeActivity
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
             }
             .show()
     }
