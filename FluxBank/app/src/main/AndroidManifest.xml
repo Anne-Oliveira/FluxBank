@@ -45,6 +45,15 @@
 
         <!-- Tela de FAQ -->
         <activity android:name=".FaqActivity" android:exported="true" />
-    </application>
+
+
+    <!-- Tela de Pagamento -->
+    <activity android:name=".PagamentoActivity" android:exported="false" />
+
+        <!-- Tela de Extrato -->
+        <activity android:name=".ExtratoActivity" android:exported="false" />
+
+</application>
+
 
 </manifest>

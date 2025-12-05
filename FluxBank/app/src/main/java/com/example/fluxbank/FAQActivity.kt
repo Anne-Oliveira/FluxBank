@@ -9,7 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.*
-
+import android.content.Intent
 
 class FaqActivity : AppCompatActivity() {
 
@@ -44,6 +44,10 @@ class FaqActivity : AppCompatActivity() {
 
         // Cabeçalho
         btnBack = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()}
         btnSearch = findViewById(R.id.btn_search)
 
         btnBack.setOnClickListener { finish() }

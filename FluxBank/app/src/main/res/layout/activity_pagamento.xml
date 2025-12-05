@@ -48,7 +48,7 @@
                 <ImageView
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:src="@drawable/ic_receipt"
+                    android:src="@drawable/ic_add"
                     android:background="@drawable/circle_background"
                     android:padding="12dp"
                     android:tint="#FFFFFF"/>
@@ -76,7 +76,7 @@
                 <ImageView
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:src="@drawable/ic_card"
+                    android:src="@drawable/ic_cards"
                     android:background="@drawable/circle_background"
                     android:padding="12dp"
                     android:tint="#FFFFFF"/>
@@ -104,7 +104,7 @@
                 <ImageView
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:src="@drawable/ic_manage"
+                    android:src="@drawable/ic_settings"
                     android:background="@drawable/circle_background"
                     android:padding="12dp"
                     android:tint="#FFFFFF"/>
@@ -132,7 +132,7 @@
                 <ImageView
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:src="@drawable/ic_more"
+                    android:src="@drawable/ic_add"
                     android:background="@drawable/circle_background"
                     android:padding="12dp"
                     android:tint="#FFFFFF"/>
@@ -183,7 +183,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Nome, chave ou Pix copia e cola"
-        android:background="@drawable/search_background"
+        android:background="@drawable/gradient_background"
         android:padding="12dp"
         android:textColor="#000000"
         android:textSize="16sp"
