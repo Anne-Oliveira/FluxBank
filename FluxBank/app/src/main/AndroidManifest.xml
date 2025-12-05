@@ -51,12 +51,6 @@
         <!-- Tela Pix -->
         <activity android:name=".PixActivity" android:exported="false" />
 
-        <!-- Tela de Cartões -->
-        <activity android:name=".CardsActivity" android:exported="false" />
-
-        <!-- Tela de Faturas -->
-        <activity android:name=".InvoiceActivity" android:exported="false" />
-
     </application>
 
 </manifest>
