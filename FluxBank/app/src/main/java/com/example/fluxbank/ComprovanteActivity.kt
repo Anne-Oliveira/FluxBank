@@ -42,7 +42,7 @@ class ComprovanteActivity : AppCompatActivity() {
         // Sobre a Transação
         setDetailRow(R.id.data_pagamento, "Data pagamento:", sdfData.format(dataAtual).replaceFirstChar { it.uppercase() })
         setDetailRow(R.id.horario, "Horário:", sdfHora.format(dataAtual))
-        setDetailRow(R.id.id_transacao, "ID da transação:", idTransacao)
+        setDetailRow(R.id.id_transacao, "ID da transação: \n \n", idTransacao)
 
         // Quem Recebeu
         setDetailRow(R.id.nome_recebeu, "Nome:", "Anee Oliveira")
