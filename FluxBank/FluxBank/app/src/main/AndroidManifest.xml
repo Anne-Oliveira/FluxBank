@@ -57,6 +57,8 @@
         <!-- Tela de Faturas -->
         <activity android:name=".InvoiceActivity" android:exported="false" />
 
+        <!-- Tela de Extrato -->
+        <activity android:name=".ExtratoActivity" android:exported="false" />
     </application>
 
 </manifest>

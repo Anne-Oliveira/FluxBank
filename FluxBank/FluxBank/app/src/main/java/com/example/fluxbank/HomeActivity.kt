@@ -63,6 +63,13 @@ class HomeActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recentActivityList)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        val btnConferirExtrato = findViewById<TextView>(R.id.dividerRecentActivity)
+
+
+        btnConferirExtrato.setOnClickListener {
+            val intent = Intent(this, ExtratoActivity::class.java)
+            startActivity(intent)
+        }
 
         val activities = listOf(
             RecentActivity("Ivan", "Pix Recebido", "R$2.000"),
