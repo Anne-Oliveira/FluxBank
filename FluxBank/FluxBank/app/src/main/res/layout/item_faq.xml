@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="1dp"
+    android:background="@android:color/white">
+
+    <!-- Pergunta (sempre visível) -->
+    <RelativeLayout
+        android:id="@+id/perguntaContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/textoPergunta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/iconExpandir"
+            android:layout_marginEnd="16dp"
+            android:layout_centerVertical="true"
+            android:text="Como abrir uma conta no banco digital?"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/iconExpandir"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_add"
+            app:tint="#666666" />
+
+    </RelativeLayout>
+
+    <!-- Linha divisória -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0" />
+
+    <!-- Resposta (expansível) -->
+    <LinearLayout
+        android:id="@+id/respostaContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="20dp"
+        android:visibility="gone"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/textoResposta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Para abrir uma conta, baixe o aplicativo, preencha seus dados pessoais, envie uma foto do documento e pronto! Sua conta será criada em minutos."
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp" />
+
+        <!-- Linha divisória inferior -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -27,6 +27,7 @@ class HomeActivity : AppCompatActivity() {
         val saldoValue = findViewById<TextView>(R.id.saldoValue)
         val visibilityIcon = findViewById<ImageView>(R.id.visibilityIcon)
         val cofinhoLink = findViewById<TextView>(R.id.cofinhoLink)
+        val helpIcon = findViewById<ImageView>(R.id.helpIcon)
 
         // Configuração da visibilidade do saldo
         visibilityIcon.setOnClickListener {
@@ -43,6 +44,12 @@ class HomeActivity : AppCompatActivity() {
         // Navegação para a tela do cofrinho
         cofinhoLink.setOnClickListener {
             val intent = Intent(this, CofinhoActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Navegação para a tela de FAQ
+        helpIcon.setOnClickListener {
+            val intent = Intent(this, FaqActivity::class.java)
             startActivity(intent)
         }
 
