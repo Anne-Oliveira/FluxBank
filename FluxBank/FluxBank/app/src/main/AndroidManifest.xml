@@ -63,6 +63,11 @@
         <!-- Tela de FAQ -->
         <activity android:name=".FaqActivity" android:exported="false" />
 
+        <!-- Tela de Edição de Dados Pessoais -->
+        <activity android:name=".DadosUsuarioActivity" android:exported="false" />
+
+
+
     </application>
 
 </manifest>
