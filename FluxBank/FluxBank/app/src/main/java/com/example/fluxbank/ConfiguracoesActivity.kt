@@ -1,7 +1,9 @@
 package com.example.fluxbank
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class ConfiguracoesActivity : AppCompatActivity() {
@@ -11,6 +13,14 @@ class ConfiguracoesActivity : AppCompatActivity() {
 
         val btnBack = findViewById<ImageView>(R.id.btnBack)
         btnBack.setOnClickListener {
+            finish()
+        }
+
+        val btnLogout = findViewById<TextView>(R.id.btnLogout)
+        btnLogout.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
             finish()
         }
     }

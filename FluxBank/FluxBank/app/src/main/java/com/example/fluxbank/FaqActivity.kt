@@ -158,7 +158,8 @@ class FaqActivity : AppCompatActivity() {
         }
 
         navQr.setOnClickListener {
-            showToast("QR Code clicado")
+            val intent = Intent(this, LeitorQrActivity::class.java)
+            startActivity(intent)
         }
 
         navTransfer.setOnClickListener {
