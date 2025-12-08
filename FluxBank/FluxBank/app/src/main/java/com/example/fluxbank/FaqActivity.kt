@@ -53,7 +53,8 @@ class FaqActivity : AppCompatActivity() {
         }
 
         btnEnviarPergunta.setOnClickListener {
-            Toast.makeText(this, "Funcionalidade de enviar pergunta em desenvolvimento", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, EnviarFaqActivity::class.java)
+            startActivity(intent)
         }
 
         // Configurar bottom navigation

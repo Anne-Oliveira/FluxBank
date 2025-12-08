@@ -60,8 +60,14 @@
         <!-- Tela de Extrato -->
         <activity android:name=".ExtratoActivity" android:exported="false" />
 
+<!--        Tela de Envio de FAQ-->
+        <activity android:name=".EnviarFaqActivity" android:exported="false" />
+
         <!-- Tela de FAQ -->
         <activity android:name=".FaqActivity" android:exported="false" />
+
+<!--        Tela de Pagamentos-->
+        <activity android:name=".PagamentosActivity" android:exported="false" />
 
     </application>
 

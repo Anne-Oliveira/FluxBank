@@ -131,6 +131,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setupActionButtons() {
         val btnPix = findViewById<MaterialCardView>(R.id.btn_pix)
         val btnCards = findViewById<MaterialCardView>(R.id.btn_cards)
+        val btnPagar = findViewById<MaterialCardView>(R.id.btn_pay)
         val investmentsCard = findViewById<MaterialCardView>(R.id.investmentsCard)
 
         btnPix.setOnClickListener {
@@ -145,6 +146,11 @@ class HomeActivity : AppCompatActivity() {
 
         investmentsCard.setOnClickListener {
             val intent = Intent(this, PoupancaActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnPagar.setOnClickListener {
+            val intent = Intent(this, PagamentosActivity::class.java)
             startActivity(intent)
         }
     }

@@ -44,6 +44,7 @@
 
     </LinearLayout>
 
+
     <!-- Content Area -->
     <ScrollView
         android:id="@+id/content_area"
