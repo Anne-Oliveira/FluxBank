@@ -27,12 +27,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnClose"
         app:layout_constraintBottom_toBottomOf="@+id/btnClose">
-        
+
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#FF2849" />
+            android:background="@color/rosaPal" />
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/rosaPal" />
         <View
             android:layout_width="8dp"
             android:layout_height="match_parent"/>

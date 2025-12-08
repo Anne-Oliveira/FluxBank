@@ -32,7 +32,15 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#FF2849" />
+            android:background="@color/rosaPal" />
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#E0E0E0" />
         <View
             android:layout_width="8dp"
             android:layout_height="match_parent"/>

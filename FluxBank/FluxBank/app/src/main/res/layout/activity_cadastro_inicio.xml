@@ -8,44 +8,41 @@
     tools:context=".CadastroInicioActivity">
 
     <!-- Header -->
-    <TextView
-        android:id="@+id/header_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Cadastro"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/btnClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_close"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/header_title"
-        app:layout_constraintBottom_toBottomOf="@+id/header_title"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/progressIndicator"
         android:layout_width="0dp"
         android:layout_height="4dp"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/header_title"
-        app:layout_constraintEnd_toEndOf="@+id/btnClose"
-        app:layout_constraintTop_toBottomOf="@+id/header_title">
-        
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toEndOf="@+id/btnClose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnClose"
+        app:layout_constraintBottom_toBottomOf="@+id/btnClose">
+
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#FF2849" />
+            android:background="@color/rosaPal" />
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#E0E0E0" />
         <View
             android:layout_width="8dp"
             android:layout_height="match_parent"/>
@@ -65,6 +62,8 @@
 
     </LinearLayout>
 
+
+
     <!-- Body -->
     <TextView
         android:id="@+id/title"
@@ -74,7 +73,7 @@
         android:text="Qual tipo de conta você deseja abrir?"
         android:textColor="@android:color/black"
         android:textSize="28sp"
-        app:layout_constraintStart_toStartOf="@+id/progressIndicator"
+        app:layout_constraintStart_toStartOf="@+id/btnClose"
         app:layout_constraintEnd_toEndOf="@+id/progressIndicator"
         app:layout_constraintTop_toBottomOf="@+id/progressIndicator" />
 
