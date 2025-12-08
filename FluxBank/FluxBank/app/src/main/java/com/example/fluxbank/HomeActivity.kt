@@ -169,7 +169,8 @@ class HomeActivity : AppCompatActivity() {
             showToast("Lista clicado")
         }
         navQr.setOnClickListener {
-            showToast("QR Code clicado")
+            val intent = Intent(this, LeitorQrActivity::class.java)
+            startActivity(intent)
         }
         navTransfer.setOnClickListener {
             showToast("Transferir clicado")

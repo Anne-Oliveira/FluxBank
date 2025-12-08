@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -50,6 +52,9 @@
 
         <!-- Tela Pix -->
         <activity android:name=".PixActivity" android:exported="false" />
+
+        <!-- Tela de Leitor QR -->
+        <activity android:name=".LeitorQrActivity" android:exported="false" />
 
         <!-- Tela de Cartões -->
         <activity android:name=".CardsActivity" android:exported="false" />
