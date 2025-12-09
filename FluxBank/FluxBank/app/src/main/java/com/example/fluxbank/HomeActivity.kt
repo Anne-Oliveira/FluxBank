@@ -27,6 +27,7 @@ class HomeActivity : BaseActivity() {
         val visibilityIcon = findViewById<ImageView>(R.id.visibilityIcon)
         val cofinhoLink = findViewById<TextView>(R.id.cofinhoLink)
         val helpIcon = findViewById<ImageView>(R.id.helpIcon)
+        val notificationIcon = findViewById<ImageView>(R.id.notificationIcon)
 
         // Configuração da visibilidade do saldo
         visibilityIcon.setOnClickListener {
@@ -49,6 +50,12 @@ class HomeActivity : BaseActivity() {
         // Navegação para a tela de FAQ
         helpIcon.setOnClickListener {
             val intent = Intent(this, FaqActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Navegação para a tela de Notificações
+        notificationIcon.setOnClickListener {
+            val intent = Intent(this, NotificacaoActivity::class.java)
             startActivity(intent)
         }
 
