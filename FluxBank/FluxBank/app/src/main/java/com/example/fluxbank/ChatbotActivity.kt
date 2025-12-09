@@ -3,8 +3,11 @@ package com.example.fluxbank
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.flexbox.FlexboxLayout
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.JustifyContent
 
-class ChatbotActivity : AppCompatActivity() {
+class ChatbotActivity : BaseActivity() {
 
     private var step = "inicio"   // controla o fluxo do chat
 
@@ -18,37 +21,93 @@ class ChatbotActivity : AppCompatActivity() {
         val scrollView = findViewById<ScrollView>(R.id.chatScroll)
         val btnBack = findViewById<ImageView>(R.id.btnBack)
 
+        btnBack.setOnClickListener { finish() }
 
-        btnBack.setOnClickListener {
-            finish()
-        }
-        addMessage("Bot: Olá! 👋 Eu sou o assistente do FluxBank.\nComo posso ajudar hoje?\n\n• Saldo\n• Extrato\n• Boleto\n• Ajuda", chatContainer)
+        // MENSAGENS INICIAIS
+        addBotMessage(
+            "Olá usuário! Sou o Fluxy,\nseu assistente virtual 24h ⭐",
+            chatContainer
+        )
+
+        addBotMessage(
+            "Escolha uma das opções abaixo\nou digite sua dúvida:",
+            chatContainer
+        )
+
+        addQuickOptions(chatContainer)
 
         btnSend.setOnClickListener {
             val userMessage = edtMessage.text.toString().trim()
             if (userMessage.isEmpty()) return@setOnClickListener
 
-
-            addMessage("Você: $userMessage", chatContainer)
+            addUserMessage(userMessage, chatContainer)
             val botResponse = getResponse(userMessage)
 
-            addMessage("Bot: $botResponse", chatContainer)
+            addBotMessage(botResponse, chatContainer)
 
             edtMessage.text.clear()
+
             scrollView.post { scrollView.fullScroll(ScrollView.FOCUS_DOWN) }
         }
     }
 
-
-
-    private fun addMessage(text: String, container: LinearLayout) {
-        val tv = TextView(this)
+    // -------------------------------------------------------------
+    // BALÃO DO BOT
+    // -------------------------------------------------------------
+    private fun addBotMessage(text: String, container: LinearLayout) {
+        val view = layoutInflater.inflate(R.layout.item_bot_message, null)
+        val tv = view.findViewById<TextView>(R.id.textBot)
         tv.text = text
-        tv.textSize = 17f
-        tv.setPadding(12, 12, 12, 12)
-        container.addView(tv)
+        container.addView(view)
     }
 
+    // -------------------------------------------------------------
+    // BALÃO DO USUÁRIO
+    // -------------------------------------------------------------
+    private fun addUserMessage(text: String, container: LinearLayout) {
+        val view = layoutInflater.inflate(R.layout.item_user_message, null)
+        val tv = view.findViewById<TextView>(R.id.textUser)
+        tv.text = text
+        container.addView(view)
+    }
+
+    // -------------------------------------------------------------
+    // BOTÕES ESTILO “PILL”
+    // -------------------------------------------------------------
+    private fun addQuickOptions(container: LinearLayout) {
+
+        val options = listOf(
+            "Minha conta", "Extrato", "Saldo",
+            "FAQ", "Cartões", "Pix",
+            "Cancelar conta", "Faturas", "Mais opções"
+        )
+
+        val flex = FlexboxLayout(this).apply {
+            flexWrap = FlexWrap.WRAP
+            justifyContent = JustifyContent.FLEX_START
+        }
+
+        for (opt in options) {
+            val item = layoutInflater.inflate(R.layout.item_quick_option, null)
+            val tv = item.findViewById<TextView>(R.id.optionText)
+            tv.text = opt
+
+            tv.setOnClickListener {
+                addUserMessage(opt, container)
+                val response = getResponse(opt.lowercase())
+                addBotMessage(response, container)
+            }
+
+            flex.addView(item)
+        }
+
+        container.addView(flex)
+    }
+
+
+    // -------------------------------------------------------------
+    // LÓGICA DO CHATBOT (a mesma que você já tinha)
+    // -------------------------------------------------------------
     private fun getResponse(msg: String): String {
         val m = msg.lowercase()
 
@@ -58,16 +117,14 @@ class ChatbotActivity : AppCompatActivity() {
             return "Boleto gerado com sucesso! 💳\nValor: R$ $msg\nCódigo: 34191.75839 48293.019584 91020.190001 2 93820000000000"
         }
 
-        // --- Fluxo principal ---
+        // ---- FLUXO PRINCIPAL ----
         return when {
 
-            // SALDO
             m.contains("saldo") -> {
                 step = "inicio"
                 "Seu saldo atual é **R$ 1.280,45** 💰"
             }
 
-            // EXTRATO
             m.contains("extrato") || m.contains("transação") -> {
                 step = "inicio"
                 "Aqui estão suas últimas movimentações:\n\n" +
@@ -77,37 +134,62 @@ class ChatbotActivity : AppCompatActivity() {
                         "• Recarga de celular − R$ 20,00"
             }
 
-            // BOLETO
             m.contains("boleto") -> {
                 step = "boleto_valor"
                 "Claro! Qual o valor do boleto que você deseja gerar?"
             }
 
-            // AJUDA / FAQ
-            m.contains("ajuda") || m.contains("duvida") -> {
+            m.contains("faq") || m.contains("ajuda") || m.contains("duvida") -> {
                 step = "inicio"
-                "Aqui estão algumas dúvidas comuns:\n\n" +
-                        "• Como abrir conta? — Basta clicar em 'Criar conta' na tela inicial.\n" +
-                        "• Horário de atendimento? — 08h às 18h.\n" +
+                "Algumas dúvidas comuns:\n\n" +
+                        "• Como abrir conta? — Clique em 'Criar conta'.\n" +
+                        "• Horário? — 08h às 18h.\n" +
                         "• O FluxBank é seguro? — Sim! Utilizamos criptografia de ponta."
             }
 
-            // OI / OLÁ
-            m.contains("oi") || m.contains("olá") -> {
+            m.contains("cartão") || m.contains("cartões") -> {
                 step = "inicio"
-                "Olá! Como posso ajudar?\n\n• Saldo\n• Extrato\n• Boleto\n• Ajuda"
+                "Você tem 2 cartões ativos:\n• Crédito final 2211\n• Débito final 8820"
             }
 
-            // DESPEDIDA
+            m.contains("pix") -> {
+                step = "inicio"
+                "Para realizar um PIX, acesse a área 'Transferências' no app."
+            }
+
+            m.contains("minha conta") -> {
+                step = "inicio"
+                "Sua conta está ativa ✔\nTitular: Usuário FluxBank\nAgência: 0001\nConta: 123456-7"
+            }
+
+            m.contains("fatura") || m.contains("faturas") -> {
+                step = "inicio"
+                "Suas faturas:\n• Janeiro: R$ 320,00\n• Fevereiro: R$ 198,00\n• Março: R$ 440,00"
+            }
+
+            m.contains("cancelar") -> {
+                step = "inicio"
+                "Tem certeza que deseja cancelar a conta? Essa ação é irreversível."
+            }
+
+            m.contains("opções") || m.contains("mais opções") -> {
+                step = "inicio"
+                "Mais opções:\n• Cartões\n• Faturas\n• Pix\n• Cancelar conta"
+            }
+
+            m.contains("oi") || m.contains("olá") -> {
+                step = "inicio"
+                "Olá! Como posso ajudar?"
+            }
+
             m.contains("tchau") || m.contains("até") -> {
                 step = "inicio"
                 "Até mais! 👋"
             }
 
-            // DESCONHECIDO
             else -> {
                 step = "inicio"
-                "Não consegui entender 🤔\nVocê pode tentar:\n• Saldo\n• Extrato\n• Boleto\n• Ajuda"
+                "Não entendi 🤔\nVocê pode tentar:\nSaldo, Extrato, Boleto, FAQ..."
             }
         }
     }
