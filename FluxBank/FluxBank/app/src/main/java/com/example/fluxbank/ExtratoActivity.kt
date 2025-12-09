@@ -7,7 +7,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fluxbank.R
 
-class ExtratoActivity : AppCompatActivity() {
+class ExtratoActivity : BaseActivity() {
 
     private lateinit var saldoLabel: TextView
     private lateinit var saldoValue: TextView

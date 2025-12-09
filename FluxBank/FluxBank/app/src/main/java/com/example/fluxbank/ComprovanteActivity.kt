@@ -13,7 +13,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
-class ComprovanteActivity : AppCompatActivity() {
+class ComprovanteActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comprovante)

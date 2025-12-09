@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class InvoiceActivity : AppCompatActivity() {
+class InvoiceActivity : BaseActivity() {
 
     private lateinit var invoicesContainer: LinearLayout
     private lateinit var progressBar: View
