@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -51,6 +53,9 @@
         <!-- Tela Pix -->
         <activity android:name=".PixActivity" android:exported="false" />
 
+        <!-- Tela de Leitor QR -->
+        <activity android:name=".LeitorQrActivity" android:exported="false" />
+
         <!-- Tela de Cartões -->
         <activity android:name=".CardsActivity" android:exported="false" />
 
@@ -60,13 +65,22 @@
         <!-- Tela de Extrato -->
         <activity android:name=".ExtratoActivity" android:exported="false" />
 
+<!--        Tela de Envio de FAQ-->
+        <activity android:name=".EnviarFaqActivity" android:exported="false" />
+
         <!-- Tela de FAQ -->
         <activity android:name=".FaqActivity" android:exported="false" />
 
-        <!-- Tela de Edição de Dados Pessoais -->
-        <activity android:name=".DadosUsuarioActivity" android:exported="false" />
+<!--        Tela de Pagamentos-->
+        <activity android:name=".PagamentosActivity" android:exported="false" />
 
 
+<!--        Tela de dados do usuario        -->
+
+        <activity android:name=".DadosClienteActivity" android:exported="false" />
+
+<!--        Tela de Chatbot-->
+        <activity android:name=".ChatbotActivity" android:exported="false" />
 
     </application>
 

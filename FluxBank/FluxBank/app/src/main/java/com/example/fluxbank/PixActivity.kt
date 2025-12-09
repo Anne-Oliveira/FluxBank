@@ -9,8 +9,6 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fluxbank.ConfiguracoesActivity
-import com.example.fluxbank.DefinirValorPixActivity
 
 class PixActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,7 +140,8 @@ class PixActivity : BaseActivity() {
         }
 
         navQr.setOnClickListener {
-            showToast("QR Code clicado")
+            val intent = Intent(this, LeitorQrActivity::class.java)
+            startActivity(intent)
         }
 
         navTransfer.setOnClickListener {

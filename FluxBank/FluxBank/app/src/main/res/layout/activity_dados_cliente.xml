@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Botão voltar -->
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:src="@drawable/ic_arrow_left" />
+
+        <!-- Título da página -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Informações do seu perfil"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginTop="16dp" />
+
+        <!-- Subtítulo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aqui você pode alterar, adicionar ou corrigir suas informações pessoais e dados da sua conta"
+            android:textSize="14sp"
+            android:textColor="#888888"
+            android:layout_marginTop="4dp" />
+
+        <!-- Seção: Dados pessoais -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dados pessoais"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginTop="25dp" />
+
+        <!-- ITEM - Nome -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_user_profile"
+                android:layout_marginEnd="12dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Anee Calorine de Andrade Oliva"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nome e sobrenome"
+                    android:textSize="13sp"
+                    android:textColor="#888888" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_right" />
+        </LinearLayout>
+
+        <!-- ITEM - CPF -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_informe_rendimentos"
+                android:layout_marginEnd="12dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="222.333.222-00"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Número do CPF"
+                    android:textSize="13sp"
+                    android:textColor="#888" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_right" />
+        </LinearLayout>
+
+        <!-- ITEM - Endereço -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_loc"
+                android:layout_marginEnd="12dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R. Haroldo Gomez, 234, 05634-090"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Endereço particular"
+                    android:textSize="13sp"
+                    android:textColor="#888" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_right" />
+        </LinearLayout>
+
+        <!-- Ocupação -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ocupação e atividade"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_marginTop="30dp" />
+
+        <!-- ITEM - Ocupação -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_travel_bag"
+                android:layout_marginEnd="12dp"
+                app:tint="@android:color/black"
+                tools:ignore="UseCompatLoadingForDrawables" />
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Estudante"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#000"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ocupação principal"
+                    android:textSize="13sp"
+                    android:textColor="#888"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_right" />
+        </LinearLayout>
+
+        <!-- Seção Dados da conta -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dados da conta"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_marginTop="30dp"/>
+
+        <!-- ITEM - Email -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_mail"
+                android:layout_marginEnd="12dp"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="anee@email.com"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#000"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E-mail cadastrado para comunicações"
+                    android:textSize="13sp"
+                    android:textColor="#888"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_right" />
+        </LinearLayout>
+
+        <!-- ITEM - Senha -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_pass_change"
+                android:layout_marginEnd="12dp"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="************"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#000"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Senha cadastrada para login"
+                    android:textSize="13sp"
+                    android:textColor="#888"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_right" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

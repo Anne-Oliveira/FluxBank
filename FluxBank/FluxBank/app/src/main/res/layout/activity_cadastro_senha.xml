@@ -97,6 +97,52 @@
         app:layout_constraintEnd_toEndOf="@+id/edtSenha"
         app:layout_constraintTop_toBottomOf="@+id/edtSenha" />
 
+
+    <!-- Lista de requisitos da senha -->
+    <LinearLayout
+        android:id="@+id/layoutValidacao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/edtConfirmarSenha"
+        app:layout_constraintEnd_toEndOf="@+id/edtConfirmarSenha"
+        app:layout_constraintTop_toBottomOf="@+id/edtConfirmarSenha">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/regra8"
+            android:text="Deve conter pelo menos 8 caracteres"
+            android:textSize="14sp"
+            android:textColor="#818181" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/regraMaiuscula"
+            android:text="Deve conter ao menos uma letra maiúscula"
+            android:textSize="14sp"
+            android:textColor="#818181" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/regraEspecial"
+            android:text="Deve conter um caractere especial (!@#\$%*)"
+            android:textSize="14sp"
+            android:textColor="#818181" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/regraCoincide"
+            android:text="As senhas devem coincidir"
+            android:textSize="14sp"
+            android:textColor="#818181" />
+    </LinearLayout>
+
+
     <!-- Footer -->
     <ImageButton
         android:id="@+id/btnFinishCadastro"

@@ -7,9 +7,9 @@
 
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/logo"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo_vazado"
         android:contentDescription="@string/logo_do_fluxbank"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

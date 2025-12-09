@@ -1,11 +1,11 @@
 package com.example.fluxbank
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fluxbank.R
 
 class ExtratoActivity : BaseActivity() {
 
@@ -58,10 +58,13 @@ class ExtratoActivity : BaseActivity() {
         val adapter = ExtratoAdapter(this, lista)
         listViewExtrato.adapter = adapter
 
-        navHome.setOnClickListener { Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show() }
+        navHome.setOnClickListener { finish() }
         navList.setOnClickListener { Toast.makeText(this, "Listagem", Toast.LENGTH_SHORT).show() }
         navTransfer.setOnClickListener { Toast.makeText(this, "Transferir", Toast.LENGTH_SHORT).show() }
         navSettings.setOnClickListener { Toast.makeText(this, "Configurações", Toast.LENGTH_SHORT).show() }
-        navQr.setOnClickListener { Toast.makeText(this, "QR Code", Toast.LENGTH_SHORT).show() }
+        navQr.setOnClickListener { 
+            val intent = Intent(this, LeitorQrActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -18,15 +18,21 @@ class CadastroEmailActivity : BaseActivity() {
         val edtEmail = findViewById<EditText>(R.id.edtEmail)
 
         btnClose.setOnClickListener {
-            finish() // Fecha a tela atual
+            finish()
         }
 
         btnNext.setOnClickListener {
+            val nome = edtNome.text.toString().trim()
+            val email = edtEmail.text.toString().trim()
+
             when {
-                edtNome.text.toString().isEmpty() -> edtNome.error = "Nome é obrigatório"
-                edtEmail.text.toString().isEmpty() -> edtEmail.error = "Email é obrigatório"
+                nome.isEmpty() -> edtNome.error = "Nome é obrigatório"
+
+                email.isEmpty() -> edtEmail.error = "Email é obrigatório"
+
+                !email.contains("@") -> edtEmail.error = "Email inválido: deve conter @"
+
                 else -> {
-                    // A próxima tela será a CadastroSenhaActivity, que criarei a seguir
                     val intent = Intent(this, CadastroSenhaActivity::class.java)
                     startActivity(intent)
                 }

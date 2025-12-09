@@ -53,7 +53,8 @@ class FaqActivity : BaseActivity() {
         }
 
         btnEnviarPergunta.setOnClickListener {
-            Toast.makeText(this, "Funcionalidade de enviar pergunta em desenvolvimento", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, EnviarFaqActivity::class.java)
+            startActivity(intent)
         }
 
         // Configurar bottom navigation
@@ -158,7 +159,8 @@ class FaqActivity : BaseActivity() {
         }
 
         navQr.setOnClickListener {
-            showToast("QR Code clicado")
+            val intent = Intent(this, LeitorQrActivity::class.java)
+            startActivity(intent)
         }
 
         navTransfer.setOnClickListener {

@@ -131,7 +131,9 @@ class HomeActivity : BaseActivity() {
     private fun setupActionButtons() {
         val btnPix = findViewById<MaterialCardView>(R.id.btn_pix)
         val btnCards = findViewById<MaterialCardView>(R.id.btn_cards)
+        val btnPagar = findViewById<MaterialCardView>(R.id.btn_pay)
         val investmentsCard = findViewById<MaterialCardView>(R.id.investmentsCard)
+        val btnChat = findViewById<ImageView>(R.id.chatIcon)
 
         btnPix.setOnClickListener {
             val intent = Intent(this, PixActivity::class.java)
@@ -145,6 +147,16 @@ class HomeActivity : BaseActivity() {
 
         investmentsCard.setOnClickListener {
             val intent = Intent(this, PoupancaActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnPagar.setOnClickListener {
+            val intent = Intent(this, PagamentosActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnChat.setOnClickListener {
+            val intent = Intent(this, ChatbotActivity::class.java)
             startActivity(intent)
         }
     }
@@ -163,7 +175,8 @@ class HomeActivity : BaseActivity() {
             showToast("Lista clicado")
         }
         navQr.setOnClickListener {
-            showToast("QR Code clicado")
+            val intent = Intent(this, LeitorQrActivity::class.java)
+            startActivity(intent)
         }
         navTransfer.setOnClickListener {
             showToast("Transferir clicado")

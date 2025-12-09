@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="12dp">
+
+    <!-- Círculo branco com ícone central -->
+    <FrameLayout
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/circle_white"
+        android:foregroundGravity="center">
+
+        <ImageView
+            android:id="@+id/item_icon"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_docs"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+    <!-- Texto abaixo do ícone -->
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comprovantes"
+        android:textColor="#fff"
+        android:textSize="11sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+</LinearLayout>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/gradient_background"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="16dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="Voltar"
+            android:padding="8dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/titlePage"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Pagamentos"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <GridView
+            android:id="@+id/listPagamentos"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_below="@id/titlePage"
+            android:gravity="center"
+            android:horizontalSpacing="6dp"
+            android:numColumns="4"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="6dp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/titulo_transferencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="12dp"
+        android:padding="10dp"
+        android:text="Deseja pagar ou transferir?"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/subTituloDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titulo_transferencia"
+        android:layout_marginTop="-30dp"
+        android:layout_marginBottom="12dp"
+        android:padding="10dp"
+        android:text="Pague boletos, efetue pix e muito mais"
+        android:textColor="#8F8F91"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/search_input"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/titulo_transferencia"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_input"
+        android:elevation="8dp"
+        android:gravity="center_vertical"
+        android:hint="Nome, chave ou Pix copia e cola"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColorHint="#999999" />
+
+    <Button
+        android:id="@+id/btnEnviarPergunta"
+        android:layout_width="240dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/search_input"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/button_rounded_pink"
+        android:drawableTop="@drawable/ic_cam"
+        android:drawablePadding="8dp"
+        android:text="Escanear Código de barras"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        app:backgroundTint="@null" />
+
+    <TextView
+        android:id="@+id/myPag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_marginTop="225dp"
+        android:layout_marginBottom="12dp"
+        android:padding="10dp"
+        android:text="Meus pagamentos"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:id="@+id/bolItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/myPag"
+
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_docs" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Meus boletos"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Acesse todos os boletos emitidos no seu CPF"
+                android:textColor="#8F8F91"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_arrow_right"
+            app:tint="#E91E63" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bolItem"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_car" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Veículos"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Acesse seu IPVA, multas e faça licenciamentos "
+                android:textColor="#8F8F91"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_arrow_right"
+            app:tint="#E91E63" />
+    </LinearLayout>
+
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="360dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_bottom_nav"
+        android:elevation="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_home" />
+
+        <ImageView
+            android:id="@+id/nav_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_list" />
+
+        <ImageView
+            android:id="@+id/nav_spacer"
+            android:layout_width="68dp"
+            android:layout_height="68dp" />
+
+        <ImageView
+            android:id="@+id/nav_transfer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_transfer" />
+
+        <ImageView
+            android:id="@+id/nav_settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_settings" />
+
+    </LinearLayout>
+
+    <!-- QR Code Button - Floating -->
+    <ImageView
+        android:id="@+id/nav_qr"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_above="@id/bottomNav"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-60dp"
+        android:background="@drawable/fab_background"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        android:scaleType="center"
+        android:src="@drawable/ic_qr_code" />
+
+
+</RelativeLayout>
