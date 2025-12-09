@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 
-class CadastroInicioActivity : AppCompatActivity() {
+class CadastroInicioActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro_inicio)

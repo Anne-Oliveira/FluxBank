@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 
-class FaqActivity : AppCompatActivity() {
+class FaqActivity : BaseActivity() {
 
     private lateinit var recyclerViewFaq: RecyclerView
     private lateinit var campoPesquisa: EditText

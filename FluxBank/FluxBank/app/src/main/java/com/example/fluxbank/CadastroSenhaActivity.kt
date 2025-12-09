@@ -10,7 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class CadastroSenhaActivity : AppCompatActivity() {
+
+class CadastroSenhaActivity : BaseActivity() {
 
     lateinit var regra8: TextView
     lateinit var regraMaiuscula: TextView

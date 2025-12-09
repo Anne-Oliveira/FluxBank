@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import java.text.NumberFormat
 import java.util.Locale
 
-class ConfirmarPagamentoActivity : AppCompatActivity() {
+class ConfirmarPagamentoActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirmar_pagamento)

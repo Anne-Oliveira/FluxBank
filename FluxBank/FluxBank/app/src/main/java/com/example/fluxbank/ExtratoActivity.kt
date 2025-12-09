@@ -7,7 +7,7 @@ import android.text.TextWatcher
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
-class ExtratoActivity : AppCompatActivity() {
+class ExtratoActivity : BaseActivity() {
 
     private lateinit var saldoLabel: TextView
     private lateinit var saldoValue: TextView

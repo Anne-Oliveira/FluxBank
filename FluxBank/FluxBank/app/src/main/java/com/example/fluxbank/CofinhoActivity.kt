@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class CofinhoActivity : AppCompatActivity() {
+class CofinhoActivity : BaseActivity() {
 
     private var isSaldoVisible = false
     private val saldoOculto = "R$ ******"
