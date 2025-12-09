@@ -74,6 +74,14 @@
 <!--        Tela de Pagamentos-->
         <activity android:name=".PagamentosActivity" android:exported="false" />
 
+
+<!--        Tela de dados do usuario        -->
+
+        <activity android:name=".DadosClienteActivity" android:exported="false" />
+
+<!--        Tela de Chatbot-->
+        <activity android:name=".ChatbotActivity" android:exported="false" />
+
     </application>
 
 </manifest>

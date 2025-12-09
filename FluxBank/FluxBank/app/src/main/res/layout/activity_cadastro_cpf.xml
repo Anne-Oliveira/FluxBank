@@ -78,7 +78,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="CPF"
+        android:hint="000.000.000-00"
         android:inputType="number"
         android:backgroundTint="#E0E0E0"
         app:layout_constraintStart_toStartOf="@+id/cpfTitle"

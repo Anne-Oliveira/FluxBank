@@ -23,5 +23,11 @@ class ConfiguracoesActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        val btnUserData = findViewById<ImageView>(R.id.btn_user_data)
+        btnUserData.setOnClickListener {
+            val intent = Intent(this, DadosClienteActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
