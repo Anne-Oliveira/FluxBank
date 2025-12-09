@@ -2,32 +2,42 @@ package com.example.fluxbank
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-
-import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 open class BaseActivity : AppCompatActivity() {
 
-    private fun enableImmersiveMode() {
-        window.decorView.systemUiVisibility = (
-                View.SYSTEM_UI_FLAG_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                )
-    }
+    protected fun setupBottomNavigation() {
+        val navHome = findViewById<ImageView>(R.id.nav_home)
+        val navList = findViewById<ImageView>(R.id.nav_list)
+        val navQr = findViewById<ImageView>(R.id.nav_qr)
+        val navTransfer = findViewById<ImageView>(R.id.nav_transfer)
+        val navSettings = findViewById<ImageView>(R.id.nav_settings)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableImmersiveMode()
-    }
-
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
-            enableImmersiveMode()
+        navHome.setOnClickListener {
+            if (this !is HomeActivity) {
+                startActivity(Intent(this, HomeActivity::class.java))
+            }
+        }
+        navList.setOnClickListener {
+            if (this !is ExtratoActivity) {
+                startActivity(Intent(this, ExtratoActivity::class.java))
+            }
+        }
+        navQr.setOnClickListener {
+            if (this !is LeitorQrActivity) {
+                startActivity(Intent(this, LeitorQrActivity::class.java))
+            }
+        }
+        navTransfer.setOnClickListener {
+            if (this !is PixActivity) {
+                startActivity(Intent(this, PixActivity::class.java))
+            }
+        }
+        navSettings.setOnClickListener {
+            if (this !is ConfiguracoesActivity) {
+                startActivity(Intent(this, ConfiguracoesActivity::class.java))
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.fluxbank
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 
 class InvoiceActivity : BaseActivity() {
 
@@ -195,39 +193,6 @@ class InvoiceActivity : BaseActivity() {
 
         btnMostrarCompras.setOnClickListener {
             showToast("Mostrar todas as compras")
-        }
-    }
-
-    private fun setupBottomNavigation() {
-        val navHome = findViewById<ImageView>(R.id.nav_home)
-        val navList = findViewById<ImageView>(R.id.nav_list)
-        val navQr = findViewById<ImageView>(R.id.nav_qr)
-        val navTransfer = findViewById<ImageView>(R.id.nav_transfer)
-        val navSettings = findViewById<ImageView>(R.id.nav_settings)
-
-        navHome.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-            finish()
-        }
-
-        navList.setOnClickListener {
-            showToast("Lista clicado")
-        }
-
-        navQr.setOnClickListener {
-            val intent = Intent(this, LeitorQrActivity::class.java)
-            startActivity(intent)
-        }
-
-        navTransfer.setOnClickListener {
-            val intent = Intent(this, PixActivity::class.java)
-            startActivity(intent)
-        }
-
-        navSettings.setOnClickListener {
-            showToast("Configurações clicado")
         }
     }
 

@@ -62,4 +62,7 @@ dependencies {
     implementation("com.google.mlkit:barcode-scanning:17.3.0")
 
     implementation("com.google.android.flexbox:flexbox:3.0.0")
+
+    // Biometric dependency
+    implementation("androidx.biometric:biometric:1.1.0")
 }
