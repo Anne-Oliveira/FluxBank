@@ -1,13 +1,17 @@
 package com.example.fluxbank
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
+import android.widget.EditText
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 
 class PagamentosActivity : BaseActivity() {
 
@@ -25,23 +29,53 @@ class PagamentosActivity : BaseActivity() {
         R.drawable.ic_more
     )
 
+    private lateinit var searchInput: EditText
+
+    private val barcodeLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+                val barcode = data?.getStringExtra("barcode_data")
+                searchInput.setText(barcode)
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pagar)
 
-        // GRID
+        searchInput = findViewById(R.id.search_input)
         val listView = findViewById<GridView>(R.id.listPagamentos)
         listView.adapter = PagamentoAdapter()
 
-        // BOTÃO VOLTAR
+        listView.setOnItemClickListener { _, _, position, _ ->
+            when (position) {
+                0 -> { // Posição do ícone "Comprovante"
+                    val intent = Intent(this, ComprovantesActivity::class.java)
+                    startActivity(intent)
+                }
+                1 -> { // Posição do ícone "Fatura do cartão"
+                    val intent = Intent(this, InvoiceActivity::class.java)
+                    startActivity(intent)
+                }
+                2 -> { // Posição do ícone "Gerenciar Pags."
+                    val intent = Intent(this, AgendarPagamentoActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
+
         val btnBack = findViewById<ImageView>(R.id.btn_back)
         btnBack.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
             finish()
         }
 
-        // Configurar a barra de navegação
+        val btnEscanear = findViewById<Button>(R.id.btnEscanearCodigoDeBarras)
+        btnEscanear.setOnClickListener {
+            val intent = Intent(this, BarcodeScannerActivity::class.java)
+            barcodeLauncher.launch(intent)
+        }
+
         setupBottomNavigation()
     }
 

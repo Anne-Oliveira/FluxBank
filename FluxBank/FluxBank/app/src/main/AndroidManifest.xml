@@ -49,6 +49,7 @@
         <activity android:name=".SenhaPagamentoActivity" android:exported="false" />
         <activity android:name=".PagamentoSucessoActivity" android:exported="false" />
         <activity android:name=".ComprovanteActivity" android:exported="false" />
+        <activity android:name=".ComprovantesActivity" android:exported="false" />
         <activity android:name=".SegundaActivity" android:exported="false" />
 
         <!-- Tela Pix -->
@@ -56,6 +57,9 @@
 
         <!-- Tela de Leitor QR -->
         <activity android:name=".LeitorQrActivity" android:exported="false" />
+
+        <!-- Tela de Scanner de Código de Barras -->
+        <activity android:name=".BarcodeScannerActivity" android:screenOrientation="landscape"/>
 
         <!-- Tela de Cartões -->
         <activity android:name=".CardsActivity" android:exported="false" />
@@ -66,22 +70,25 @@
         <!-- Tela de Extrato -->
         <activity android:name=".ExtratoActivity" android:exported="false" />
 
-<!--        Tela de Envio de FAQ-->
+        <!-- Tela de Envio de FAQ-->
         <activity android:name=".EnviarFaqActivity" android:exported="false" />
 
         <!-- Tela de FAQ -->
         <activity android:name=".FaqActivity" android:exported="false" />
 
-<!--        Tela de Pagamentos-->
+        <!-- Tela de Pagamentos-->
         <activity android:name=".PagamentosActivity" android:exported="false" />
+        <activity android:name=".AgendarPagamentoActivity" android:exported="false" />
 
 
-<!--        Tela de dados do usuario        -->
-
+        <!-- Tela de dados do usuario -->
         <activity android:name=".DadosClienteActivity" android:exported="false" />
 
-<!--        Tela de Chatbot-->
+        <!-- Tela de Chatbot-->
         <activity android:name=".ChatbotActivity" android:exported="false" />
+
+        <!-- Tela de Notificações -->
+        <activity android:name=".NotificacaoActivity" android:exported="false" />
 
     </application>
 
