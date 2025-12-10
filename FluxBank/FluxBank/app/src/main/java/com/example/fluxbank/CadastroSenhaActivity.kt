@@ -1,5 +1,6 @@
 package com.example.fluxbank
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -8,8 +9,6 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-
 
 class CadastroSenhaActivity : BaseActivity() {
 
@@ -51,6 +50,9 @@ class CadastroSenhaActivity : BaseActivity() {
             val confirmarSenha = edtConfirmarSenha.text.toString()
 
             if (validarRegras(senha, confirmarSenha)) {
+                // Adiciona a nova senha ao conjunto de senhas válidas
+                addPasswordToSet(senha)
+
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
@@ -75,5 +77,15 @@ class CadastroSenhaActivity : BaseActivity() {
         else { regraCoincide.setTextColor(0xFFFF0000.toInt()); valido = false }
 
         return valido
+    }
+
+    private fun addPasswordToSet(password: String) {
+        val prefs = getSharedPreferences("fluxbank_prefs", Context.MODE_PRIVATE)
+        val passwords = prefs.getStringSet("user_passwords", mutableSetOf())?.toMutableSet() ?: mutableSetOf()
+        passwords.add(password)
+        with(prefs.edit()) {
+            putStringSet("user_passwords", passwords)
+            apply()
+        }
     }
 }

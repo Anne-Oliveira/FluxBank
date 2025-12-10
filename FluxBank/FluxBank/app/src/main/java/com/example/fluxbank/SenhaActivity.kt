@@ -110,8 +110,8 @@ class SenhaActivity : BaseActivity() {
 
     private fun isValidPassword(password: String): Boolean {
         val prefs = getSharedPreferences("fluxbank_prefs", Context.MODE_PRIVATE)
-        val savedPassword = prefs.getString("user_password", null)
-        return password == savedPassword
+        val savedPasswords = prefs.getStringSet("user_passwords", null)
+        return savedPasswords?.contains(password) ?: false
     }
 
     private fun navigateToLoadingScreen() {
