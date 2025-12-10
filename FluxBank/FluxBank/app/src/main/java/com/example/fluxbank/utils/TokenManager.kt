@@ -3,8 +3,8 @@ package com.example.fluxbank.utils
 import android.content.Context
 import android.content.SharedPreferences
 
-
 class TokenManager(context: Context) {
+
     companion object {
         private const val PREFS_NAME = "FluxBankPrefs"
         private const val KEY_TOKEN = "jwt_token"
@@ -17,6 +17,7 @@ class TokenManager(context: Context) {
         private const val KEY_NUMERO_CONTA = "numero_conta"
         private const val KEY_SALDO = "saldo"
     }
+
     private val prefs: SharedPreferences =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
@@ -30,7 +31,7 @@ class TokenManager(context: Context) {
 
     fun saveUserData(
         userId: Long,
-        userName: String,
+        userName: String?,
         email: String,
         cpf: String? = null,
         cnpj: String? = null,
@@ -40,7 +41,7 @@ class TokenManager(context: Context) {
     ) {
         prefs.edit().apply {
             putLong(KEY_USER_ID, userId)
-            putString(KEY_USER_NAME, userName)
+            putString(KEY_USER_NAME, userName ?: "Usuário")
             putString(KEY_USER_EMAIL, email)
             putString(KEY_USER_CPF, cpf)
             putString(KEY_USER_CNPJ, cnpj)
