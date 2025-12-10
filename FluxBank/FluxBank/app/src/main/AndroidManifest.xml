@@ -85,6 +85,8 @@
         <!-- Tela de Notificações -->
         <activity android:name=".NotificacaoActivity" android:exported="false" />
 
+        <!-- Tela de Esqueci senha -->
+        <activity android:name=".EsqueciSenhaActivity" android:exported="false" />
     </application>
 
 </manifest>
