@@ -31,6 +31,7 @@
         <activity android:name=".MainActivity" android:exported="false" />
         <activity android:name=".SenhaActivity" android:exported="false" />
         <activity android:name=".EsqueciSenhaActivity" android:exported="false" />
+        <activity android:name=".RedefinirSenhaActivity" android:exported="false" />
 
         <!-- Telas de Cadastro -->
         <activity android:name=".CadastroInicioActivity" android:exported="false" />
