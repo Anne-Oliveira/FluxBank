@@ -6,7 +6,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 
+/**
+ * Activity principal - Login (Parte 1: CPF/CNPJ)
+ * Usuário digita CPF (11 dígitos) ou CNPJ (14 dígitos)
+ * Mantém máscara de CPF original
+ */
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,6 +21,7 @@ class MainActivity : BaseActivity() {
         val edtCpf = findViewById<EditText>(R.id.edtCpf)
         val btnNext = findViewById<ImageButton>(R.id.btnNext)
 
+        // Máscara de CPF (mantém funcionalidade original)
         edtCpf.addTextChangedListener(object : TextWatcher {
             private var isUpdating = false
             private val mask = "###.###.###-##"
@@ -51,15 +58,33 @@ class MainActivity : BaseActivity() {
         })
 
         btnNext.setOnClickListener {
-            val cpf = edtCpf.text.toString()
+            val cpfMascarado = edtCpf.text.toString()
 
-            if (cpf.isBlank() || cpf.length < 14) { // 14 = 000.000.000-00
+            if (cpfMascarado.isBlank() || cpfMascarado.length < 14) { // 14 = 000.000.000-00
                 edtCpf.error = "Digite um CPF válido"
             } else {
-                val intent = Intent(this, SenhaActivity::class.java)
-                intent.putExtra("cpfDigitado", cpf)
-                startActivity(intent)
+                // Remove máscara para enviar apenas números para a API
+                val cpfLimpo = cpfMascarado.replace(".", "").replace("-", "")
+                // Validar se tem 11 dígitos (CPF)
+                if (cpfLimpo.length == 11) {
+                    navegarParaSenha(cpfLimpo)
+                } else {
+                    Toast.makeText(
+                        this,
+                        "CPF deve ter 11 dígitos",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
+    }
+
+    /**
+     * Navega para a tela de senha, passando o CPF sem máscara
+     */
+    private fun navegarParaSenha(cpf: String) {
+        val intent = Intent(this, SenhaActivity::class.java)
+        intent.putExtra("documento", cpf)  // Envia CPF limpo (só números)
+        startActivity(intent)
     }
 }
