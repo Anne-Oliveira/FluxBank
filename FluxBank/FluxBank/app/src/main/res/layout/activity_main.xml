@@ -19,7 +19,7 @@
         android:contentDescription="@string/logo_do_fluxbank"/>
 
     <TextView
-        android:id="@+id/txtCpf"
+        android:id="@+id/txtCpfLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/digite_seu_cpf"
@@ -35,19 +35,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="000.000.000-00"
-        android:textColorHint="#74FFFFFF"
+        android:textColorHint="#8DFFFFFF"
         android:textColor="@android:color/white"
         android:background="@null"
-        android:maxLength="14"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        app:layout_constraintTop_toBottomOf="@id/txtCpf"
+        app:layout_constraintTop_toBottomOf="@id/txtCpfLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:autofillHints="cpf"
         android:inputType="number"/>
 
     <View
+        android:id="@+id/underline"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@android:color/white"
