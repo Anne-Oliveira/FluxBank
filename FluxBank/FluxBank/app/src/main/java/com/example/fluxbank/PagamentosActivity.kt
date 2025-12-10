@@ -8,9 +8,8 @@ import android.widget.BaseAdapter
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 
-class PagamentosActivity : AppCompatActivity() {
+class PagamentosActivity : BaseActivity() {
 
     private val titulos = listOf(
         "Comprovante",
@@ -41,6 +40,9 @@ class PagamentosActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        // Configurar a barra de navegação
+        setupBottomNavigation()
     }
 
     inner class PagamentoAdapter : BaseAdapter() {

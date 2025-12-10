@@ -8,7 +8,6 @@ import android.widget.GridView
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 
 class PixActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -121,36 +120,6 @@ class PixActivity : BaseActivity() {
         managementList.setOnItemClickListener { _, _, position, _ ->
             val option = options[position]
             showToast("${option.title} clicado")
-        }
-    }
-
-    private fun setupBottomNavigation() {
-        val navHome = findViewById<ImageView>(R.id.nav_home)
-        val navList = findViewById<ImageView>(R.id.nav_list)
-        val navQr = findViewById<ImageView>(R.id.nav_qr)
-        val navTransfer = findViewById<ImageView>(R.id.nav_transfer)
-        val navSettings = findViewById<ImageView>(R.id.nav_settings)
-
-        navHome.setOnClickListener {
-            finish() // Volta para a home
-        }
-
-        navList.setOnClickListener {
-            showToast("Lista clicado")
-        }
-
-        navQr.setOnClickListener {
-            val intent = Intent(this, LeitorQrActivity::class.java)
-            startActivity(intent)
-        }
-
-        navTransfer.setOnClickListener {
-            showToast("Transferir clicado")
-        }
-
-        navSettings.setOnClickListener {
-            val intent = Intent(this, ConfiguracoesActivity::class.java)
-            startActivity(intent)
         }
     }
 

@@ -7,7 +7,6 @@ import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
@@ -138,37 +137,6 @@ class FaqActivity : BaseActivity() {
         // Mostrar mensagem se não encontrar resultados
         if (listaFaqFiltrada.isEmpty()) {
             Toast.makeText(this, "Nenhuma pergunta encontrada", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun setupBottomNavigation() {
-        val navHome = findViewById<ImageView>(R.id.nav_home)
-        val navList = findViewById<ImageView>(R.id.nav_list)
-        val navQr = findViewById<ImageView>(R.id.nav_qr)
-        val navTransfer = findViewById<ImageView>(R.id.nav_transfer)
-        val navSettings = findViewById<ImageView>(R.id.nav_settings)
-
-        navHome.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        navList.setOnClickListener {
-            showToast("Lista clicado")
-        }
-
-        navQr.setOnClickListener {
-            val intent = Intent(this, LeitorQrActivity::class.java)
-            startActivity(intent)
-        }
-
-        navTransfer.setOnClickListener {
-            showToast("Transferir clicado")
-        }
-
-        navSettings.setOnClickListener {
-            showToast("Configurações clicado")
         }
     }
 

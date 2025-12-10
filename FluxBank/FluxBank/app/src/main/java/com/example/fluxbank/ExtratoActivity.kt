@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 
 class ExtratoActivity : BaseActivity() {
 
@@ -15,12 +14,6 @@ class ExtratoActivity : BaseActivity() {
     private lateinit var labelTransferir: TextView
     private lateinit var histInput: EditText
     private lateinit var listViewExtrato: ListView
-
-    private lateinit var navHome: ImageView
-    private lateinit var navList: ImageView
-    private lateinit var navTransfer: ImageView
-    private lateinit var navSettings: ImageView
-    private lateinit var navQr: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +28,6 @@ class ExtratoActivity : BaseActivity() {
         labelTransferir = findViewById(R.id.labelTransferir)
         histInput = findViewById(R.id.hist_input)
         listViewExtrato = findViewById(R.id.listViewExtrato)
-
-        navHome = findViewById(R.id.nav_home)
-        navList = findViewById(R.id.nav_list)
-        navTransfer = findViewById(R.id.nav_transfer)
-        navSettings = findViewById(R.id.nav_settings)
-        navQr = findViewById(R.id.nav_qr)
 
         visibilityIcon.setOnClickListener {
             saldoValue.text = if (saldoValue.text == "R$********") "R$ 1.258,90" else "R$********"
@@ -58,13 +45,6 @@ class ExtratoActivity : BaseActivity() {
         val adapter = ExtratoAdapter(this, lista)
         listViewExtrato.adapter = adapter
 
-        navHome.setOnClickListener { finish() }
-        navList.setOnClickListener { Toast.makeText(this, "Listagem", Toast.LENGTH_SHORT).show() }
-        navTransfer.setOnClickListener { Toast.makeText(this, "Transferir", Toast.LENGTH_SHORT).show() }
-        navSettings.setOnClickListener { Toast.makeText(this, "Configurações", Toast.LENGTH_SHORT).show() }
-        navQr.setOnClickListener { 
-            val intent = Intent(this, LeitorQrActivity::class.java)
-            startActivity(intent)
-        }
+        setupBottomNavigation()
     }
 }
