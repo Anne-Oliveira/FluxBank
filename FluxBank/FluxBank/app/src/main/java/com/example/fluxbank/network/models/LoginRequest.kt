@@ -1,4 +1,6 @@
 package com.example.fluxbank.network.models
 
-class LoginRequest {
-}
+data class LoginRequest (
+    val documento: String,
+    val senha: String
+)
