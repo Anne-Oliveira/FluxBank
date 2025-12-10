@@ -76,6 +76,17 @@
         app:layout_constraintTop_toTopOf="@id/chkBiometria"
         app:layout_constraintBottom_toBottomOf="@+id/chkBiometria"/>
 
+    <TextView
+        android:id="@+id/txtEsqueciSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Esqueci minha senha"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/underline"
+        app:layout_constraintTop_toTopOf="@+id/chkBiometria"
+        app:layout_constraintBottom_toBottomOf="@+id/chkBiometria"/>
+
     <ImageButton
         android:id="@+id/btnNext"
         android:layout_width="70dp"
