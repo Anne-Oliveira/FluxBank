@@ -49,6 +49,7 @@
         <activity android:name=".SenhaPagamentoActivity" android:exported="false" />
         <activity android:name=".PagamentoSucessoActivity" android:exported="false" />
         <activity android:name=".ComprovanteActivity" android:exported="false" />
+        <activity android:name=".ComprovantesActivity" android:exported="false" />
         <activity android:name=".SegundaActivity" android:exported="false" />
 
         <!-- Tela Pix -->
@@ -56,6 +57,9 @@
 
         <!-- Tela de Leitor QR -->
         <activity android:name=".LeitorQrActivity" android:exported="false" />
+
+        <!-- Tela de Scanner de Código de Barras -->
+        <activity android:name=".BarcodeScannerActivity" android:screenOrientation="landscape"/>
 
         <!-- Tela de Cartões -->
         <activity android:name=".CardsActivity" android:exported="false" />
@@ -74,6 +78,7 @@
 
         <!-- Tela de Pagamentos-->
         <activity android:name=".PagamentosActivity" android:exported="false" />
+        <activity android:name=".AgendarPagamentoActivity" android:exported="false" />
 
 
         <!-- Tela de dados do usuario -->

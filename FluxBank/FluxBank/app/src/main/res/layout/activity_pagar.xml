@@ -87,13 +87,13 @@
         android:background="@drawable/rounded_input"
         android:elevation="8dp"
         android:gravity="center_vertical"
-        android:hint="Nome, chave ou Pix copia e cola"
+        android:hint="Digite seu codigo de barras"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textColorHint="#999999" />
 
     <Button
-        android:id="@+id/btnEnviarPergunta"
+        android:id="@+id/btnEscanearCodigoDeBarras"
         android:layout_width="240dp"
         android:layout_height="80dp"
         android:layout_below="@id/search_input"
