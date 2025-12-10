@@ -56,7 +56,8 @@ class SenhaActivity : BaseActivity() {
     
     private fun isBiometricPreferenceEnabled(): Boolean {
         val prefs = getSharedPreferences("fluxbank_prefs", Context.MODE_PRIVATE)
-        return prefs.getBoolean("biometric_enabled", false)
+        val savedPasswords = prefs.getStringSet("user_passwords", null)
+        return savedPasswords?.contains(password) ?: false
     }
 
     private fun navigateToLoadingScreen() {
