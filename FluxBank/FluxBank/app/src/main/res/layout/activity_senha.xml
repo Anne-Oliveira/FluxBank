@@ -74,7 +74,7 @@
         android:textColor="@android:color/white"
         app:layout_constraintStart_toEndOf="@id/chkBiometria"
         app:layout_constraintTop_toTopOf="@id/chkBiometria"
-        app:layout_constraintBottom_toBottomOf="@id/chkBiometria"/>
+        app:layout_constraintBottom_toBottomOf="@+id/chkBiometria"/>
 
     <ImageButton
         android:id="@+id/btnNext"
