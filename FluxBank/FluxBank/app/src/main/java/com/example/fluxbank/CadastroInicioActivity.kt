@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RadioGroup
-import androidx.appcompat.app.AppCompatActivity
 
 class CadastroInicioActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,11 +21,15 @@ class CadastroInicioActivity : BaseActivity() {
 
         btnNext.setOnClickListener {
             val selectedId = radioGroup.checkedRadioButtonId
+
             if (selectedId == R.id.radioPf) {
                 val intent = Intent(this, CadastroCpfActivity::class.java)
+                intent.putExtra("tipoUsuario", "PF")
                 startActivity(intent)
+
             } else if (selectedId == R.id.radioPj) {
                 val intent = Intent(this, CadastroCnpjActivity::class.java)
+                intent.putExtra("tipoUsuario", "PJ")
                 startActivity(intent)
             }
         }
