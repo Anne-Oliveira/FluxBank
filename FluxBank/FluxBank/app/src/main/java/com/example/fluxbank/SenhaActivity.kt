@@ -13,8 +13,6 @@ import com.example.fluxbank.network.ApiClient
 import com.example.fluxbank.network.models.LoginRequest
 import com.example.fluxbank.utils.TokenManager
 import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
-import org.json.JSONObject
 
 class SenhaActivity : BaseActivity() {
 
@@ -96,9 +94,13 @@ class SenhaActivity : BaseActivity() {
                         if (primeiraConta != null) {
                             Log.d("SenhaActivity", "Conta.id: ${primeiraConta.id}")
                             Log.d("SenhaActivity", "Conta.numeroConta: ${primeiraConta.numeroConta}")
+                            Log.d("SenhaActivity", "Conta.agencia: ${primeiraConta.agencia}")  // ← LOG ADICIONADO
                             Log.d("SenhaActivity", "Conta.saldo: ${primeiraConta.saldo}")
                         }
 
+                        // ========================================
+                        // MUDANÇA AQUI: Adicionado agencia
+                        // ========================================
                         tokenManager.saveUserData(
                             userId = authResponse.usuario.id,
                             userName = authResponse.usuario.nome,
@@ -107,6 +109,7 @@ class SenhaActivity : BaseActivity() {
                             cnpj = authResponse.usuario.cnpj,
                             contaId = primeiraConta?.id,
                             numeroConta = primeiraConta?.numeroConta,
+                            agencia = primeiraConta?.agencia,
                             saldo = primeiraConta?.saldo?.toString()
                         )
 
@@ -114,7 +117,7 @@ class SenhaActivity : BaseActivity() {
 
                         Toast.makeText(
                             this@SenhaActivity,
-                            "Login OK! Usuário: ${authResponse.usuario.nome}",
+                            "Login OK! Usuário: ${authResponse.usuario.nome ?: "Bem-vindo"}",
                             Toast.LENGTH_SHORT
                         ).show()
 

@@ -15,6 +15,7 @@ class TokenManager(context: Context) {
         private const val KEY_USER_CNPJ = "user_cnpj"
         private const val KEY_CONTA_ID = "conta_id"
         private const val KEY_NUMERO_CONTA = "numero_conta"
+        private const val KEY_AGENCIA = "agencia"
         private const val KEY_SALDO = "saldo"
     }
 
@@ -37,6 +38,7 @@ class TokenManager(context: Context) {
         cnpj: String? = null,
         contaId: Long? = null,
         numeroConta: String? = null,
+        agencia: String? = null,
         saldo: String? = null
     ) {
         prefs.edit().apply {
@@ -47,9 +49,14 @@ class TokenManager(context: Context) {
             putString(KEY_USER_CNPJ, cnpj)
             contaId?.let { putLong(KEY_CONTA_ID, it) }
             putString(KEY_NUMERO_CONTA, numeroConta)
+            putString(KEY_AGENCIA, agencia)
             putString(KEY_SALDO, saldo)
             apply()
         }
+    }
+
+    fun getUserId(): Long {
+        return prefs.getLong(KEY_USER_ID, 0L)
     }
 
     fun getUserName(): String? {
@@ -68,8 +75,16 @@ class TokenManager(context: Context) {
         return prefs.getString(KEY_USER_CNPJ, null)
     }
 
+    fun getContaId(): Long {
+        return prefs.getLong(KEY_CONTA_ID, 0L)
+    }
+
     fun getNumeroConta(): String? {
         return prefs.getString(KEY_NUMERO_CONTA, null)
+    }
+
+    fun getAgencia(): String? {
+        return prefs.getString(KEY_AGENCIA, null)
     }
 
     fun getSaldo(): String? {

@@ -17,6 +17,10 @@ import com.example.fluxbank.network.models.CadastroRequest
 import com.example.fluxbank.utils.TokenManager
 import kotlinx.coroutines.launch
 
+/**
+ * CadastroSenhaActivity - Cadastro (Última etapa: Senha)
+ * ATUALIZADO: Salva agência junto com outros dados
+ */
 class CadastroSenhaActivity : BaseActivity() {
 
     private lateinit var tokenManager: TokenManager
@@ -95,7 +99,6 @@ class CadastroSenhaActivity : BaseActivity() {
             try {
                 Log.d("CadastroSenha", "=== INÍCIO CADASTRO API ===")
 
-                // Criar request
                 val request = CadastroRequest(
                     nomeCompleto = nome,
                     cpf = cpf,
@@ -125,6 +128,17 @@ class CadastroSenhaActivity : BaseActivity() {
                     tokenManager.saveToken(authResponse.token)
 
                     val primeiraConta = authResponse.usuario.contas?.firstOrNull()
+
+                    if (primeiraConta != null) {
+                        Log.d("CadastroSenha", "Conta.id: ${primeiraConta.id}")
+                        Log.d("CadastroSenha", "Conta.numeroConta: ${primeiraConta.numeroConta}")
+                        Log.d("CadastroSenha", "Conta.agencia: ${primeiraConta.agencia}")  // ← LOG ADICIONADO
+                        Log.d("CadastroSenha", "Conta.saldo: ${primeiraConta.saldo}")
+                    }
+
+                    // ========================================
+                    // MUDANÇA AQUI: Adicionado agencia
+                    // ========================================
                     tokenManager.saveUserData(
                         userId = authResponse.usuario.id,
                         userName = authResponse.usuario.nome,
@@ -133,6 +147,7 @@ class CadastroSenhaActivity : BaseActivity() {
                         cnpj = authResponse.usuario.cnpj,
                         contaId = primeiraConta?.id,
                         numeroConta = primeiraConta?.numeroConta,
+                        agencia = primeiraConta?.agencia,
                         saldo = primeiraConta?.saldo?.toString()
                     )
 
