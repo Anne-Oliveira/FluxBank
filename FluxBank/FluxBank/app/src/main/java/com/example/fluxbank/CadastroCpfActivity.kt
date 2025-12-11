@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 
 class CadastroCpfActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +18,8 @@ class CadastroCpfActivity : BaseActivity() {
         val btnNext = findViewById<ImageButton>(R.id.btnNextCpf)
         val edtCpf = findViewById<EditText>(R.id.edtCpf)
 
-        // 🔹 Aplica máscara de CPF
+        val tipoUsuario = intent.getStringExtra("tipoUsuario") ?: "PF"
+
         edtCpf.addTextChangedListener(object : TextWatcher {
             private var isUpdating = false
             private val mask = "###.###.###-##"
@@ -59,12 +60,19 @@ class CadastroCpfActivity : BaseActivity() {
         }
 
         btnNext.setOnClickListener {
-            val cpf = edtCpf.text.toString()
+            val cpfMascarado = edtCpf.text.toString()
 
-            if (cpf.isBlank() || cpf.length < 14) { // 14 = 000.000.000-00
+            if (cpfMascarado.isBlank() || cpfMascarado.length < 14) {
                 edtCpf.error = "CPF inválido"
             } else {
-                startActivity(Intent(this, CadastroEmailActivity::class.java))
+                val cpfLimpo = cpfMascarado.replace(".", "").replace("-", "")
+
+                Log.d("CadastroCpf", "CPF limpo: $cpfLimpo")
+
+                val intent = Intent(this, CadastroEmailActivity::class.java)
+                intent.putExtra("cpf", cpfLimpo)
+                intent.putExtra("tipoUsuario", tipoUsuario)
+                startActivity(intent)
             }
         }
     }
