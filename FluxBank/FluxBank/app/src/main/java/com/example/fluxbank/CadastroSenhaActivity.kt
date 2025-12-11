@@ -159,7 +159,7 @@ class CadastroSenhaActivity : BaseActivity() {
                         Toast.LENGTH_LONG
                     ).show()
 
-                    val intent = Intent(this@CadastroSenhaActivity, LoadingActivity::class.java)
+                    val intent = Intent(this@CadastroSenhaActivity, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()

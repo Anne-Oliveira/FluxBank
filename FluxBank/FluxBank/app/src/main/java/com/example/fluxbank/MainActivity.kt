@@ -20,23 +20,27 @@ class MainActivity : BaseActivity() {
         val edtCpf = findViewById<EditText>(R.id.edtCpf)
         val btnNext = findViewById<ImageButton>(R.id.btnNext)
 
+
         edtCpf.addTextChangedListener(object : TextWatcher {
             private var isUpdating = false
-            private val mask = "###.###.###-##"
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (isUpdating) {
-                    isUpdating = false
-                    return
+                if (isUpdating) return
+
+                val digits = s.toString().filter { it.isDigit() }
+
+                // Decide se é CPF ou CNPJ
+                val mask = when {
+                    digits.length <= 11 -> "###.###.###-##"
+                    else -> "##.###.###/####-##"
                 }
 
-                val digits = s.toString().replace(".", "").replace("-", "")
                 var masked = ""
                 var index = 0
 
-                for (m in mask.toCharArray()) {
+                for (m in mask) {
                     if (m == '#') {
                         if (index < digits.length) {
                             masked += digits[index]
@@ -50,52 +54,52 @@ class MainActivity : BaseActivity() {
                 isUpdating = true
                 edtCpf.setText(masked)
                 edtCpf.setSelection(masked.length)
+                isUpdating = false
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
 
         btnNext.setOnClickListener {
-            val cpfMascarado = edtCpf.text.toString()
+            val documentoMascarado = edtCpf.text.toString()
+            val documentoLimpo = documentoMascarado.filter { it.isDigit() }
 
-            Log.d("MainActivity", "=== Botão clicado ===")
-            Log.d("MainActivity", "CPF com máscara: $cpfMascarado")
+            Log.d("MainActivity", "Documento mascarado: $documentoMascarado")
+            Log.d("MainActivity", "Documento limpo: $documentoLimpo")
 
-            if (cpfMascarado.isBlank() || cpfMascarado.length < 14) {
-                edtCpf.error = "Digite um CPF válido"
-                Log.d("MainActivity", "Erro: CPF inválido")
-                return@setOnClickListener
-            }
+            when (documentoLimpo.length) {
 
-            val cpfLimpo = cpfMascarado.replace(".", "").replace("-", "")
+                11 -> {
+                    Log.d("MainActivity", "Detectado CPF válido")
+                    navegarParaSenha(documentoLimpo)
+                }
 
-            Log.d("MainActivity", "CPF limpo: $cpfLimpo")
-            Log.d("MainActivity", "Tamanho: ${cpfLimpo.length} dígitos")
+                14 -> {
+                    Log.d("MainActivity", "Detectado CNPJ válido")
+                    navegarParaSenha(documentoLimpo)
+                }
 
-            if (cpfLimpo.length == 11) {
-                Log.d("MainActivity", "✅ CPF válido! Navegando...")
-                navegarParaSenha(cpfLimpo)
-            } else {
-                Log.d("MainActivity", "❌ CPF com tamanho incorreto")
-                Toast.makeText(
-                    this,
-                    "CPF deve ter 11 dígitos",
-                    Toast.LENGTH_SHORT
-                ).show()
+                else -> {
+                    Log.d("MainActivity", "Documento inválido: tamanho ${documentoLimpo.length}")
+                    edtCpf.error = "Digite um CPF ou CNPJ válido"
+                    Toast.makeText(
+                        this,
+                        "CPF deve ter 11 dígitos — CNPJ deve ter 14",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
 
-    private fun navegarParaSenha(cpf: String) {
-        Toast.makeText(this, "Enviando: $cpf", Toast.LENGTH_LONG).show()
+    private fun navegarParaSenha(documento: String) {
+        Toast.makeText(this, "Enviando documento: $documento", Toast.LENGTH_LONG).show()
+
         Log.d("MainActivity", "=== Criando Intent ===")
-        Log.d("MainActivity", "CPF a ser enviado: $cpf")
+        Log.d("MainActivity", "Documento enviado: $documento")
 
         val intent = Intent(this, SenhaActivity::class.java)
-        intent.putExtra("documento", cpf)
-
-        Log.d("MainActivity", "Intent criado com extra 'documento'")
-        Log.d("MainActivity", "Iniciando SenhaActivity...")
+        intent.putExtra("documento", documento)
 
         startActivity(intent)
     }

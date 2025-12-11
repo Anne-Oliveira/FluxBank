@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">FluxBank</string>
-    <string name="digite_seu_cpf">Digite seu cpf:</string>
+    <string name="digite_seu_cpf_cnpj">Digite seu cpf ou cnpj:</string>
     <string name="cpf_hint">___.___.___-__</string>
     <string name="logo_do_fluxbank">Logo do FluxBank</string>
     <string name="bot_o_de_avan_ar">Botão de avançar</string>

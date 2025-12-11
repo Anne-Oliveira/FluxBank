@@ -174,6 +174,7 @@ class SenhaActivity : BaseActivity() {
 
     private fun navigateToLoadingScreen() {
         val intent = Intent(this, LoadingActivity::class.java)
+        intent.putExtra("documento", documento)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()

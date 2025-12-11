@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ThemeOverlay.FluxBank.CNPJ" parent="">
+        <item name="colorPrimaryFlux">@color/purplePal</item>
+        <item name="colorSecondaryFlux">@color/lRosaPal</item>
+        <item name="bgFlux">@color/backgroundDark1</item>
+        <item name="colorTextFlux">@color/backgroundLight</item>
+        <item name="colorCardFlux">@color/cardDark</item>
+        <item name="navBottomColor">#363945</item>
+
+    </style>
+</resources>

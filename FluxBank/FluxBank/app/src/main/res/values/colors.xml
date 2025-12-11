@@ -12,6 +12,8 @@
     <color name="backgroundDark1">#0c1319</color>
     <color name="backgroundLight">#FAF9FF</color>
     <color name="purplePal">#382971</color>
+    <color name="cardDark">#363945</color>
+    <color name="cardLight">#FAF9FF</color>
 
     <!-- Cores Adicionais -->
     <color name="grey_300">#E0E0E0</color>

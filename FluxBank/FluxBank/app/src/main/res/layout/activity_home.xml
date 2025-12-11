@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".HomeActivity"
+    tools:theme="@style/ThemeOverlay.FluxBank.CPF"
     android:background="@drawable/home_header_gradient">
 
     <!-- Header -->
@@ -104,7 +106,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
-        android:background="@color/backgroundLight"
+        android:background="?attr/bgFlux"
         app:layout_constraintTop_toBottomOf="@id/accountLabel"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +123,7 @@
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="Saldo Conta Corrente:"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/colorTextFlux"
                 android:textSize="18sp"
                 android:layout_marginTop="24dp"
                 android:layout_marginStart="16dp"
@@ -133,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="R$********"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/colorTextFlux"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/saldoLabel"
@@ -145,6 +147,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_visibility"
                 android:layout_marginEnd="16dp"
+                app:tint="?attr/colorTextFlux"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/saldoLabel"
                 app:layout_constraintBottom_toBottomOf="@id/saldoValue" />
@@ -177,16 +180,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:background="@color/white"
+                        android:background="?attr/colorCardFlux"
                         android:gravity="center">
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
+                            app:tint="?attr/colorTextFlux"
                             android:src="@drawable/ic_pix"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
+                            android:textColor="?attr/colorTextFlux"
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:text="PIX"/>
@@ -209,17 +214,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:background="@color/white"
+                        android:background="?attr/colorCardFlux"
                         android:gravity="center">
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
+                            app:tint="?attr/colorTextFlux"
+
                             android:src="@drawable/ic_pay"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:textSize="12sp"
+                            android:textColor="?attr/colorTextFlux"
                             android:textStyle="bold"
                             android:text="Pagar"/>
                     </LinearLayout>
@@ -243,17 +251,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:background="@color/white"
+                        android:background="?attr/colorCardFlux"
                         android:gravity="center">
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
+                            app:tint="?attr/colorTextFlux"
                             android:src="@drawable/ic_cards"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:textSize="12sp"
+                            android:textColor="?attr/colorTextFlux"
                             android:textStyle="bold"
                             android:text="Cartões"/>
                     </LinearLayout>
@@ -276,16 +286,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:background="@color/white"
+                        android:background="?attr/colorCardFlux"
                         android:gravity="center">
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
+                            app:tint="?attr/colorTextFlux"
                             android:src="@drawable/ic_investments"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
+                            android:textColor="?attr/colorTextFlux"
                             android:textSize="12sp"
                             android:textStyle="bold"
 
@@ -303,7 +315,7 @@
                 android:text="Últimas atividades:"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/colorTextFlux"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@id/actionsLayout"
@@ -314,7 +326,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Conferir todas →"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="@color/rosaPal"
                 android:layout_marginStart="16dp"
                 android:textStyle="bold"
@@ -324,17 +336,18 @@
                 app:layout_constraintTop_toBottomOf="@id/recentActivityLabel"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <!-- Cofrinho Section -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recentActivityList"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
-                android:background="@color/backgroundLight"
-                android:layout_marginTop="14dp"
-                app:layout_constraintTop_toBottomOf="@id/recentActivityLabel"
+                android:layout_marginTop="16dp"
+                android:background="?attr/bgFlux"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/recentActivityLabel" />
 
-            <!-- Cofrinho Section -->
             <TextView
                 android:id="@+id/cofinhoSectionLabel"
                 android:layout_width="wrap_content"
@@ -342,10 +355,10 @@
                 android:text="Cofrinho"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/colorTextFlux"
                 android:drawableStart="@drawable/ic_porquinho"
                 android:drawablePadding="8dp"
-                app:drawableTint="@android:color/black"
+                app:tint="?attr/colorTextFlux"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@id/recentActivityList"
@@ -395,7 +408,7 @@
                     android:text="Limite"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/colorTextFlux"
                     android:layout_marginStart="16dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -451,7 +464,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="R$924,00"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorTextFlux"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -476,7 +489,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="R$475,00"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorTextFlux"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -519,7 +532,7 @@
         android:id="@+id/bottomNavBackground"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:background="@color/backgroundLight"
+        android:background="?attr/bgFlux"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -538,11 +551,11 @@
         android:gravity="center_vertical"
         android:elevation="8dp">
 
-        <ImageView android:id="@+id/nav_home" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_home"/>
-        <ImageView android:id="@+id/nav_list" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_list"/>
+        <ImageView android:id="@+id/nav_home" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" app:tint="?attr/colorTextFlux" android:src="@drawable/ic_home"/>
+        <ImageView android:id="@+id/nav_list" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" app:tint="?attr/colorTextFlux" android:src="@drawable/ic_list"/>
         <ImageView android:id="@+id/nav_spacer" android:layout_width="68dp" android:layout_height="68dp" />
-        <ImageView android:id="@+id/nav_transfer" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_transfer"/>
-        <ImageView android:id="@+id/nav_settings" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_settings"/>
+        <ImageView android:id="@+id/nav_transfer" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" app:tint="?attr/colorTextFlux" android:src="@drawable/ic_transfer"/>
+        <ImageView android:id="@+id/nav_settings" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" app:tint="?attr/colorTextFlux" android:src="@drawable/ic_settings"/>
 
     </LinearLayout>
 
