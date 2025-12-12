@@ -26,7 +26,6 @@ class FaqActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faq)
 
-        // Inicializar views
         recyclerViewFaq = findViewById(R.id.recyclerViewFaq)
         campoPesquisa = findViewById(R.id.campoPesquisa)
         btnEnviarPergunta = findViewById(R.id.btnEnviarPergunta)

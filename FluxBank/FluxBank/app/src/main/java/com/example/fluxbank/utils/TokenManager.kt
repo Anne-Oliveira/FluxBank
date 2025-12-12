@@ -32,7 +32,7 @@ class TokenManager(context: Context) {
 
     fun saveUserData(
         userId: Long,
-        userName: String?,
+        userName: String,
         email: String,
         cpf: String? = null,
         cnpj: String? = null,
@@ -43,7 +43,7 @@ class TokenManager(context: Context) {
     ) {
         prefs.edit().apply {
             putLong(KEY_USER_ID, userId)
-            putString(KEY_USER_NAME, userName ?: "Usuário")
+            putString(KEY_USER_NAME, userName)
             putString(KEY_USER_EMAIL, email)
             putString(KEY_USER_CPF, cpf)
             putString(KEY_USER_CNPJ, cnpj)
@@ -53,10 +53,6 @@ class TokenManager(context: Context) {
             putString(KEY_SALDO, saldo)
             apply()
         }
-    }
-
-    fun getUserId(): Long {
-        return prefs.getLong(KEY_USER_ID, 0L)
     }
 
     fun getUserName(): String? {
@@ -89,6 +85,13 @@ class TokenManager(context: Context) {
 
     fun getSaldo(): String? {
         return prefs.getString(KEY_SALDO, null)
+    }
+
+    fun saveSaldo(saldo: String) {
+        prefs.edit().apply {
+            putString(KEY_SALDO, saldo)
+            apply()
+        }
     }
 
     fun isLoggedIn(): Boolean {

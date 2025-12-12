@@ -6,5 +6,6 @@ data class CardInfo(
     val imageRes: Int,
     val gradientStart: String,
     val gradientCenter: String,
-    val gradientEnd: String
+    val gradientEnd: String,
+    var isBlocked: Boolean = false
 )
