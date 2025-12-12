@@ -322,19 +322,30 @@ class HomeActivity : BaseActivity() {
 
     private fun setupActionButtons() {
         findViewById<MaterialCardView>(R.id.btn_pix).setOnClickListener {
-            startActivity(Intent(this, PixActivity::class.java))
+            val intentPix = Intent(this, PixActivity::class.java)
+            intentPix.putExtra("documento", documento)
+            startActivity(intentPix)
         }
+
         findViewById<MaterialCardView>(R.id.btn_cards).setOnClickListener {
-            startActivity(Intent(this, CardsActivity::class.java))
+            val intent = Intent(this, CardsActivity::class.java)
+            intent.putExtra("documento", documento)
+            startActivity(intent)
         }
         findViewById<MaterialCardView>(R.id.investmentsCard).setOnClickListener {
-            startActivity(Intent(this, PoupancaActivity::class.java))
+            val intent = Intent(this, PoupancaActivity::class.java)
+            intent.putExtra("documento", documento)
+            startActivity(intent)
         }
         findViewById<MaterialCardView>(R.id.btn_pay).setOnClickListener {
-            startActivity(Intent(this, PagamentosActivity::class.java))
+            val intent = Intent(this, PagamentosActivity::class.java)
+            intent.putExtra("documento", documento)
+            startActivity(intent)
         }
         findViewById<ImageView>(R.id.chatIcon).setOnClickListener {
-            startActivity(Intent(this, ChatbotActivity::class.java))
+            val intent = Intent(this, ChatbotActivity::class.java)
+            intent.putExtra("documento", documento)
+            startActivity(intent)
         }
     }
 }

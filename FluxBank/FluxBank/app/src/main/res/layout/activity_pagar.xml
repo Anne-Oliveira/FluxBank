@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".PagamentosActivity"
+    tools:theme="@style/ThemeOverlay.FluxBank.CNPJ"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="?attr/bgFlux">
 
     <!-- Header -->
     <RelativeLayout
@@ -59,7 +62,7 @@
         android:layout_marginBottom="12dp"
         android:padding="10dp"
         android:text="Deseja pagar ou transferir?"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorTextFlux"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -118,7 +121,7 @@
         android:layout_marginBottom="12dp"
         android:padding="10dp"
         android:text="Meus pagamentos"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorTextFlux"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -137,6 +140,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginEnd="12dp"
+            app:tint="?attr/colorTextFlux"
             android:src="@drawable/ic_docs" />
 
         <LinearLayout
@@ -149,7 +153,7 @@
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:text="Meus boletos"
-                android:textColor="#000000"
+                android:textColor="?attr/colorTextFlux"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -180,6 +184,7 @@
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
+            app:tint="?attr/colorTextFlux"
             android:layout_marginEnd="12dp"
             android:src="@drawable/ic_car" />
 
@@ -193,7 +198,7 @@
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:text="Veículos"
-                android:textColor="#000000"
+                android:textColor="?attr/colorTextFlux"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -231,6 +236,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            app:tint="?attr/colorTextFlux"
             android:src="@drawable/ic_home" />
 
         <ImageView
@@ -238,6 +244,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            app:tint="?attr/colorTextFlux"
             android:src="@drawable/ic_list" />
 
         <ImageView
@@ -247,6 +254,7 @@
 
         <ImageView
             android:id="@+id/nav_transfer"
+            app:tint="?attr/colorTextFlux"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -254,6 +262,8 @@
 
         <ImageView
             android:id="@+id/nav_settings"
+            app:tint="?attr/colorTextFlux"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

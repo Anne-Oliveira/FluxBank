@@ -7,6 +7,11 @@
     <attr name="colorTextFlux" format="color" />
     <attr name="colorCardFlux" format="color" />
     <attr name="navBottomColor" format="color" />
+    <attr name="inputColor" format="color" />
+    <attr name="itemPix" format="color" />
+    <attr name="strokeFlux" format="color" />
+    <attr name="colorSubText" format="color" />
+    <attr name="poupCard" format="color" />
 
 
 </resources>

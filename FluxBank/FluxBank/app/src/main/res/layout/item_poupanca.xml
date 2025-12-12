@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".PoupancaActivity"
+    tools:theme="@style/ThemeOverlay.FluxBank.CNPJ"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -18,7 +21,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="#fff"
+            android:background="?attr/poupCard"
 
             android:padding="16dp">
 
@@ -27,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Poupança Especial"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/colorTextFlux"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ag/Conta: 1122/xx.xxxx-x"
+                android:textColor="?attr/colorSubText"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/poupancaTitle" />
@@ -47,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Valor total"
+                android:textColor="?attr/colorSubText"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/poupancaAccount" />
@@ -55,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="3.5dp"
-                android:background="#25000000"
+                android:background="?attr/strokeFlux"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/valorTotalLabel" />
 
@@ -64,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="R$ ****"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/colorTextFlux"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/valorTotalLabel" />
 
@@ -73,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:textColor="?attr/colorSubText"
                 android:text="Valor para resgate"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="R$ ****"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/colorTextFlux"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/valorResgateLabel" />
 

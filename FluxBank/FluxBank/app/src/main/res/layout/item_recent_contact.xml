@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".PixActivity"
+    tools:theme="@style/ThemeOverlay.FluxBank.CPF"
     android:layout_width="64dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -17,6 +21,7 @@
             android:layout_height="24dp"
             android:layout_centerInParent="true"
             android:src="@drawable/ic_person"
+            app:tint="?attr/colorTextFlux"
             android:contentDescription="Contato" />
 
     </RelativeLayout>
@@ -26,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Anne"
-        android:textColor="#000000"
+        android:textColor="?attr/colorTextFlux"
         android:textSize="12sp"
         android:gravity="center"
         android:maxLines="1"

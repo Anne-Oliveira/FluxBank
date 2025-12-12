@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".PagamentosActivity"
+    tools:theme="@style/ThemeOverlay.FluxBank.CNPJ"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -18,6 +22,7 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:src="@drawable/ic_docs"
+            app:tint="?attr/colorTextFlux"
             android:layout_gravity="center"/>
     </FrameLayout>
 
@@ -27,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Comprovantes"
-        android:textColor="#fff"
+        android:textColor="?attr/colorTextFlux"
         android:textSize="11sp"
         android:gravity="center"
         android:textStyle="bold"/>

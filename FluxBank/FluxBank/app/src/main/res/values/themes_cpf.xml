@@ -7,6 +7,10 @@
         <item name="colorTextFlux">@color/backgroundDark1</item>
         <item name="colorCardFlux">@color/cardLight</item>
         <item name="navBottomColor">#FFF</item>
-
+        <item name="inputColor">#fff</item>
+        <item name="itemPix">#f5f5f5</item>
+        <item name="strokeFlux">#F0F0F0</item>
+        <item name="colorSubText">#48444E</item>
+        <item name="poupCard">#fff</item>
     </style>
 </resources>

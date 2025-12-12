@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".PixActivity"
+    tools:theme="@style/ThemeOverlay.FluxBank.CPF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="?attr/bgFlux">
 
     <!-- Header -->
     <LinearLayout
@@ -64,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Para quem você deseja transferir?"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorTextFlux"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp" />
@@ -98,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Transferir novamente:"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorTextFlux"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"
@@ -125,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Outras opções:"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorTextFlux"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
@@ -145,7 +148,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Gerenciar:"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorTextFlux"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
@@ -175,11 +178,11 @@
         android:gravity="center_vertical"
         android:elevation="8dp">
 
-        <ImageView android:id="@+id/nav_home" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_home"/>
-        <ImageView android:id="@+id/nav_list" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_list"/>
+        <ImageView android:id="@+id/nav_home" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" app:tint="?attr/colorTextFlux" android:src="@drawable/ic_home"/>
+        <ImageView android:id="@+id/nav_list" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" app:tint="?attr/colorTextFlux" android:src="@drawable/ic_list"/>
         <ImageView android:id="@+id/nav_spacer" android:layout_width="68dp" android:layout_height="68dp" />
-        <ImageView android:id="@+id/nav_transfer" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_transfer"/>
-        <ImageView android:id="@+id/nav_settings" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/ic_settings"/>
+        <ImageView android:id="@+id/nav_transfer" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" app:tint="?attr/colorTextFlux" android:src="@drawable/ic_transfer"/>
+        <ImageView android:id="@+id/nav_settings" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" app:tint="?attr/colorTextFlux" android:src="@drawable/ic_settings"/>
 
     </LinearLayout>
 
