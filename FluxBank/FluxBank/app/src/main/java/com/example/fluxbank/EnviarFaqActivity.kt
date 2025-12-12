@@ -21,9 +21,8 @@ class EnviarFaqActivity : AppCompatActivity() {
             if (pergunta.isEmpty()) {
                 Toast.makeText(this, "Digite sua pergunta", Toast.LENGTH_SHORT).show()
             } else {
-                // Aqui você pode enviar para o backend, salvar no Firebase etc.
                 Toast.makeText(this, "Pergunta enviada com sucesso!", Toast.LENGTH_LONG).show()
-                finish() // fecha a activity
+                finish()
             }
         }
     }

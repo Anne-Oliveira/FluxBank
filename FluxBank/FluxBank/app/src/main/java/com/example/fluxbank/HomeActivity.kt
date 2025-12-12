@@ -60,6 +60,7 @@ class HomeActivity : BaseActivity() {
         val userName = tokenManager.getUserName() ?: "Usuário"
         val numeroConta = tokenManager.getNumeroConta() ?: "0000000000"
         val agencia = tokenManager.getAgencia() ?: "0001"
+
         val saldoStr = tokenManager.getSaldo() ?: "0.00"
 
         try {
@@ -72,7 +73,7 @@ class HomeActivity : BaseActivity() {
         Log.d("HomeActivity", "Nome: $userName")
         Log.d("HomeActivity", "Agência: $agencia")
         Log.d("HomeActivity", "Conta: $numeroConta")
-        Log.d("HomeActivity", "Saldo: R$ $saldoReal")
+        Log.d("HomeActivity", "Saldo inicial: R$ $saldoReal")
 
         findViewById<TextView>(R.id.userName).text = userName
         findViewById<TextView>(R.id.agencyLabel).text = "Ag $agencia"
@@ -94,7 +95,7 @@ class HomeActivity : BaseActivity() {
                 Log.d("HomeActivity", "ContaId: $contaId")
 
                 if (token == null || contaId == 0L) {
-                    Log.e("HomeActivity", "❌ Token ou ContaId inválido")
+                    Log.e("HomeActivity", "Token ou ContaId inválido")
                     setupRecyclerViewSemTransacoes()
                     return@launch
                 }
@@ -102,11 +103,10 @@ class HomeActivity : BaseActivity() {
                 val authHeader = "Bearer $token"
                 Log.d("HomeActivity", "URL: /api/extrato/conta/$contaId/ultimos-30-dias")
 
-                // CHAMADA À API
                 val response = ApiClient.api.buscarExtrato(contaId, authHeader)
 
                 Log.d("HomeActivity", "════════════════════════════")
-                Log.d("HomeActivity", "📡 RESPOSTA")
+                Log.d("HomeActivity", "RESPOSTA")
                 Log.d("HomeActivity", "════════════════════════════")
                 Log.d("HomeActivity", "Status: ${response.code()}")
 
@@ -116,15 +116,26 @@ class HomeActivity : BaseActivity() {
                     Log.d("HomeActivity", "✅ Extrato recebido!")
                     Log.d("HomeActivity", "Conta: ${extrato.numeroConta}")
                     Log.d("HomeActivity", "Agência: ${extrato.agencia}")
-                    Log.d("HomeActivity", "Saldo: R$ ${extrato.saldoAtual}")
+                    Log.d("HomeActivity", "Saldo REAL: R$ ${extrato.saldoAtual}")
                     Log.d("HomeActivity", "Total de transações: ${extrato.totalTransacoes}")
-                    Log.d("HomeActivity", "Transações na lista: ${extrato.transacoes.size}")
 
-                    // USAR extrato.transacoes (não extrato direto)
+                    saldoReal = extrato.saldoAtual
+
+                    // Salvar saldo atualizado no TokenManager
+                    tokenManager.saveSaldo(saldoReal.toString())
+
+                    Log.d("HomeActivity", "Saldo atualizado: R$ $saldoReal")
+
+                    // Atualizar UI do saldo (se estiver visível)
+                    if (isSaldoVisible) {
+                        val saldoFormatado = String.format("R$ %.2f", saldoReal).replace(".", ",")
+                        findViewById<TextView>(R.id.saldoValue).text = saldoFormatado
+                    }
+
                     val transacoes = extrato.transacoes
 
                     if (transacoes.isEmpty()) {
-                        Log.d("HomeActivity", "⚠️ Sem transações")
+                        Log.d("HomeActivity", "⚠Sem transações")
                         setupRecyclerViewSemTransacoes()
                     } else {
                         setupRecyclerViewComTransacoes(transacoes)
@@ -137,7 +148,7 @@ class HomeActivity : BaseActivity() {
 
             } catch (e: Exception) {
                 Log.e("HomeActivity", "════════════════════════════")
-                Log.e("HomeActivity", "💥 EXCEÇÃO")
+                Log.e("HomeActivity", "EXCEÇÃO")
                 Log.e("HomeActivity", "════════════════════════════")
                 Log.e("HomeActivity", "Tipo: ${e.javaClass.simpleName}")
                 Log.e("HomeActivity", "Mensagem: ${e.message}")
@@ -157,9 +168,11 @@ class HomeActivity : BaseActivity() {
         }
 
         val activities = listOf(
-            RecentActivity("Aguardando", "Nenhuma transação", "R$ 0,00"),
-            RecentActivity("Faça sua", "primeira transferência", ""),
-            RecentActivity("Use o", "botão PIX abaixo", "")
+            RecentActivity(
+                "Nenhuma transação",
+                "Você ainda não realizou transações",
+                ""
+            )
         )
 
         recyclerView.adapter = RecentActivityAdapter(activities)
@@ -186,17 +199,43 @@ class HomeActivity : BaseActivity() {
             Log.d("HomeActivity", "Entrada: ${t.ehEntrada}")
             Log.d("HomeActivity", "Destinatário: ${t.nomeDestinatario}")
 
-            val nome = if (t.ehEntrada == true) {
-                t.nomeDestinatario ?: "Recebido"
-            } else {
-                t.nomeDestinatario ?: "Enviado"
-            }
+            val (nome, descricao) = when (t.tipoTransacao) {
+                "PIX" -> {
+                    if (t.ehEntrada == true) {
+                        Pair(t.nomeDestinatario ?: "Recebido", "Pix recebido")
+                    } else {
+                        Pair(t.nomeDestinatario ?: "Enviado", "Pix enviado")
+                    }
+                }
 
-            val descricao = when {
-                t.tipoTransacao == "PIX" && t.ehEntrada == true -> "Pix Recebido"
-                t.tipoTransacao == "PIX" && t.ehEntrada == false -> "Pix Enviado"
-                t.tipoTransacao == "TRANSFERENCIA" -> "Transferência"
-                else -> t.descricao ?: t.tipoTransacao
+                "TRANSFERENCIA" -> {
+                    if (t.ehEntrada == true) {
+                        Pair(t.nomeDestinatario ?: "Transferência", "Transferência recebida")
+                    } else {
+                        Pair(t.nomeDestinatario ?: "Transferência", "Transferência enviada")
+                    }
+                }
+
+                "COFRINHO" -> {
+                    val descCofrinho = t.descricao ?: "Cofrinho"
+                    if (t.ehEntrada == true) {
+                        Pair("Cofrinho", "Resgate de $descCofrinho")
+                    } else {
+                        Pair("Cofrinho", "Depósito em $descCofrinho")
+                    }
+                }
+
+                "PAGAMENTO" -> Pair(t.nomeDestinatario ?: "Pagamento", "Pagamento efetuado")
+                "DEPOSITO" -> Pair(t.nomeDestinatario ?: "Depósito", "Depósito realizado")
+                "SAQUE" -> Pair(t.nomeDestinatario ?: "Saque", "Saque efetuado")
+
+                else -> {
+                    if (t.ehEntrada == true) {
+                        Pair(t.nomeDestinatario ?: "Entrada", t.descricao ?: "Entrada em conta")
+                    } else {
+                        Pair(t.nomeDestinatario ?: "Saída", t.descricao ?: "Saída de conta")
+                    }
+                }
             }
 
             val valorFormatado = String.format("R$ %.2f", t.valor).replace(".", ",")
