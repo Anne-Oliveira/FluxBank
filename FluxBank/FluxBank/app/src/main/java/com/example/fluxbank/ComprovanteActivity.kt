@@ -2,61 +2,61 @@ package com.example.fluxbank
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.IdRes
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.fluxbank.utils.TokenManager
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import java.util.UUID
 
 class ComprovanteActivity : BaseActivity() {
+
+    private lateinit var tokenManager: TokenManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comprovante)
 
-        // Recebe os dados da tela anterior
-        val pixKey = intent.getStringExtra("PIX_KEY")
-        val valorString = intent.getStringExtra("VALOR")
+        tokenManager = TokenManager(this)
 
-        // Formata o valor como moeda
+        val pixKey = intent.getStringExtra("PIX_KEY") ?: ""
+        val valorString = intent.getStringExtra("VALOR") ?: "0"
+        val transacaoId = intent.getLongExtra("TRANSACAO_ID", 0L)
+
+        Log.d("Comprovante", "PIX: $pixKey | Valor: $valorString | ID: $transacaoId")
+
         val valorFormatado = try {
-            val valorDouble = valorString?.toDouble() ?: 0.0
+            val valorDouble = valorString.toDouble()
             NumberFormat.getCurrencyInstance(Locale("pt", "BR")).format(valorDouble)
         } catch (e: NumberFormatException) {
             "R$ 0,00"
         }
 
-        // Gera dados da transação
         val sdfData = SimpleDateFormat("EEEE, dd/MM/yyyy", Locale("pt", "BR"))
         val sdfHora = SimpleDateFormat("HH'h'mm", Locale("pt", "BR"))
         val dataAtual = Date()
-        val idTransacao = "E" + UUID.randomUUID().toString().replace("-", "").uppercase()
 
-        // --- Preenche os dados na tela de forma segura ---
+        val idTransacao = "E${transacaoId.toString().padStart(10, '0')}"
+
         findViewById<TextView>(R.id.payment_value).text = valorFormatado
 
-        // Sobre a Transação
         setDetailRow(R.id.data_pagamento, "Data pagamento:", sdfData.format(dataAtual).replaceFirstChar { it.uppercase() })
         setDetailRow(R.id.horario, "Horário:", sdfHora.format(dataAtual))
         setDetailRow(R.id.id_transacao, "ID da transação: \n \n", idTransacao)
 
-        // Quem Recebeu
-        setDetailRow(R.id.nome_recebeu, "Nome:", "Anee Oliveira")
-        setDetailRow(R.id.cpf_recebeu, "CPF:", "***.111.222-**")
-        setDetailRow(R.id.instituicao_recebeu, "Instituição:", "Banco Bradesco")
+        setDetailRow(R.id.nome_recebeu, "Nome:", "Destinatário")
+        setDetailRow(R.id.cpf_recebeu, "CPF:", "***.***.***: ***-**")
+        setDetailRow(R.id.instituicao_recebeu, "Instituição:", "Verificando...")
         setDetailRow(R.id.chave_recebeu, "Chave:", pixKey)
 
-        // Quem Pagou
-        setDetailRow(R.id.nome_pagou, "Nome:", "Seu Nome")
-        setDetailRow(R.id.cpf_pagou, "CPF:", "***.333.444-**")
-        setDetailRow(R.id.instituicao_pagou, "Instituição:", "FluxBank")
+        carregarDadosUsuario()
 
-
-        // Botões
         val btnNovoPix = findViewById<Button>(R.id.btn_novo_pix)
         val btnVoltarInicio = findViewById<Button>(R.id.btn_voltar_inicio)
 
@@ -72,6 +72,46 @@ class ComprovanteActivity : BaseActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
             finish()
+        }
+    }
+
+    private fun carregarDadosUsuario() {
+        lifecycleScope.launch {
+            try {
+                val userName = tokenManager.getUserName() ?: "Usuário"
+                val userCpf = tokenManager.getUserCpf() ?: ""
+                val userCnpj = tokenManager.getUserCnpj()
+
+                Log.d("Comprovante", "Nome: $userName")
+                Log.d("Comprovante", "CPF: $userCpf")
+
+                val documentoMascarado = if (userCpf.isNotEmpty()) {
+                    if (userCpf.length == 11) {
+                        "***.${userCpf.substring(3, 6)}.${userCpf.substring(6, 9)}-**"
+                    } else {
+                        "***.***.***: ***-**"
+                    }
+                } else if (userCnpj != null && userCnpj.isNotEmpty()) {
+                    if (userCnpj.length == 14) {
+                        "**.${userCnpj.substring(2, 5)}.${userCnpj.substring(5, 8)}/****-**"
+                    } else {
+                        "**.***.****: /****: /**-**"
+                    }
+                } else {
+                    "***.***.***: ***-**"
+                }
+
+                setDetailRow(R.id.nome_pagou, "Nome:", userName)
+                setDetailRow(R.id.cpf_pagou, if (userCnpj != null) "CNPJ:" else "CPF:", documentoMascarado)
+                setDetailRow(R.id.instituicao_pagou, "Instituição:", "FluxBank")
+
+            } catch (e: Exception) {
+                Log.e("Comprovante", "Erro ao carregar dados", e)
+
+                setDetailRow(R.id.nome_pagou, "Nome:", "Usuário")
+                setDetailRow(R.id.cpf_pagou, "CPF:", "***.***.***: ***-**")
+                setDetailRow(R.id.instituicao_pagou, "Instituição:", "FluxBank")
+            }
         }
     }
 
