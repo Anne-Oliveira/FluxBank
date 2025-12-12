@@ -9,5 +9,6 @@ data class CadastroRequest(
     val confirmarSenha: String,
     val telefone: String? = null,
     val dataNascimento: String? = null,
-    val tipoUsuario: String
+    val tipoUsuario: String,
+    val senhaTransacao: String
 )

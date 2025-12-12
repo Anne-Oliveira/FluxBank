@@ -17,10 +17,6 @@ import com.example.fluxbank.network.models.CadastroRequest
 import com.example.fluxbank.utils.TokenManager
 import kotlinx.coroutines.launch
 
-/**
- * CadastroSenhaActivity - Cadastro (Última etapa: Senha)
- * ATUALIZADO: Salva agência junto com outros dados
- */
 class CadastroSenhaActivity : BaseActivity() {
 
     private lateinit var tokenManager: TokenManager
@@ -51,6 +47,7 @@ class CadastroSenhaActivity : BaseActivity() {
         val cpf = intent.getStringExtra("cpf")
         val cnpj = intent.getStringExtra("cnpj")
         val tipoUsuario = intent.getStringExtra("tipoUsuario") ?: "PF"
+        val senhaTransacao = intent.getStringExtra("senhaTransacao") ?: ""
 
         Log.d("CadastroSenha", "=== Dados recebidos ===")
         Log.d("CadastroSenha", "Nome: $nome")
@@ -58,6 +55,7 @@ class CadastroSenhaActivity : BaseActivity() {
         Log.d("CadastroSenha", "CPF: $cpf")
         Log.d("CadastroSenha", "CNPJ: $cnpj")
         Log.d("CadastroSenha", "Tipo: $tipoUsuario")
+        Log.d("CadastroSenha", "SenhaTrans: ${if (senhaTransacao.isNotEmpty()) "****" else "VAZIO"}")
 
         btnClose.setOnClickListener { finish() }
 
@@ -77,7 +75,7 @@ class CadastroSenhaActivity : BaseActivity() {
             val confirmarSenha = edtConfirmarSenha.text.toString()
 
             if (validarRegras(senha, confirmarSenha)) {
-                fazerCadastro(nome, email, cpf, cnpj, senha, confirmarSenha, tipoUsuario)
+                fazerCadastro(nome, email, cpf, cnpj, senha, confirmarSenha, tipoUsuario, senhaTransacao)
             } else {
                 Toast.makeText(this, "Corrija os erros antes de continuar", Toast.LENGTH_SHORT).show()
             }
@@ -91,7 +89,8 @@ class CadastroSenhaActivity : BaseActivity() {
         cnpj: String?,
         senha: String,
         confirmarSenha: String,
-        tipoUsuario: String
+        tipoUsuario: String,
+        senhaTransacao: String
     ) {
         btnFinish.isEnabled = false
 
@@ -108,7 +107,8 @@ class CadastroSenhaActivity : BaseActivity() {
                     confirmarSenha = confirmarSenha,
                     telefone = null,
                     dataNascimento = null,
-                    tipoUsuario = tipoUsuario
+                    tipoUsuario = tipoUsuario,
+                    senhaTransacao = senhaTransacao
                 )
 
                 Log.d("CadastroSenha", "Request: $request")
@@ -132,13 +132,10 @@ class CadastroSenhaActivity : BaseActivity() {
                     if (primeiraConta != null) {
                         Log.d("CadastroSenha", "Conta.id: ${primeiraConta.id}")
                         Log.d("CadastroSenha", "Conta.numeroConta: ${primeiraConta.numeroConta}")
-                        Log.d("CadastroSenha", "Conta.agencia: ${primeiraConta.agencia}")  // ← LOG ADICIONADO
+                        Log.d("CadastroSenha", "Conta.agencia: ${primeiraConta.agencia}")
                         Log.d("CadastroSenha", "Conta.saldo: ${primeiraConta.saldo}")
                     }
 
-                    // ========================================
-                    // MUDANÇA AQUI: Adicionado agencia
-                    // ========================================
                     tokenManager.saveUserData(
                         userId = authResponse.usuario.id,
                         userName = authResponse.usuario.nome,

@@ -18,7 +18,6 @@ import java.util.Locale
 class ConfirmarPagamentoActivity : BaseActivity() {
 
     private lateinit var tokenManager: TokenManager
-    private var transacaoId: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +34,13 @@ class ConfirmarPagamentoActivity : BaseActivity() {
         val btnPagar = findViewById<Button>(R.id.btnPagar)
 
         val pixKey = intent.getStringExtra("PIX_KEY") ?: ""
+        val contaId = intent.getLongExtra("CONTA_ID", 0L)
         val valorString = intent.getStringExtra("VALOR") ?: "0"
+        val nomeDestinatario = intent.getStringExtra("NOME_DESTINATARIO") ?: "Destinatário"
+        val documentoMascarado = intent.getStringExtra("DOCUMENTO_MASCARADO") ?: "***.***.***: ***-**"
+        val tipoDocumento = intent.getStringExtra("TIPO_DOCUMENTO") ?: "CPF"
+        val instituicao = intent.getStringExtra("INSTITUICAO") ?: "FluxBank"
 
-        // Formata o valor
         val valorFormatado = try {
             val valorDouble = valorString.toDouble()
             NumberFormat.getCurrencyInstance(Locale("pt", "BR")).format(valorDouble)
@@ -46,13 +49,11 @@ class ConfirmarPagamentoActivity : BaseActivity() {
         }
 
         paymentValue.text = valorFormatado
+        recipientName.text = nomeDestinatario
+        recipientCpf.text = "$tipoDocumento: $documentoMascarado"
+        recipientInstitution.text = instituicao
         recipientKey.text = pixKey
         btnPagar.text = "Pagar $valorFormatado"
-
-        // TODO: Buscar dados do destinatário pela chave PIX
-        recipientName.text = "Carregando..."
-        recipientCpf.text = "***.***.***: ***-**"
-        recipientInstitution.text = "Verificando..."
 
         btnBack.setOnClickListener {
             finish()
@@ -61,11 +62,18 @@ class ConfirmarPagamentoActivity : BaseActivity() {
         btnPagar.setOnClickListener {
             btnPagar.isEnabled = false
             btnPagar.text = "Processando..."
-            iniciarPix(pixKey, valorString)
+            iniciarPix(pixKey, valorString, nomeDestinatario, documentoMascarado, tipoDocumento, instituicao)
         }
     }
 
-    private fun iniciarPix(chavePix: String, valorString: String) {
+    private fun iniciarPix(
+        chavePix: String,
+        valorString: String,
+        nomeDestinatario: String,
+        documentoMascarado: String,
+        tipoDocumento: String,
+        instituicao: String
+    ) {
         lifecycleScope.launch {
             try {
                 Log.d("ConfirmarPagamento", "=== INICIANDO PIX ===")
@@ -95,7 +103,6 @@ class ConfirmarPagamentoActivity : BaseActivity() {
                 )
 
                 Log.d("ConfirmarPagamento", "Request: $request")
-                Log.d("ConfirmarPagamento", "Token: ${token.substring(0, 20)}...")
 
                 val response = ApiClient.api.iniciarPix(request, "Bearer $token")
 
@@ -104,36 +111,35 @@ class ConfirmarPagamentoActivity : BaseActivity() {
                 if (response.isSuccessful && response.body() != null) {
                     val transacao = response.body()!!
 
-                    Log.d("ConfirmarPagamento", "✅ Transação iniciada!")
+                    Log.d("ConfirmarPagamento", "Transação iniciada!")
                     Log.d("ConfirmarPagamento", "ID: ${transacao.id}")
                     Log.d("ConfirmarPagamento", "Status: ${transacao.statusTransacao}")
-                    Log.d("ConfirmarPagamento", "Requer verificação: ${transacao.requerVerificacao}")
 
-                    transacaoId = transacao.id
-
-                    if (transacao.requerVerificacao == true) {
-                        val intent = Intent(this@ConfirmarPagamentoActivity, SenhaPagamentoActivity::class.java)
-                        intent.putExtra("PIX_KEY", chavePix)
-                        intent.putExtra("VALOR", valorString)
-                        intent.putExtra("TRANSACAO_ID", transacao.id)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        val intent = Intent(this@ConfirmarPagamentoActivity, PagamentoSucessoActivity::class.java)
-                        intent.putExtra("PIX_KEY", chavePix)
-                        intent.putExtra("VALOR", valorString)
-                        intent.putExtra("TRANSACAO_ID", transacao.id)
-                        startActivity(intent)
-                        finish()
-                    }
+                    val intent = Intent(this@ConfirmarPagamentoActivity, SenhaPagamentoActivity::class.java)
+                    intent.putExtra("PIX_KEY", chavePix)
+                    intent.putExtra("VALOR", valorString)
+                    intent.putExtra("TRANSACAO_ID", transacao.id)
+                    intent.putExtra("NOME_DESTINATARIO", nomeDestinatario)
+                    intent.putExtra("DOCUMENTO_MASCARADO", documentoMascarado)
+                    intent.putExtra("TIPO_DOCUMENTO", tipoDocumento)
+                    intent.putExtra("INSTITUICAO", instituicao)
+                    startActivity(intent)
+                    finish()
 
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    Log.e("ConfirmarPagamento", "❌ Erro: $errorBody")
+                    Log.e("ConfirmarPagamento", "Erro: $errorBody")
+
+                    val errorMessage = when {
+                        errorBody?.contains("Saldo insuficiente") == true -> "Saldo insuficiente"
+                        errorBody?.contains("não encontrada") == true -> "Chave Pix não encontrada"
+                        errorBody?.contains("mesma conta") == true -> "Não é possível transferir para a mesma conta"
+                        else -> "Erro ao iniciar PIX"
+                    }
 
                     Toast.makeText(
                         this@ConfirmarPagamentoActivity,
-                        "Erro ao iniciar PIX: ${response.code()}",
+                        errorMessage,
                         Toast.LENGTH_LONG
                     ).show()
 

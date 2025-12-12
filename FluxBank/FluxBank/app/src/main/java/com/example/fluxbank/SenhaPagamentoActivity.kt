@@ -2,15 +2,21 @@ package com.example.fluxbank
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.fluxbank.network.ApiClient
 import com.example.fluxbank.network.models.VerificarTransacaoRequest
 import com.example.fluxbank.utils.TokenManager
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
+import java.util.Locale
 
 class SenhaPagamentoActivity : BaseActivity() {
 
@@ -22,56 +28,102 @@ class SenhaPagamentoActivity : BaseActivity() {
 
         tokenManager = TokenManager(this)
 
-        val btnNext = findViewById<ImageButton>(R.id.btnNext)
-        val edtCodigo = findViewById<EditText>(R.id.edtSenha) // Reutiliza campo de senha
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+        val txtValor = findViewById<TextView>(R.id.txtValor)
+        val txtDestinatario = findViewById<TextView>(R.id.txtDestinatario)
+        val edtSenha = findViewById<EditText>(R.id.edtSenhaTransacao)
+        val btnConfirmar = findViewById<ImageButton>(R.id.btnConfirmar)
 
         val pixKey = intent.getStringExtra("PIX_KEY") ?: ""
-        val valor = intent.getStringExtra("VALOR") ?: "0"
+        val valorString = intent.getStringExtra("VALOR") ?: "0"
         val transacaoId = intent.getLongExtra("TRANSACAO_ID", 0L)
+        val nomeDestinatario = intent.getStringExtra("NOME_DESTINATARIO") ?: "Destinatário"
+        val documentoMascarado = intent.getStringExtra("DOCUMENTO_MASCARADO") ?: ""
+        val tipoDocumento = intent.getStringExtra("TIPO_DOCUMENTO") ?: "CPF"
+        val instituicao = intent.getStringExtra("INSTITUICAO") ?: "FluxBank"
 
-        Log.d("SenhaPagamento", "TransacaoId: $transacaoId")
+        val valorFormatado = try {
+            val valorDouble = valorString.toDouble()
+            NumberFormat.getCurrencyInstance(Locale("pt", "BR")).format(valorDouble)
+        } catch (e: NumberFormatException) {
+            "R$ 0,00"
+        }
 
-        btnNext.setOnClickListener {
-            val codigo = edtCodigo.text.toString()
+        txtValor.text = valorFormatado
+        txtDestinatario.text = "Para: $nomeDestinatario"
 
-            if (codigo.length != 6) {
-                edtCodigo.error = "Digite o código de 6 dígitos"
+        edtSenha.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s != null && s.length > 6) {
+                    edtSenha.setText(s.substring(0, 6))
+                    edtSenha.setSelection(6)
+                }
+            }
+        })
+
+        btnBack.setOnClickListener {
+            finish()
+        }
+
+        btnConfirmar.setOnClickListener {
+            val senhaTransacao = edtSenha.text.toString()
+
+            if (senhaTransacao.length != 6) {
+                edtSenha.error = "A senha deve ter 6 dígitos"
                 return@setOnClickListener
             }
 
-            btnNext.isEnabled = false
-            verificarCodigo(transacaoId, codigo, pixKey, valor)
+            btnConfirmar.isEnabled = false
+
+            verificarESenhaPagar(
+                transacaoId,
+                senhaTransacao,
+                pixKey,
+                valorString,
+                nomeDestinatario,
+                documentoMascarado,
+                tipoDocumento,
+                instituicao,
+                btnConfirmar
+            )
         }
     }
 
-    private fun verificarCodigo(
+    private fun verificarESenhaPagar(
         transacaoId: Long,
-        codigo: String,
+        senhaTransacao: String,
         pixKey: String,
-        valor: String
+        valorString: String,
+        nomeDestinatario: String,
+        documentoMascarado: String,
+        tipoDocumento: String,
+        instituicao: String,
+        btnConfirmar: ImageButton
     ) {
         lifecycleScope.launch {
             try {
-                Log.d("SenhaPagamento", "=== VERIFICANDO CÓDIGO ===")
+                Log.d("SenhaPagamento", "=== VERIFICANDO SENHA DE TRANSAÇÃO ===")
 
                 val token = tokenManager.getToken()
 
                 if (token == null) {
                     Toast.makeText(
                         this@SenhaPagamentoActivity,
-                        "Erro: Token não encontrado",
+                        "Erro: Sessão inválida",
                         Toast.LENGTH_LONG
                     ).show()
-                    findViewById<ImageButton>(R.id.btnNext).isEnabled = true
+                    btnConfirmar.isEnabled = true
                     return@launch
                 }
 
                 val request = VerificarTransacaoRequest(
                     transacaoId = transacaoId,
-                    codigoVerificacao = codigo
+                    codigoVerificacao = senhaTransacao
                 )
 
-                Log.d("SenhaPagamento", "Request: $request")
+                Log.d("SenhaPagamento", "TransacaoID: $transacaoId")
 
                 val response = ApiClient.api.verificarPix(request, "Bearer $token")
 
@@ -80,49 +132,44 @@ class SenhaPagamentoActivity : BaseActivity() {
                 if (response.isSuccessful && response.body() != null) {
                     val transacao = response.body()!!
 
-                    Log.d("SenhaPagamento", "Código verificado!")
+                    Log.d("SenhaPagamento", "Senha correta! Transação concluída!")
                     Log.d("SenhaPagamento", "Status: ${transacao.statusTransacao}")
 
-                    if (transacao.statusTransacao == "CONCLUIDA") {
-                        val intent = Intent(this@SenhaPagamentoActivity, PagamentoSucessoActivity::class.java)
-                        intent.putExtra("PIX_KEY", pixKey)
-                        intent.putExtra("VALOR", valor)
-                        intent.putExtra("TRANSACAO_ID", transacaoId)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(
-                            this@SenhaPagamentoActivity,
-                            "Status: ${transacao.statusTransacao}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        findViewById<ImageButton>(R.id.btnNext).isEnabled = true
-                    }
+                    val intent = Intent(this@SenhaPagamentoActivity, PagamentoSucessoActivity::class.java)
+                    intent.putExtra("PIX_KEY", pixKey)
+                    intent.putExtra("VALOR", valorString)
+                    intent.putExtra("TRANSACAO_ID", transacaoId)
+                    intent.putExtra("NOME_DESTINATARIO", nomeDestinatario)
+                    intent.putExtra("DOCUMENTO_MASCARADO", documentoMascarado)
+                    intent.putExtra("TIPO_DOCUMENTO", tipoDocumento)
+                    intent.putExtra("INSTITUICAO", instituicao)
+                    startActivity(intent)
+                    finish()
 
                 } else {
                     val errorBody = response.errorBody()?.string()
                     Log.e("SenhaPagamento", "Erro: $errorBody")
 
-                    val errorMsg = when {
-                        errorBody?.contains("código inválido", ignoreCase = true) == true ->
-                            "Código inválido. Tente novamente."
-                        errorBody?.contains("expirado", ignoreCase = true) == true ->
-                            "Código expirado. Inicie novamente."
-                        else ->
-                            "Erro: ${response.code()}"
+                    val errorMessage = when {
+                        errorBody?.contains("incorreta") == true -> "Senha de transação incorreta"
+                        errorBody?.contains("Saldo insuficiente") == true -> "Saldo insuficiente"
+                        errorBody?.contains("já foi processada") == true -> "Transação já foi processada"
+                        else -> "Erro ao processar pagamento"
                     }
 
                     Toast.makeText(
                         this@SenhaPagamentoActivity,
-                        errorMsg,
+                        errorMessage,
                         Toast.LENGTH_LONG
                     ).show()
 
-                    findViewById<ImageButton>(R.id.btnNext).isEnabled = true
+                    findViewById<EditText>(R.id.edtSenhaTransacao).setText("")
+
+                    btnConfirmar.isEnabled = true
                 }
 
             } catch (e: Exception) {
-                Log.e("SenhaPagamento", "❌ Exceção", e)
+                Log.e("SenhaPagamento", "Exceção", e)
 
                 Toast.makeText(
                     this@SenhaPagamentoActivity,
@@ -130,7 +177,7 @@ class SenhaPagamentoActivity : BaseActivity() {
                     Toast.LENGTH_LONG
                 ).show()
 
-                findViewById<ImageButton>(R.id.btnNext).isEnabled = true
+                btnConfirmar.isEnabled = true
             }
         }
     }
