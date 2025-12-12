@@ -88,13 +88,13 @@ class HomeActivity : BaseActivity() {
                 val contaId = tokenManager.getContaId()
 
                 Log.d("HomeActivity", "════════════════════════════")
-                Log.d("HomeActivity", "🔍 DEBUG TRANSAÇÕES")
+                Log.d("HomeActivity", "DEBUG TRANSAÇÕES")
                 Log.d("HomeActivity", "════════════════════════════")
                 Log.d("HomeActivity", "Token exists: ${token != null}")
                 Log.d("HomeActivity", "ContaId: $contaId")
 
                 if (token == null || contaId == 0L) {
-                    Log.e("HomeActivity", "❌ Token ou ContaId inválido")
+                    Log.e("HomeActivity", "Token ou ContaId inválido")
                     setupRecyclerViewSemTransacoes()
                     return@launch
                 }
@@ -106,14 +106,14 @@ class HomeActivity : BaseActivity() {
                 val response = ApiClient.api.buscarExtrato(contaId, authHeader)
 
                 Log.d("HomeActivity", "════════════════════════════")
-                Log.d("HomeActivity", "📡 RESPOSTA")
+                Log.d("HomeActivity", "RESPOSTA")
                 Log.d("HomeActivity", "════════════════════════════")
                 Log.d("HomeActivity", "Status: ${response.code()}")
 
                 if (response.isSuccessful && response.body() != null) {
                     val extrato = response.body()!!
 
-                    Log.d("HomeActivity", "✅ Extrato recebido!")
+                    Log.d("HomeActivity", "Extrato recebido!")
                     Log.d("HomeActivity", "Conta: ${extrato.numeroConta}")
                     Log.d("HomeActivity", "Agência: ${extrato.agencia}")
                     Log.d("HomeActivity", "Saldo: R$ ${extrato.saldoAtual}")
@@ -124,20 +124,20 @@ class HomeActivity : BaseActivity() {
                     val transacoes = extrato.transacoes
 
                     if (transacoes.isEmpty()) {
-                        Log.d("HomeActivity", "⚠️ Sem transações")
+                        Log.d("HomeActivity", "Sem transações")
                         setupRecyclerViewSemTransacoes()
                     } else {
                         setupRecyclerViewComTransacoes(transacoes)
                     }
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    Log.e("HomeActivity", "❌ Erro: $errorBody")
+                    Log.e("HomeActivity", "Erro: $errorBody")
                     setupRecyclerViewSemTransacoes()
                 }
 
             } catch (e: Exception) {
                 Log.e("HomeActivity", "════════════════════════════")
-                Log.e("HomeActivity", "💥 EXCEÇÃO")
+                Log.e("HomeActivity", "EXCEÇÃO")
                 Log.e("HomeActivity", "════════════════════════════")
                 Log.e("HomeActivity", "Tipo: ${e.javaClass.simpleName}")
                 Log.e("HomeActivity", "Mensagem: ${e.message}")
