@@ -21,12 +21,16 @@ class HomeActivity : BaseActivity() {
     private var isSaldoVisible = false
     private var saldoReal: Double = 0.0
 
+    // Guarda o documento recebido via Intent para reutilizar ao iniciar outras Activities
+    private var documento: String? = null
+
     private val limiteTotal = 1400.0
     private val limiteUsado = 924.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val documento = intent.getStringExtra("documento")
+        // armazena o documento em campo de classe
+        documento = intent.getStringExtra("documento")
 
         val isCNPJ = documento?.length == 14
         val isCPF = documento?.length == 11
@@ -229,7 +233,10 @@ class HomeActivity : BaseActivity() {
 
     private fun setupNavigation() {
         findViewById<TextView>(R.id.cofinhoLink).setOnClickListener {
-            startActivity(Intent(this, CofinhoActivity::class.java))
+            val intent = Intent(this, CofinhoActivity::class.java)
+            // passa o documento atual para manter o tema/estado nas próximas Activities
+            intent.putExtra("documento", documento)
+            startActivity(intent)
         }
         findViewById<ImageView>(R.id.helpIcon).setOnClickListener {
             startActivity(Intent(this, FaqActivity::class.java))
