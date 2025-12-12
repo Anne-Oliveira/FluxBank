@@ -21,12 +21,16 @@ class HomeActivity : BaseActivity() {
     private var isSaldoVisible = false
     private var saldoReal: Double = 0.0
 
+    // Guarda o documento recebido via Intent para reutilizar ao iniciar outras Activities
+    private var documento: String? = null
+
     private val limiteTotal = 1400.0
     private val limiteUsado = 924.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val documento = intent.getStringExtra("documento")
+        // armazena o documento em campo de classe
+        documento = intent.getStringExtra("documento")
 
         val isCNPJ = documento?.length == 14
         val isCPF = documento?.length == 11
@@ -89,7 +93,7 @@ class HomeActivity : BaseActivity() {
                 val contaId = tokenManager.getContaId()
 
                 Log.d("HomeActivity", "════════════════════════════")
-                Log.d("HomeActivity", "🔍 DEBUG TRANSAÇÕES")
+                Log.d("HomeActivity", "DEBUG TRANSAÇÕES")
                 Log.d("HomeActivity", "════════════════════════════")
                 Log.d("HomeActivity", "Token exists: ${token != null}")
                 Log.d("HomeActivity", "ContaId: $contaId")
@@ -113,7 +117,7 @@ class HomeActivity : BaseActivity() {
                 if (response.isSuccessful && response.body() != null) {
                     val extrato = response.body()!!
 
-                    Log.d("HomeActivity", "✅ Extrato recebido!")
+                    Log.d("HomeActivity", "Extrato recebido!")
                     Log.d("HomeActivity", "Conta: ${extrato.numeroConta}")
                     Log.d("HomeActivity", "Agência: ${extrato.agencia}")
                     Log.d("HomeActivity", "Saldo REAL: R$ ${extrato.saldoAtual}")
@@ -135,14 +139,16 @@ class HomeActivity : BaseActivity() {
                     val transacoes = extrato.transacoes
 
                     if (transacoes.isEmpty()) {
-                        Log.d("HomeActivity", "⚠Sem transações")
+                      
+                        Log.d("HomeActivity", "Sem transações")
+
                         setupRecyclerViewSemTransacoes()
                     } else {
                         setupRecyclerViewComTransacoes(transacoes)
                     }
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    Log.e("HomeActivity", "❌ Erro: $errorBody")
+                    Log.e("HomeActivity", "Erro: $errorBody")
                     setupRecyclerViewSemTransacoes()
                 }
 
@@ -268,7 +274,10 @@ class HomeActivity : BaseActivity() {
 
     private fun setupNavigation() {
         findViewById<TextView>(R.id.cofinhoLink).setOnClickListener {
-            startActivity(Intent(this, CofinhoActivity::class.java))
+            val intent = Intent(this, CofinhoActivity::class.java)
+            // passa o documento atual para manter o tema/estado nas próximas Activities
+            intent.putExtra("documento", documento)
+            startActivity(intent)
         }
         findViewById<ImageView>(R.id.helpIcon).setOnClickListener {
             startActivity(Intent(this, FaqActivity::class.java))

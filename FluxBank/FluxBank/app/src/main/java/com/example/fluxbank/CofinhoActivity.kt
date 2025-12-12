@@ -14,6 +14,17 @@ class CofinhoActivity : BaseActivity() {
     private val saldoVisivel = "R$ 150,00"
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Aplica tema baseado no documento recebido via Intent antes de inflar views
+        val documento = intent?.getStringExtra("documento")
+        val isCNPJ = documento?.length == 14
+        val isCPF = documento?.length == 11
+
+        when {
+            isCNPJ -> setTheme(R.style.ThemeOverlay_FluxBank_CNPJ)
+            isCPF -> setTheme(R.style.ThemeOverlay_FluxBank_CPF)
+            else -> setTheme(R.style.ThemeOverlay_FluxBank_CPF)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cofinho)
 

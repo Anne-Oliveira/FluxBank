@@ -50,10 +50,14 @@
 
         <!-- ITEM - Nome -->
         <LinearLayout
+            android:id="@+id/item_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:paddingVertical="12dp">
+            android:paddingVertical="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
 
             <ImageView
                 android:layout_width="26dp"
@@ -68,14 +72,16 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txt_nome_valor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Anee Calorine de Andrade Oliva"
+                    android:text="Carregando..."
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txt_nome_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nome e sobrenome"
@@ -89,12 +95,16 @@
                 android:src="@drawable/ic_arrow_right" />
         </LinearLayout>
 
-        <!-- ITEM - CPF -->
+        <!-- ITEM - CPF/CNPJ -->
         <LinearLayout
+            android:id="@+id/item_cpf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:paddingVertical="12dp">
+            android:paddingVertical="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
 
             <ImageView
                 android:layout_width="26dp"
@@ -109,14 +119,16 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/txt_cpf_valor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="222.333.222-00"
+                    android:text="Carregando..."
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="#000" />
 
                 <TextView
+                    android:id="@+id/txt_cpf_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Número do CPF"
@@ -132,10 +144,14 @@
 
         <!-- ITEM - Endereço -->
         <LinearLayout
+            android:id="@+id/item_endereco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:paddingVertical="12dp">
+            android:paddingVertical="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
 
             <ImageView
                 android:layout_width="26dp"
@@ -150,14 +166,16 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/txt_endereco_valor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="R. Haroldo Gomez, 234, 05634-090"
+                    android:text="Não cadastrado"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="#000" />
 
                 <TextView
+                    android:id="@+id/txt_endereco_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Endereço particular"
@@ -183,10 +201,14 @@
 
         <!-- ITEM - Ocupação -->
         <LinearLayout
+            android:id="@+id/item_ocupacao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:paddingVertical="12dp">
+            android:paddingVertical="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
 
             <ImageView
                 android:layout_width="26dp"
@@ -196,7 +218,6 @@
                 app:tint="@android:color/black"
                 tools:ignore="UseCompatLoadingForDrawables" />
 
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -204,14 +225,16 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txt_ocupacao_valor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estudante"
+                    android:text="Não informado"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="#000"/>
 
                 <TextView
+                    android:id="@+id/txt_ocupacao_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ocupação principal"
@@ -237,10 +260,14 @@
 
         <!-- ITEM - Email -->
         <LinearLayout
+            android:id="@+id/item_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:paddingVertical="12dp">
+            android:paddingVertical="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
 
             <ImageView
                 android:layout_width="26dp"
@@ -255,14 +282,16 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/txt_email_valor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="anee@email.com"
+                    android:text="email@exemplo.com"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="#000"/>
 
                 <TextView
+                    android:id="@+id/txt_email_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="E-mail cadastrado para comunicações"
@@ -278,10 +307,14 @@
 
         <!-- ITEM - Senha -->
         <LinearLayout
+            android:id="@+id/item_senha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:paddingVertical="12dp">
+            android:paddingVertical="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
 
             <ImageView
                 android:layout_width="26dp"
@@ -296,6 +329,7 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/txt_senha_valor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="************"
@@ -304,6 +338,7 @@
                     android:textColor="#000"/>
 
                 <TextView
+                    android:id="@+id/txt_senha_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Senha cadastrada para login"
