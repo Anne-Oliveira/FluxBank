@@ -1,18 +1,8 @@
 package com.example.fluxbank.network
 
-import com.example.fluxbank.network.models.AuthResponse
-import com.example.fluxbank.network.models.CadastroRequest
-import com.example.fluxbank.network.models.ExtratoResponse
-import com.example.fluxbank.network.models.LoginRequest
-import com.example.fluxbank.network.models.PixRequest
-import com.example.fluxbank.network.models.TransacaoResponse
-import com.example.fluxbank.network.models.VerificarTransacaoRequest
+import com.example.fluxbank.network.models.*
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface FluxBankApi {
 
@@ -27,6 +17,12 @@ interface FluxBankApi {
         @Path("contaId") contaId: Long,
         @Header("Authorization") token: String
     ): Response<ExtratoResponse>
+
+    @GET("api/pix/buscar-conta")
+    suspend fun buscarContaPorChavePix(
+        @Query("chavePix") chavePix: String,
+        @Header("Authorization") token: String
+    ): Response<ContaInfo>
 
     @POST("api/pix/transferir")
     suspend fun iniciarPix(

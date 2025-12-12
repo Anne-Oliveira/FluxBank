@@ -28,6 +28,10 @@ class ComprovanteActivity : BaseActivity() {
         val pixKey = intent.getStringExtra("PIX_KEY") ?: ""
         val valorString = intent.getStringExtra("VALOR") ?: "0"
         val transacaoId = intent.getLongExtra("TRANSACAO_ID", 0L)
+        val nomeDestinatario = intent.getStringExtra("NOME_DESTINATARIO") ?: "Destinatário"
+        val documentoMascarado = intent.getStringExtra("DOCUMENTO_MASCARADO") ?: "***.***.***: ***-**"
+        val tipoDocumento = intent.getStringExtra("TIPO_DOCUMENTO") ?: "CPF"
+        val instituicao = intent.getStringExtra("INSTITUICAO") ?: "FluxBank"
 
         Log.d("Comprovante", "PIX: $pixKey | Valor: $valorString | ID: $transacaoId")
 
@@ -50,9 +54,9 @@ class ComprovanteActivity : BaseActivity() {
         setDetailRow(R.id.horario, "Horário:", sdfHora.format(dataAtual))
         setDetailRow(R.id.id_transacao, "ID da transação: \n \n", idTransacao)
 
-        setDetailRow(R.id.nome_recebeu, "Nome:", "Destinatário")
-        setDetailRow(R.id.cpf_recebeu, "CPF:", "***.***.***: ***-**")
-        setDetailRow(R.id.instituicao_recebeu, "Instituição:", "Verificando...")
+        setDetailRow(R.id.nome_recebeu, "Nome:", nomeDestinatario)
+        setDetailRow(R.id.cpf_recebeu, "$tipoDocumento:", documentoMascarado)
+        setDetailRow(R.id.instituicao_recebeu, "Instituição:", instituicao)
         setDetailRow(R.id.chave_recebeu, "Chave:", pixKey)
 
         carregarDadosUsuario()
@@ -84,6 +88,7 @@ class ComprovanteActivity : BaseActivity() {
 
                 Log.d("Comprovante", "Nome: $userName")
                 Log.d("Comprovante", "CPF: $userCpf")
+                Log.d("Comprovante", "CNPJ: $userCnpj")
 
                 val documentoMascarado = if (userCpf.isNotEmpty()) {
                     if (userCpf.length == 11) {
@@ -102,7 +107,7 @@ class ComprovanteActivity : BaseActivity() {
                 }
 
                 setDetailRow(R.id.nome_pagou, "Nome:", userName)
-                setDetailRow(R.id.cpf_pagou, if (userCnpj != null) "CNPJ:" else "CPF:", documentoMascarado)
+                setDetailRow(R.id.cpf_pagou, if (userCnpj != null && userCnpj.isNotEmpty()) "CNPJ:" else "CPF:", documentoMascarado)
                 setDetailRow(R.id.instituicao_pagou, "Instituição:", "FluxBank")
 
             } catch (e: Exception) {

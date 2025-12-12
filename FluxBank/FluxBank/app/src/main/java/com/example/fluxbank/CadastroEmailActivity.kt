@@ -41,7 +41,7 @@ class CadastroEmailActivity : BaseActivity() {
                 else -> {
                     Log.d("CadastroEmail", "Nome: $nome, Email: $email")
 
-                    val intent = Intent(this, CadastroSenhaActivity::class.java)
+                    val intent = Intent(this, CadastroSenhaTransActivity::class.java)
                     intent.putExtra("nome", nome)
                     intent.putExtra("email", email)
                     intent.putExtra("cpf", cpf)

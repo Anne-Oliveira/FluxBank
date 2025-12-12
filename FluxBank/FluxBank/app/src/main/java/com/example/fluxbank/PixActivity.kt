@@ -2,16 +2,23 @@ package com.example.fluxbank
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.example.fluxbank.network.ApiClient
+import com.example.fluxbank.utils.TokenManager
+import kotlinx.coroutines.launch
 
 class PixActivity : BaseActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
 
+    private lateinit var tokenManager: TokenManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         val documento = intent?.getStringExtra("documento")
         val isCNPJ = documento?.length == 14
         val isCPF = documento?.length == 11
@@ -25,18 +32,13 @@ class PixActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pix)
 
-        // Configuração do botão voltar no header
+        tokenManager = TokenManager(this)
+
         setupHeader()
-
-        // Configurar o campo de busca e o botão prosseguir
         setupSearch()
-
-        // Configurar listas e grids
         setupRecentContacts()
         setupOptionsGrid()
         setupManagementOptions()
-
-        // Configuração da navegação inferior
         setupBottomNavigation()
     }
 
@@ -44,13 +46,8 @@ class PixActivity : BaseActivity() {
         val btnBack = findViewById<ImageView>(R.id.btn_back)
         val btnHelp = findViewById<ImageView>(R.id.btn_help)
 
-        btnBack.setOnClickListener {
-            finish() // Volta para a tela anterior
-        }
-
-        btnHelp.setOnClickListener {
-            showToast("Ajuda clicado")
-        }
+        btnBack.setOnClickListener { finish() }
+        btnHelp.setOnClickListener { showToast("Ajuda clicado") }
     }
 
     private fun setupSearch() {
@@ -58,13 +55,74 @@ class PixActivity : BaseActivity() {
         val btnProsseguir = findViewById<Button>(R.id.btn_prosseguir)
 
         btnProsseguir.setOnClickListener {
-            val pixKey = searchInput.text.toString()
-            if (pixKey.isNotEmpty()) {
-                val intent = Intent(this, DefinirValorPixActivity::class.java)
-                intent.putExtra("PIX_KEY", pixKey)
-                startActivity(intent)
-            } else {
+            val pixKey = searchInput.text.toString().trim()
+
+            if (pixKey.isEmpty()) {
                 searchInput.error = "Digite uma chave Pix"
+                return@setOnClickListener
+            }
+
+            buscarContaEProsseguir(pixKey, btnProsseguir)
+        }
+    }
+
+    private fun buscarContaEProsseguir(pixKey: String, btnProsseguir: Button) {
+        btnProsseguir.isEnabled = false
+        btnProsseguir.text = "Buscando..."
+
+        lifecycleScope.launch {
+            try {
+                val token = tokenManager.getToken()
+
+                if (token == null) {
+                    showToast("Erro: Sessão inválida")
+                    btnProsseguir.isEnabled = true
+                    btnProsseguir.text = "Prosseguir"
+                    return@launch
+                }
+
+                Log.d("PixActivity", "Buscando conta com chave: $pixKey")
+
+                val response = ApiClient.api.buscarContaPorChavePix(pixKey, "Bearer $token")
+
+                if (response.isSuccessful && response.body() != null) {
+                    val contaInfo = response.body()!!
+
+                    Log.d("PixActivity", "Conta encontrada: ${contaInfo.nomeUsuario}")
+
+                    val intent = Intent(this@PixActivity, DefinirValorPixActivity::class.java)
+                    intent.putExtra("PIX_KEY", pixKey)
+                    intent.putExtra("CONTA_ID", contaInfo.id)
+                    intent.putExtra("NOME_DESTINATARIO", contaInfo.nomeUsuario)
+                    intent.putExtra("DOCUMENTO_DESTINATARIO", contaInfo.getDocumento())
+                    intent.putExtra("DOCUMENTO_MASCARADO", contaInfo.getDocumentoMascarado())
+                    intent.putExtra("TIPO_DOCUMENTO", contaInfo.getTipoDocumento())
+                    intent.putExtra("INSTITUICAO", contaInfo.instituicao)
+                    startActivity(intent)
+
+                    btnProsseguir.isEnabled = true
+                    btnProsseguir.text = "Prosseguir"
+
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("PixActivity", "Erro: $errorBody")
+
+                    val errorMessage = when {
+                        errorBody?.contains("não encontrada") == true -> "Chave Pix não encontrada"
+                        errorBody?.contains("não está ativa") == true -> "Conta não está ativa"
+                        else -> "Erro ao buscar chave Pix"
+                    }
+
+                    showToast(errorMessage)
+                    btnProsseguir.isEnabled = true
+                    btnProsseguir.text = "Prosseguir"
+                }
+
+            } catch (e: Exception) {
+                Log.e("PixActivity", "Exceção", e)
+                showToast("Erro: ${e.message}")
+                btnProsseguir.isEnabled = true
+                btnProsseguir.text = "Prosseguir"
             }
         }
     }
@@ -72,7 +130,6 @@ class PixActivity : BaseActivity() {
     private fun setupRecentContacts() {
         val recentContactsList = findViewById<ListView>(R.id.recent_contacts)
 
-        // Lista de contatos recentes
         val contacts = listOf(
             Contact("Anne"),
             Contact("João"),
@@ -84,7 +141,6 @@ class PixActivity : BaseActivity() {
         val adapter = RecentContactsAdapter(this, contacts)
         recentContactsList.adapter = adapter
 
-        // Ajusta a altura do ListView para mostrar todos os itens
         recentContactsList.post {
             ListViewHelper.setListViewHeightBasedOnChildren(recentContactsList)
         }
@@ -93,7 +149,6 @@ class PixActivity : BaseActivity() {
     private fun setupOptionsGrid() {
         val optionsGrid = findViewById<GridView>(R.id.options_grid)
 
-        // Opções do grid
         val options = listOf(
             PixOption(R.drawable.ic_calendar, "Agendar Pix"),
             PixOption(R.drawable.ic_copy, "Copia e cola"),
@@ -103,7 +158,6 @@ class PixActivity : BaseActivity() {
         val adapter = OptionsGridAdapter(this, options)
         optionsGrid.adapter = adapter
 
-        // Click nos itens do grid
         optionsGrid.setOnItemClickListener { _, _, position, _ ->
             val option = options[position]
             showToast("${option.title} clicado")
@@ -113,7 +167,6 @@ class PixActivity : BaseActivity() {
     private fun setupManagementOptions() {
         val managementList = findViewById<ListView>(R.id.management_options)
 
-        // Opções de gerenciamento
         val options = listOf(
             ManagementOption(R.drawable.ic_key, "Minhas chaves"),
             ManagementOption(R.drawable.ic_limit, "Meus limites de transferência")
@@ -122,12 +175,10 @@ class PixActivity : BaseActivity() {
         val adapter = ManagementOptionsAdapter(this, options)
         managementList.adapter = adapter
 
-        // Ajusta a altura do ListView para mostrar todos os itens
         managementList.post {
             ListViewHelper.setListViewHeightBasedOnChildren(managementList)
         }
 
-        // Click nos itens da lista
         managementList.setOnItemClickListener { _, _, position, _ ->
             val option = options[position]
             showToast("${option.title} clicado")

@@ -40,6 +40,7 @@
         <activity android:name=".CadastroCnpjActivity" android:exported="false" />
         <activity android:name=".CadastroEmailActivity" android:exported="false" />
         <activity android:name=".CadastroSenhaActivity" android:exported="false" />
+        <activity android:name=".CadastroSenhaTransActivity" android:exported="false" />
 
         <!-- Telas Pós-Login -->
         <activity android:name=".LoadingActivity" android:exported="false" />
