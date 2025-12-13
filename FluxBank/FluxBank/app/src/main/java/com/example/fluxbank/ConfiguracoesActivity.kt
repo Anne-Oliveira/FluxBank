@@ -3,6 +3,7 @@ package com.example.fluxbank
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -26,6 +27,12 @@ class ConfiguracoesActivity : BaseActivity() {
 
         val btnUserData = findViewById<ImageView>(R.id.btn_user_data)
         btnUserData.setOnClickListener {
+            val intent = Intent(this, DadosClienteActivity::class.java)
+            startActivity(intent)
+        }
+
+        val btnUserData2 = findViewById<RelativeLayout>(R.id.btnCad2)
+        btnUserData2.setOnClickListener {
             val intent = Intent(this, DadosClienteActivity::class.java)
             startActivity(intent)
         }

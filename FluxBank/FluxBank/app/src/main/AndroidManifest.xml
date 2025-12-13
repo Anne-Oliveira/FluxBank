@@ -65,6 +65,7 @@
         <activity android:name=".ComprovanteActivity" android:exported="false" />
         <activity android:name=".ComprovantesActivity" android:exported="false" />
         <activity android:name=".SegundaActivity" android:exported="false" />
+        <activity android:name=".BoletoActivity" android:exported="false"/>
 
         <!-- Tela Pix -->
         <activity android:name=".PixActivity" android:exported="false" />

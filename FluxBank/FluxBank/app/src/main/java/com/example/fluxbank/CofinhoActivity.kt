@@ -1,11 +1,15 @@
 package com.example.fluxbank
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textfield.TextInputEditText
 
 class CofinhoActivity : BaseActivity() {
 
@@ -13,8 +17,11 @@ class CofinhoActivity : BaseActivity() {
     private val saldoOculto = "R$ ******"
     private val saldoVisivel = "R$ 150,00"
 
+    private lateinit var cofinhoAdapter: CofinhoAdapter
+    private val cofinhoItems = mutableListOf<CofinhoItem>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Aplica tema baseado no documento recebido via Intent antes de inflar views
+
         val documento = intent?.getStringExtra("documento")
         val isCNPJ = documento?.length == 14
         val isCPF = documento?.length == 11
@@ -31,13 +38,11 @@ class CofinhoActivity : BaseActivity() {
         val btnBack = findViewById<ImageView>(R.id.btnBack)
         val totalCofinhoValue = findViewById<TextView>(R.id.totalCofinhoValue)
         val visibilityIcon = findViewById<ImageView>(R.id.visibilityIcon)
+        val btnCriarCofinho = findViewById<Button>(R.id.btnCriarCofinho)
 
-        // Define o estado inicial como oculto
         totalCofinhoValue.text = saldoOculto
 
-        btnBack.setOnClickListener {
-            finish()
-        }
+        btnBack.setOnClickListener { finish() }
 
         visibilityIcon.setOnClickListener {
             isSaldoVisible = !isSaldoVisible
@@ -52,21 +57,58 @@ class CofinhoActivity : BaseActivity() {
 
         setupCofinho()
 
-        // Configurar bottom navigation
+        btnCriarCofinho.setOnClickListener {
+            abrirBottomSheetCriarCofinho()
+        }
+
         setupBottomNavigation()
     }
 
     private fun setupCofinho() {
-        val cofinhoRecyclerView = findViewById<RecyclerView>(R.id.cofinhoRecyclerView)
-        cofinhoRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        val recyclerView = findViewById<RecyclerView>(R.id.cofinhoRecyclerView)
+        recyclerView.layoutManager =
+            GridLayoutManager(this, 3)
 
-        val cofinhoItems = listOf(
-            CofinhoItem(R.drawable.ic_porquinho, "Dia a Dia", "R$ 0,00", "Rendeu R$ 0,00"),
-            CofinhoItem(R.drawable.ic_travel_bag, "Viagem", "R$ 0,00", "Rendeu R$ 0,00")
+        cofinhoItems.addAll(
+            listOf(
+                CofinhoItem(R.drawable.ic_porquinho, "Dia a Dia", "R$ 0,00", "Rendeu R$ 0,00"),
+                CofinhoItem(R.drawable.ic_travel_bag, "Viagem", "R$ 0,00", "Rendeu R$ 0,00")
+            )
         )
 
-        val adapter = CofinhoAdapter(cofinhoItems)
-        cofinhoRecyclerView.adapter = adapter
+        cofinhoAdapter = CofinhoAdapter(cofinhoItems)
+        recyclerView.adapter = cofinhoAdapter
+    }
+
+    private fun abrirBottomSheetCriarCofinho() {
+        val bottomSheet = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_criar_cofinho, null)
+
+        val etNomeCofinho = view.findViewById<TextInputEditText>(R.id.etNomeCofinho)
+        val btnConfirmar = view.findViewById<Button>(R.id.btnConfirmarCriacao)
+
+        btnConfirmar.setOnClickListener {
+            val nome = etNomeCofinho.text.toString().trim()
+
+            if (nome.isEmpty()) {
+                showToast("Informe um nome para o cofrinho")
+                return@setOnClickListener
+            }
+
+            val novoCofinho = CofinhoItem(
+                R.drawable.ic_porquinho,
+                nome,
+                "R$ 0,00",
+                "Rendeu R$ 0,00"
+            )
+
+            cofinhoAdapter.addCofinho(novoCofinho)
+            bottomSheet.dismiss()
+            showToast("Cofrinho criado com sucesso")
+        }
+
+        bottomSheet.setContentView(view)
+        bottomSheet.show()
     }
 
     private fun showToast(message: String) {

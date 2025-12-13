@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.GridView
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 
@@ -85,6 +86,12 @@ class PagamentosActivity : BaseActivity() {
         btnEscanear.setOnClickListener {
             val intent = Intent(this, BarcodeScannerActivity::class.java)
             barcodeLauncher.launch(intent)
+        }
+
+        val btnBoleto = findViewById<LinearLayout>(R.id.bolItem)
+        btnBoleto.setOnClickListener {
+            val intent = Intent(this, BoletoActivity::class.java)
+            startActivity(intent)
         }
 
         setupBottomNavigation()
