@@ -10,13 +10,18 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.fluxbank.network.ApiClient
+import com.example.fluxbank.network.models.ContatoRecente
 import com.example.fluxbank.utils.TokenManager
 import kotlinx.coroutines.launch
 
 class PixActivity : BaseActivity() {
 
     private lateinit var tokenManager: TokenManager
+    private lateinit var contatosAdapter: RecentContactsAdapter
+    private val contatosRecentes = mutableListOf<ContatoRecente>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val documento = intent?.getStringExtra("documento")
@@ -40,6 +45,8 @@ class PixActivity : BaseActivity() {
         setupOptionsGrid()
         setupManagementOptions()
         setupBottomNavigation()
+
+        carregarContatosRecentes()
     }
 
     private fun setupHeader() {
@@ -90,15 +97,9 @@ class PixActivity : BaseActivity() {
 
                     Log.d("PixActivity", "Conta encontrada: ${contaInfo.nomeUsuario}")
 
-                    val intent = Intent(this@PixActivity, DefinirValorPixActivity::class.java)
-                    intent.putExtra("PIX_KEY", pixKey)
-                    intent.putExtra("CONTA_ID", contaInfo.id)
-                    intent.putExtra("NOME_DESTINATARIO", contaInfo.nomeUsuario)
-                    intent.putExtra("DOCUMENTO_DESTINATARIO", contaInfo.getDocumento())
-                    intent.putExtra("DOCUMENTO_MASCARADO", contaInfo.getDocumentoMascarado())
-                    intent.putExtra("TIPO_DOCUMENTO", contaInfo.getTipoDocumento())
-                    intent.putExtra("INSTITUICAO", contaInfo.instituicao)
-                    startActivity(intent)
+                    irParaDefinirValor(contaInfo.chavePix, contaInfo.nomeUsuario,
+                        contaInfo.getDocumento(), contaInfo.getDocumentoMascarado(),
+                        contaInfo.getTipoDocumento(), contaInfo.instituicao)
 
                     btnProsseguir.isEnabled = true
                     btnProsseguir.text = "Prosseguir"
@@ -128,22 +129,67 @@ class PixActivity : BaseActivity() {
     }
 
     private fun setupRecentContacts() {
-        val recentContactsList = findViewById<ListView>(R.id.recent_contacts)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerContatosRecentes)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        val contacts = listOf(
-            Contact("Anne"),
-            Contact("João"),
-            Contact("Maria"),
-            Contact("Pedro"),
-            Contact("Carlos")
-        )
-
-        val adapter = RecentContactsAdapter(this, contacts)
-        recentContactsList.adapter = adapter
-
-        recentContactsList.post {
-            ListViewHelper.setListViewHeightBasedOnChildren(recentContactsList)
+        contatosAdapter = RecentContactsAdapter(contatosRecentes) { contato ->
+            irParaDefinirValor(
+                contato.chavePix,
+                contato.nome ?: "Destinatário",
+                contato.documento ?: "",
+                contato.documentoMascarado ?: "***.**.***: ***-**",
+                contato.tipoDocumento ?: "CPF",
+                contato.instituicao
+            )
         }
+
+        recyclerView.adapter = contatosAdapter
+    }
+
+    private fun carregarContatosRecentes() {
+        lifecycleScope.launch {
+            try {
+                val token = tokenManager.getToken()
+                if (token == null) return@launch
+
+                val response = ApiClient.api.buscarContatosRecentes("Bearer $token")
+
+                if (response.isSuccessful && response.body() != null) {
+                    val contatos = response.body()!!
+
+                    val contatosUnicos = contatos.distinctBy { it.chavePix }
+
+                    contatosRecentes.clear()
+                    contatosRecentes.addAll(contatosUnicos.take(10)) // Máximo 10
+                    contatosAdapter.notifyDataSetChanged()
+
+                    Log.d("PixActivity", "${contatosUnicos.size} contatos recentes carregados")
+                } else {
+                    Log.e("PixActivity", "Erro ao carregar contatos recentes")
+                }
+
+            } catch (e: Exception) {
+                Log.e("PixActivity", "Erro ao carregar contatos", e)
+            }
+        }
+    }
+
+    private fun irParaDefinirValor(
+        pixKey: String,
+        nome: String,
+        documento: String,
+        documentoMascarado: String,
+        tipoDocumento: String,
+        instituicao: String
+    ) {
+        val intent = Intent(this, DefinirValorPixActivity::class.java)
+        intent.putExtra("PIX_KEY", pixKey)
+        intent.putExtra("NOME_DESTINATARIO", nome)
+        intent.putExtra("DOCUMENTO_DESTINATARIO", documento)
+        intent.putExtra("DOCUMENTO_MASCARADO", documentoMascarado)
+        intent.putExtra("TIPO_DOCUMENTO", tipoDocumento)
+        intent.putExtra("INSTITUICAO", instituicao)
+        startActivity(intent)
     }
 
     private fun setupOptionsGrid() {
@@ -159,8 +205,11 @@ class PixActivity : BaseActivity() {
         optionsGrid.adapter = adapter
 
         optionsGrid.setOnItemClickListener { _, _, position, _ ->
-            val option = options[position]
-            showToast("${option.title} clicado")
+            when (position) {
+                0 -> startActivity(Intent(this, AgendarPagamentoActivity::class.java)) // Agendar Pix
+                1 -> showToast("Copia e cola clicado")
+                2 -> startActivity(Intent(this, LeitorQrActivity::class.java)) // Ler Qr
+            }
         }
     }
 
@@ -180,8 +229,14 @@ class PixActivity : BaseActivity() {
         }
 
         managementList.setOnItemClickListener { _, _, position, _ ->
-            val option = options[position]
-            showToast("${option.title} clicado")
+            when (position) {
+                0 -> {
+                    startActivity(Intent(this, MinhasChavesActivity::class.java))
+                }
+                1 -> {
+                    showToast("Meus limites clicado")
+                }
+            }
         }
     }
 
