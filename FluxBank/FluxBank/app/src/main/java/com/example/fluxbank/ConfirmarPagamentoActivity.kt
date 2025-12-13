@@ -27,6 +27,7 @@ class ConfirmarPagamentoActivity : BaseActivity() {
 
         val btnBack = findViewById<ImageView>(R.id.btnBack)
         val paymentValue = findViewById<TextView>(R.id.payment_value)
+        val recipientNameBig = findViewById<TextView>(R.id.recipient_name_big) // ✅ ADICIONADO
         val recipientName = findViewById<TextView>(R.id.recipient_name)
         val recipientCpf = findViewById<TextView>(R.id.recipient_cpf)
         val recipientInstitution = findViewById<TextView>(R.id.recipient_institution)
@@ -49,6 +50,7 @@ class ConfirmarPagamentoActivity : BaseActivity() {
         }
 
         paymentValue.text = valorFormatado
+        recipientNameBig.text = nomeDestinatario
         recipientName.text = nomeDestinatario
         recipientCpf.text = "$tipoDocumento: $documentoMascarado"
         recipientInstitution.text = instituicao

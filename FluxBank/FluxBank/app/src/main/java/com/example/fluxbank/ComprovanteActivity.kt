@@ -1,15 +1,22 @@
 package com.example.fluxbank
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.IdRes
+import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.fluxbank.utils.TokenManager
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -33,7 +40,13 @@ class ComprovanteActivity : BaseActivity() {
         val tipoDocumento = intent.getStringExtra("TIPO_DOCUMENTO") ?: "CPF"
         val instituicao = intent.getStringExtra("INSTITUICAO") ?: "FluxBank"
 
-        Log.d("Comprovante", "PIX: $pixKey | Valor: $valorString | ID: $transacaoId")
+        Log.d("Comprovante", "========== DADOS RECEBIDOS ==========")
+        Log.d("Comprovante", "Nome Destinatário: $nomeDestinatario")
+        Log.d("Comprovante", "Documento: $documentoMascarado")
+        Log.d("Comprovante", "Tipo: $tipoDocumento")
+        Log.d("Comprovante", "Instituição: $instituicao")
+        Log.d("Comprovante", "Chave: $pixKey")
+        Log.d("Comprovante", "=====================================")
 
         val valorFormatado = try {
             val valorDouble = valorString.toDouble()
@@ -52,14 +65,20 @@ class ComprovanteActivity : BaseActivity() {
 
         setDetailRow(R.id.data_pagamento, "Data pagamento:", sdfData.format(dataAtual).replaceFirstChar { it.uppercase() })
         setDetailRow(R.id.horario, "Horário:", sdfHora.format(dataAtual))
-        setDetailRow(R.id.id_transacao, "ID da transação: \n \n", idTransacao)
+        setDetailRow(R.id.id_transacao, "ID da transação:", idTransacao)
 
+        Log.d("Comprovante", "Definindo dados do DESTINATÁRIO...")
         setDetailRow(R.id.nome_recebeu, "Nome:", nomeDestinatario)
         setDetailRow(R.id.cpf_recebeu, "$tipoDocumento:", documentoMascarado)
         setDetailRow(R.id.instituicao_recebeu, "Instituição:", instituicao)
         setDetailRow(R.id.chave_recebeu, "Chave:", pixKey)
 
         carregarDadosUsuario()
+
+        val btnCompartilhar = findViewById<Button>(R.id.btn_compartilhar)
+        btnCompartilhar.setOnClickListener {
+            compartilharComprovante()
+        }
 
         val btnNovoPix = findViewById<Button>(R.id.btn_novo_pix)
         val btnVoltarInicio = findViewById<Button>(R.id.btn_voltar_inicio)
@@ -85,10 +104,6 @@ class ComprovanteActivity : BaseActivity() {
                 val userName = tokenManager.getUserName() ?: "Usuário"
                 val userCpf = tokenManager.getUserCpf() ?: ""
                 val userCnpj = tokenManager.getUserCnpj()
-
-                Log.d("Comprovante", "Nome: $userName")
-                Log.d("Comprovante", "CPF: $userCpf")
-                Log.d("Comprovante", "CNPJ: $userCnpj")
 
                 val documentoMascarado = if (userCpf.isNotEmpty()) {
                     if (userCpf.length == 11) {
@@ -121,8 +136,63 @@ class ComprovanteActivity : BaseActivity() {
     }
 
     private fun setDetailRow(@IdRes viewId: Int, labelText: String, valueText: String?) {
-        val rowView = findViewById<View>(viewId)
-        rowView?.findViewById<TextView>(R.id.label)?.text = labelText
-        rowView?.findViewById<TextView>(R.id.value)?.text = valueText
+        try {
+            val rowView = findViewById<View>(viewId)
+
+            if (rowView == null) {
+                Log.e("Comprovante", "View $viewId não encontrada!")
+                return
+            }
+
+            val labelView = rowView.findViewById<TextView>(R.id.label)
+            val valueView = rowView.findViewById<TextView>(R.id.value)
+
+            if (labelView != null && valueView != null) {
+                labelView.text = labelText
+                valueView.text = valueText
+                Log.d("Comprovante", "$labelText = $valueText")
+            } else {
+                Log.e("Comprovante", "label/value não encontrado em $viewId")
+            }
+
+        } catch (e: Exception) {
+            Log.e("Comprovante", "Erro ao definir $viewId: ${e.message}")
+        }
+    }
+
+    private fun compartilharComprovante() {
+        try {
+            // Capturar screenshot do comprovante
+            val view = window.decorView.rootView
+            val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            view.draw(canvas)
+
+            val cachePath = File(cacheDir, "images")
+            cachePath.mkdirs()
+            val file = File(cachePath, "comprovante_${System.currentTimeMillis()}.png")
+            val stream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            stream.close()
+
+            val contentUri: Uri = FileProvider.getUriForFile(
+                this,
+                "${packageName}.fileprovider",
+                file
+            )
+
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "image/png"
+                putExtra(Intent.EXTRA_STREAM, contentUri)
+                putExtra(Intent.EXTRA_TEXT, "Comprovante de Pix - FluxBank")
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+
+            startActivity(Intent.createChooser(shareIntent, "Compartilhar comprovante via"))
+
+        } catch (e: Exception) {
+            Log.e("Comprovante", "Erro ao compartilhar", e)
+            Toast.makeText(this, "Erro ao compartilhar comprovante", Toast.LENGTH_SHORT).show()
+        }
     }
 }
