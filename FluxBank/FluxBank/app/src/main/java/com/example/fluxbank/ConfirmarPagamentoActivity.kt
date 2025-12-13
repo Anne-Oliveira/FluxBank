@@ -27,20 +27,45 @@ class ConfirmarPagamentoActivity : BaseActivity() {
 
         val btnBack = findViewById<ImageView>(R.id.btnBack)
         val paymentValue = findViewById<TextView>(R.id.payment_value)
-        val recipientNameBig = findViewById<TextView>(R.id.recipient_name_big) // ✅ ADICIONADO
+        val recipientNameBig = findViewById<TextView>(R.id.recipient_name_big)
         val recipientName = findViewById<TextView>(R.id.recipient_name)
         val recipientCpf = findViewById<TextView>(R.id.recipient_cpf)
         val recipientInstitution = findViewById<TextView>(R.id.recipient_institution)
         val recipientKey = findViewById<TextView>(R.id.recipient_key)
         val btnPagar = findViewById<Button>(R.id.btnPagar)
 
-        val pixKey = intent.getStringExtra("PIX_KEY") ?: ""
-        val contaId = intent.getLongExtra("CONTA_ID", 0L)
-        val valorString = intent.getStringExtra("VALOR") ?: "0"
-        val nomeDestinatario = intent.getStringExtra("NOME_DESTINATARIO") ?: "Destinatário"
-        val documentoMascarado = intent.getStringExtra("DOCUMENTO_MASCARADO") ?: "***.***.***: ***-**"
-        val tipoDocumento = intent.getStringExtra("TIPO_DOCUMENTO") ?: "CPF"
-        val instituicao = intent.getStringExtra("INSTITUICAO") ?: "FluxBank"
+        // Verificar se veio de QR Code
+        val origem = intent.getStringExtra("ORIGEM")
+        val isFromQRCode = origem == "QR_CODE"
+
+        val pixKey: String
+        val valorString: String
+        val nomeDestinatario: String
+        val documentoMascarado: String
+        val tipoDocumento: String
+        val instituicao: String
+
+        if (isFromQRCode) {
+            pixKey = intent.getStringExtra("PIX_KEY") ?: ""
+            valorString = intent.getStringExtra("VALOR") ?: "0"
+            nomeDestinatario = intent.getStringExtra("NOME_DESTINATARIO") ?: "Destinatário"
+            documentoMascarado = intent.getStringExtra("DOCUMENTO_MASCARADO") ?: "***.***.***-**"
+            tipoDocumento = intent.getStringExtra("TIPO_DOCUMENTO") ?: "CPF"
+            instituicao = intent.getStringExtra("INSTITUICAO") ?: "Instituição Financeira"
+
+            Log.d("ConfirmarPagamento", "=== DADOS DO QR CODE ===")
+            Log.d("ConfirmarPagamento", "Chave PIX: $pixKey")
+            Log.d("ConfirmarPagamento", "Valor: $valorString")
+            Log.d("ConfirmarPagamento", "Nome: $nomeDestinatario")
+        } else {
+            pixKey = intent.getStringExtra("PIX_KEY") ?: ""
+            val contaId = intent.getLongExtra("CONTA_ID", 0L)
+            valorString = intent.getStringExtra("VALOR") ?: "0"
+            nomeDestinatario = intent.getStringExtra("NOME_DESTINATARIO") ?: "Destinatário"
+            documentoMascarado = intent.getStringExtra("DOCUMENTO_MASCARADO") ?: "***.***.***-**"
+            tipoDocumento = intent.getStringExtra("TIPO_DOCUMENTO") ?: "CPF"
+            instituicao = intent.getStringExtra("INSTITUICAO") ?: "FluxBank"
+        }
 
         val valorFormatado = try {
             val valorDouble = valorString.toDouble()

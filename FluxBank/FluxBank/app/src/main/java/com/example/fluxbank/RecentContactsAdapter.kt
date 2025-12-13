@@ -27,10 +27,10 @@ class RecentContactsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contato = contatos[position]
 
-        val nomeSeguro = contato.nome?.takeIf { it.isNotBlank() } ?: "?"
-        val inicial = nomeSeguro.firstOrNull()?.uppercase() ?: "?"
+        val nomeCompleto = contato.nome?.takeIf { it.isNotBlank() } ?: "Contato"
+        val primeiroNome = nomeCompleto.split(" ").firstOrNull() ?: "Contato"
 
-        holder.txtNome.text = inicial
+        holder.txtNome.text = primeiroNome
 
         holder.itemView.setOnClickListener {
             onContatoClick(contato)

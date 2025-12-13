@@ -133,6 +133,7 @@ class PixActivity : BaseActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         contatosAdapter = RecentContactsAdapter(contatosRecentes) { contato ->
+            // Redireciona para DefinirValorPixActivity com os dados do contato
             irParaDefinirValor(
                 contato.chavePix,
                 contato.nome ?: "Destinatário",
@@ -157,7 +158,16 @@ class PixActivity : BaseActivity() {
                 if (response.isSuccessful && response.body() != null) {
                     val contatos = response.body()!!
 
-                    val contatosUnicos = contatos.distinctBy { it.chavePix }
+                    // Garante que o nome do destinatário seja exibido corretamente
+                    val contatosComNome = contatos.map { contato ->
+                        if (contato.nome.isNullOrBlank()) {
+                            contato.copy(nome = "Destinatário")
+                        } else {
+                            contato
+                        }
+                    }
+
+                    val contatosUnicos = contatosComNome.distinctBy { it.chavePix }
 
                     contatosRecentes.clear()
                     contatosRecentes.addAll(contatosUnicos.take(10)) // Máximo 10
