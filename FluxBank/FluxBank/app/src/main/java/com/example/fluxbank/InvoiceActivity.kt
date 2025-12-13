@@ -1,5 +1,6 @@
 package com.example.fluxbank
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -181,7 +182,12 @@ class InvoiceActivity : BaseActivity() {
     private fun setupButtons() {
         val btnMostrarDetalhes = findViewById<TextView>(R.id.btn_mostrar_detalhes)
         val btnMostrarTodas = findViewById<TextView>(R.id.btn_mostrar_todas)
+
         val btnMostrarCompras = findViewById<TextView>(R.id.btn_mostrar_compras)
+        btnMostrarCompras.setOnClickListener {
+            val intent = Intent(this, ExtratoActivity::class.java)
+            startActivity(intent)
+        }
 
         btnMostrarDetalhes.setOnClickListener {
             showToast("Mostrar detalhes do limite")
@@ -191,9 +197,7 @@ class InvoiceActivity : BaseActivity() {
             showToast("Mostrar todas as faturas")
         }
 
-        btnMostrarCompras.setOnClickListener {
-            showToast("Mostrar todas as compras")
-        }
+
     }
 
     private fun showToast(message: String) {

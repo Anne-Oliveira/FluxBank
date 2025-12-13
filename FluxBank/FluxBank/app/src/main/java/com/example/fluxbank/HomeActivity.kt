@@ -296,7 +296,7 @@ class HomeActivity : BaseActivity() {
             CofinhoItem(R.drawable.ic_travel_bag, "Viagem", "R$ 0,00", "Rendeu R$ 0,00")
         )
 
-        cofinhoRecyclerView.adapter = CofinhoAdapter(cofinhoItems)
+        cofinhoRecyclerView.adapter = CofinhoAdapter(cofinhoItems.toMutableList())
     }
 
     private fun setupInvoiceModule() {

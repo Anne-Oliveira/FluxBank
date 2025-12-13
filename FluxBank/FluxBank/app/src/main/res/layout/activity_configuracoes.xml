@@ -149,6 +149,7 @@
 
                 <!-- Cadastro -->
                 <RelativeLayout
+                    android:id="@+id/btnCad2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="15dp">
@@ -184,37 +185,7 @@
                     android:layout_height="1dp"
                     android:background="@color/grey_300" />
 
-                <!-- Meus Limites -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp">
 
-                    <ImageView
-                        android:id="@+id/ic_limites"
-                        app:tint="#737373"
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_limits" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="16dp"
-                        android:layout_toEndOf="@id/ic_limites"
-                        android:text="Meus Limites"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_right"
-                        app:tint="@android:color/black" />
-                </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -303,23 +274,6 @@
                 app:layout_constraintStart_toStartOf="@id/optionsList"
                 app:layout_constraintTop_toBottomOf="@id/optionsList">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="@color/grey_300"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="@color/grey_300"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp" />
             </LinearLayout>
 
             <!-- Logout Button -->
