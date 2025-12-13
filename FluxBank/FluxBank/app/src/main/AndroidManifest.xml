@@ -105,6 +105,9 @@
         <!-- Tela de Notificações -->
         <activity android:name=".NotificacaoActivity" android:exported="false" />
 
+        <!-- Tela de Minhas Chaves -->
+        <activity android:name=".MinhasChavesActivity" android:exported="false" />
+
     </application>
 
 </manifest>

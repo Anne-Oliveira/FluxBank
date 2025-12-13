@@ -115,12 +115,12 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="16dp">
 
-                <ListView
-                    android:id="@+id/recent_contacts"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerContatosRecentes"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:divider="@android:color/transparent"
-                    android:dividerHeight="0dp" />
+                    android:layout_height="80dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp"/>
             </LinearLayout>
 
             <!-- Other Options Section -->

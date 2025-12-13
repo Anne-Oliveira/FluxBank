@@ -35,4 +35,9 @@ interface FluxBankApi {
         @Body request: VerificarTransacaoRequest,
         @Header("Authorization") token: String
     ): Response<TransacaoResponse>
+
+    @GET("api/pix/contatos-recentes")
+    suspend fun buscarContatosRecentes(
+        @Header("Authorization") token: String
+    ): Response<List<ContatoRecente>>
 }
