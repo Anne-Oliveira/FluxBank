@@ -281,6 +281,7 @@ class HomeActivity : BaseActivity() {
         }
         findViewById<ImageView>(R.id.helpIcon).setOnClickListener {
             startActivity(Intent(this, FaqActivity::class.java))
+            intent.putExtra("documento", documento)
         }
         findViewById<ImageView>(R.id.notificationIcon).setOnClickListener {
             startActivity(Intent(this, NotificacaoActivity::class.java))
