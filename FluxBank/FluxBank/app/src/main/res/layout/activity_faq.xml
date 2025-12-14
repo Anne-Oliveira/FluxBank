@@ -2,6 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".FaqActivity"
+    tools:theme="@style/ThemeOverlay.FluxBank.CPF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundLight">
@@ -92,7 +94,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:background="@drawable/search_bar_background"
+                android:elevation="3dp"
+                android:background="@drawable/bg_input_field"
                 android:layout_marginBottom="24dp">
 
                 <ImageView

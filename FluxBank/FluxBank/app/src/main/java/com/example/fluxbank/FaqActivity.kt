@@ -23,6 +23,17 @@ class FaqActivity : BaseActivity() {
     private lateinit var listaFaqFiltrada: MutableList<FaqItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val documento = intent?.getStringExtra("documento")
+        val isCNPJ = documento?.length == 14
+        val isCPF = documento?.length == 11
+
+        when {
+            isCNPJ -> setTheme(R.style.ThemeOverlay_FluxBank_CNPJ)
+            isCPF -> setTheme(R.style.ThemeOverlay_FluxBank_CPF)
+            else -> setTheme(R.style.ThemeOverlay_FluxBank_CPF)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faq)
 
@@ -53,6 +64,7 @@ class FaqActivity : BaseActivity() {
         btnEnviarPergunta.setOnClickListener {
             val intent = Intent(this, EnviarFaqActivity::class.java)
             startActivity(intent)
+            intent.putExtra("documento", documento)
         }
 
         // Configurar bottom navigation
