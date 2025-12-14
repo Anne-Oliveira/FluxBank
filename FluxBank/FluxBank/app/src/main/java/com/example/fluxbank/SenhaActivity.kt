@@ -8,6 +8,9 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.fluxbank.network.ApiClient
 import com.example.fluxbank.network.models.LoginRequest
@@ -46,6 +49,18 @@ class SenhaActivity : BaseActivity() {
         chkBiometria = findViewById(R.id.chkBiometria)
         chkBiometria.isChecked = isBiometricPreferenceEnabled()
 
+        // Se biometria estiver habilitada, tenta autenticar
+        if (isBiometricPreferenceEnabled()) {
+            showBiometricPromptIfAvailable()
+        }
+
+        chkBiometria.setOnCheckedChangeListener { _, isChecked ->
+            saveBiometricPreference(isChecked)
+            if (isChecked) {
+                showBiometricPromptIfAvailable()
+            }
+        }
+
         btnNext.setOnClickListener {
             val senha = edtSenha.text.toString()
             if (senha.isEmpty()) {
@@ -53,6 +68,43 @@ class SenhaActivity : BaseActivity() {
                 return@setOnClickListener
             }
             documento?.let { doc -> fazerLoginDebug(doc, senha) }
+        }
+    }
+
+    private fun showBiometricPromptIfAvailable() {
+        val biometricManager = BiometricManager.from(this)
+        if (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS) {
+            val executor = ContextCompat.getMainExecutor(this)
+            val biometricPrompt = BiometricPrompt(this, executor, object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    // Preenche a senha salva (se desejar) ou faz login automático
+                    documento?.let { doc ->
+                        val senhaSalva = edtSenha.text.toString()
+                        if (senhaSalva.isNotEmpty()) {
+                            fazerLoginDebug(doc, senhaSalva)
+                        } else {
+                            Toast.makeText(this@SenhaActivity, "Digite sua senha para login automático", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    super.onAuthenticationError(errorCode, errString)
+                    Toast.makeText(this@SenhaActivity, "Erro biometria: $errString", Toast.LENGTH_SHORT).show()
+                }
+                override fun onAuthenticationFailed() {
+                    super.onAuthenticationFailed()
+                    Toast.makeText(this@SenhaActivity, "Biometria não reconhecida", Toast.LENGTH_SHORT).show()
+                }
+            })
+            val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Autenticação biométrica")
+                .setSubtitle("Use sua digital ou rosto para autenticar")
+                .setNegativeButtonText("Cancelar")
+                .build()
+            biometricPrompt.authenticate(promptInfo)
+        } else {
+            Toast.makeText(this, "Biometria não disponível neste dispositivo", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -98,9 +150,6 @@ class SenhaActivity : BaseActivity() {
                             Log.d("SenhaActivity", "Conta.saldo: ${primeiraConta.saldo}")
                         }
 
-                        // ========================================
-                        // MUDANÇA AQUI: Adicionado agencia
-                        // ========================================
                         tokenManager.saveUserData(
                             userId = authResponse.usuario.id,
                             userName = authResponse.usuario.nome,
