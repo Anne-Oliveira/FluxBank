@@ -151,35 +151,57 @@ class PixActivity : BaseActivity() {
         lifecycleScope.launch {
             try {
                 val token = tokenManager.getToken()
-                if (token == null) return@launch
+                if (token == null) {
+                    Log.e("PixActivity", "Token é nulo")
+                    return@launch
+                }
+
+                Log.d("PixActivity", "=== BUSCANDO CONTATOS RECENTES ===")
+                Log.d("PixActivity", "Token: ${token.take(20)}...")
 
                 val response = ApiClient.api.buscarContatosRecentes("Bearer $token")
+
+                Log.d("PixActivity", "Response code: ${response.code()}")
 
                 if (response.isSuccessful && response.body() != null) {
                     val contatos = response.body()!!
 
-                    // Garante que o nome do destinatário seja exibido corretamente
-                    val contatosComNome = contatos.map { contato ->
-                        if (contato.nome.isNullOrBlank()) {
-                            contato.copy(nome = "Destinatário")
-                        } else {
-                            contato
-                        }
+                    Log.d("PixActivity", "Total de contatos recebidos: ${contatos.size}")
+
+                    contatos.forEachIndexed { index, contato ->
+                        Log.d("PixActivity", "=== CONTATO $index ===")
+                        Log.d("PixActivity", "Nome: ${contato.nome}")
+                        Log.d("PixActivity", "Nome Exibível: ${contato.getNomeExibivel()}")
+                        Log.d("PixActivity", "Chave PIX: ${contato.chavePix}")
+                        Log.d("PixActivity", "CPF: ${contato.cpf}")
+                        Log.d("PixActivity", "CNPJ: ${contato.cnpj}")
+                        Log.d("PixActivity", "Instituição: ${contato.instituicao}")
                     }
 
-                    val contatosUnicos = contatosComNome.distinctBy { it.chavePix }
+                    val contatosUnicos = contatos.distinctBy { it.chavePix }
+
+                    Log.d("PixActivity", "Contatos únicos: ${contatosUnicos.size}")
 
                     contatosRecentes.clear()
-                    contatosRecentes.addAll(contatosUnicos.take(10)) // Máximo 10
+                    contatosRecentes.addAll(contatosUnicos.take(10))
                     contatosAdapter.notifyDataSetChanged()
 
-                    Log.d("PixActivity", "${contatosUnicos.size} contatos recentes carregados")
+                    Log.d("PixActivity", "✅ ${contatosRecentes.size} contatos carregados no adapter")
+
+                    contatosRecentes.forEachIndexed { index, contato ->
+                        Log.d("PixActivity", "[$index] ${contato.getNomeExibivel()} - ${contato.chavePix}")
+                    }
+
                 } else {
+                    val errorBody = response.errorBody()?.string()
                     Log.e("PixActivity", "Erro ao carregar contatos recentes")
+                    Log.e("PixActivity", "Error body: $errorBody")
                 }
 
             } catch (e: Exception) {
-                Log.e("PixActivity", "Erro ao carregar contatos", e)
+                Log.e("PixActivity", "Exceção ao carregar contatos", e)
+                Log.e("PixActivity", "Mensagem: ${e.message}")
+                e.printStackTrace()
             }
         }
     }

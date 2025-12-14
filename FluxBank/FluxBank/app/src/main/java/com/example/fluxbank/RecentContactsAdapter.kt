@@ -1,5 +1,6 @@
 package com.example.fluxbank
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,12 +28,18 @@ class RecentContactsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contato = contatos[position]
 
-        val nomeCompleto = contato.nome?.takeIf { it.isNotBlank() } ?: "Contato"
-        val primeiroNome = nomeCompleto.split(" ").firstOrNull() ?: "Contato"
+        Log.d("RecentContactsAdapter", "=== CONTATO $position ===")
+        Log.d("RecentContactsAdapter", "Nome: ${contato.nome}")
+        Log.d("RecentContactsAdapter", "Nome Exibível: ${contato.getNomeExibivel()}")
+        Log.d("RecentContactsAdapter", "Primeiro Nome: ${contato.getPrimeiroNome()}")
+        Log.d("RecentContactsAdapter", "Chave PIX: ${contato.chavePix}")
+
+        val primeiroNome = contato.getPrimeiroNome()
 
         holder.txtNome.text = primeiroNome
 
         holder.itemView.setOnClickListener {
+            Log.d("RecentContactsAdapter", "Clicou no contato: ${contato.nome}")
             onContatoClick(contato)
         }
     }
